@@ -1,12 +1,14 @@
 package net.cozystudios.squish.datagen;
 
 import net.cozystudios.squish.item.SquishItems;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
 import java.util.function.Consumer;
@@ -18,13 +20,14 @@ public class SquishRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, SquishItems.BLANK_LOLLIPOP, 4)
-                .pattern(" S ")
-                .pattern(" S ")
-                .pattern(" T ")
-                .input('S', Items.SUGAR)
-                .input('T', Items.STICK)
+        CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(Items.SUGAR), RecipeCategory.MISC, SquishItems.MELTED_SUGAR, 0.1f, 600)
                 .criterion(hasItem(Items.SUGAR), conditionsFromItem(Items.SUGAR))
+                .offerTo(exporter, new Identifier("squish", "campfire_melt_sugar"));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, SquishItems.LOLLIPOP, 1)
+                .input(SquishItems.HARDENED_SUGAR_SHARD)
+                .input(Items.STICK)
+                .criterion(hasItem(SquishItems.HARDENED_SUGAR_SHARD), conditionsFromItem(SquishItems.HARDENED_SUGAR_SHARD))
                 .offerTo(exporter, new Identifier("squish", "blank_lollipop"));
     }
 }

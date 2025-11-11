@@ -1,5 +1,6 @@
 package net.cozystudios.squish.datagen;
 
+import net.cozystudios.squish.block.SquishBlocks;
 import net.cozystudios.squish.item.SquishItems;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -14,12 +15,15 @@ public class SquishModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        blockStateModelGenerator.registerSimpleCubeAll(SquishBlocks.MELTED_SUGAR_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(SquishBlocks.HARDENED_SUGAR_BLOCK);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(SquishItems.SQUISH_CANDY, Models.GENERATED);
-        itemModelGenerator.register(SquishItems.BLANK_LOLLIPOP, Models.GENERATED);
+        itemModelGenerator.register(SquishItems.LOLLIPOP, Models.GENERATED);
         itemModelGenerator.register(SquishItems.SQUISH_ESSENCE, Models.GENERATED);
+        itemModelGenerator.register(SquishItems.HARDENED_SUGAR_SHARD, Models.GENERATED);
     }
 }

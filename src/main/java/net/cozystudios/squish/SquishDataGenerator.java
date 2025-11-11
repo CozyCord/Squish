@@ -1,5 +1,6 @@
 package net.cozystudios.squish;
 
+import net.cozystudios.squish.datagen.SquishLootTableProvider;
 import net.cozystudios.squish.datagen.SquishModelProvider;
 import net.cozystudios.squish.datagen.SquishRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -11,5 +12,6 @@ public class SquishDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(SquishRecipeProvider::new);
         pack.addProvider(SquishModelProvider::new);
+        pack.addProvider(SquishLootTableProvider::new);
     }
 }

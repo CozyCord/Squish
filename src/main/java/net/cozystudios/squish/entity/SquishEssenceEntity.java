@@ -64,7 +64,7 @@ public class SquishEssenceEntity extends ThrownItemEntity {
 
         Box box = new Box(pos.add(-1.5, -1.5, -1.5), pos.add(1.5, 1.5, 1.5));
         List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box,
-                e -> e.getStack().isOf(SquishItems.BLANK_LOLLIPOP));
+                e -> e.getStack().isOf(SquishItems.LOLLIPOP));
 
         for (ItemEntity it : items) {
             ItemStack s = it.getStack();

@@ -1,5 +1,7 @@
 package net.cozystudios.squish;
 
+import net.cozystudios.squish.block.SquishBlocks;
+import net.cozystudios.squish.block.entity.SquishBlockEntities;
 import net.fabricmc.api.ModInitializer;
 import net.cozystudios.squish.item.SquishItems;
 import org.slf4j.Logger;
@@ -13,5 +15,7 @@ public class Squish implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Squish Initialized");
         SquishItems.register();
+        SquishBlocks.register();
+        SquishBlockEntities.register();
     }
 }

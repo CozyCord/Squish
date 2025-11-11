@@ -1,11 +1,13 @@
 package net.cozystudios.squish.item;
 
 import net.cozystudios.squish.Squish;
+import net.cozystudios.squish.block.SquishBlocks;
 import net.cozystudios.squish.entity.SquishEssenceEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
@@ -15,8 +17,11 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 
 public class SquishItems {
     public static final Item SQUISH_CANDY = new SquishCandyItem(new Item.Settings().maxCount(16));
-    public static final Item BLANK_LOLLIPOP = new Item(new Item.Settings().maxCount(64));
+    public static final Item LOLLIPOP = new Item(new Item.Settings().maxCount(64));
     public static final Item SQUISH_ESSENCE = new SquishEssenceItem(new Item.Settings().maxCount(16));
+    public static final Item MELTED_SUGAR = new BlockItem(SquishBlocks.MELTED_SUGAR_BLOCK, new Item.Settings());
+    public static final Item HARDENED_SUGAR = new BlockItem(SquishBlocks.HARDENED_SUGAR_BLOCK, new Item.Settings());
+    public static final Item HARDENED_SUGAR_SHARD = new Item(new Item.Settings());
 
     public static final EntityType<SquishEssenceEntity> SQUISH_ESSENCE_ENTITY =
             Registry.register(Registries.ENTITY_TYPE,
@@ -31,12 +36,18 @@ public class SquishItems {
     public static void register() {
         Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "squish_candy"), SQUISH_CANDY);
         Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "squish_essence"), SQUISH_ESSENCE);
-        Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "blank_lollipop"), BLANK_LOLLIPOP);
+        Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "lollipop"), LOLLIPOP);
+        Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "melted_sugar"), MELTED_SUGAR);
+        Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "hardened_sugar"), HARDENED_SUGAR);
+        Registry.register(Registries.ITEM, new Identifier(Squish.MOD_ID, "hardened_sugar_shard"), HARDENED_SUGAR_SHARD);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.add(SQUISH_CANDY);
-            entries.add(BLANK_LOLLIPOP);
+            entries.add(LOLLIPOP);
             entries.add(SQUISH_ESSENCE);
+            entries.add(MELTED_SUGAR);
+            entries.add(HARDENED_SUGAR);
+            entries.add(HARDENED_SUGAR_SHARD);
         });
     }
 
