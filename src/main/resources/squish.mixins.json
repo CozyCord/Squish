@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "net.cozystudios.squish.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BrewingRecipeRegistryMixin",
+    "BrewingStandBlockEntityMixin",
+    "PassiveEntitySquishMixin",
+    "AnimalEntitySquishMixin",
+    "VillagerEntitySquishMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
