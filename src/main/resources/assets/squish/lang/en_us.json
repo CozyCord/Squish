@@ -6,5 +6,7 @@
   "block.squish.hardened_sugar": "Hardened Sugar",
   "item.squish.melted_sugar": "Melted Sugar",
   "item.squish.hardened_sugar": "Hardened Sugar",
-  "item.squish.hardened_sugar_shard": "Hardened Sugar Shard"
+  "item.squish.hardened_sugar_shard": "Hardened Sugar Shard",
+  "effect.squish.sugar_rush": "Sugar Rush",
+  "item.squish.squish_guidebook": "Squish Guidebook"
 }

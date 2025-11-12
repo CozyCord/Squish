@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class MeltedSugarBlockEntity extends BlockEntity {
-    private static final int HARDEN_TICKS = 2400;
+    private static final int HARDEN_TICKS = 1200;
 
     private int age = 0;
 

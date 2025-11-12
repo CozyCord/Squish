@@ -1,8 +1,7 @@
 package net.cozystudios.squish.item;
 
-import net.minecraft.item.Item;
 
-public class BlankLollipopItem extends Item {
+public class BlankLollipopItem extends SquishBaseItem {
     public BlankLollipopItem(Settings settings) {
         super(settings);
     }

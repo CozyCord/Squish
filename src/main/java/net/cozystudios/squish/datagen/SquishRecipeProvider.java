@@ -29,5 +29,10 @@ public class SquishRecipeProvider extends FabricRecipeProvider {
                 .input(Items.STICK)
                 .criterion(hasItem(SquishItems.HARDENED_SUGAR_SHARD), conditionsFromItem(SquishItems.HARDENED_SUGAR_SHARD))
                 .offerTo(exporter, new Identifier("squish", "blank_lollipop"));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, SquishItems.HARDENED_SUGAR_SHARD, 4)
+                .input(SquishItems.HARDENED_SUGAR)
+                .criterion(hasItem(SquishItems.HARDENED_SUGAR), conditionsFromItem(SquishItems.HARDENED_SUGAR))
+                .offerTo(exporter, new Identifier("squish", "hardened_sugar_shard_from_block"));
     }
 }

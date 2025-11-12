@@ -1,0 +1,12 @@
+{
+  "name": "Squish Manual",
+  "landing_text": "Welcome to the Squish mod! Learn all about sugar crafting, candy effects, and how to keep your pets small and adorable forever!",
+  "version": 1,
+  "show_progress": false,
+  "model": "patchouli:book_purple",
+  "subtitle": "Official Squish Guide",
+  "book_texture": "patchouli:textures/gui/book_purple.png",
+  "use_resource_pack": true,
+  "show_category_index": false,
+  "id": "squish:squish_guidebook"
+}

@@ -1,0 +1,7 @@
+{
+  "sugar_pop": {
+    "sounds": [
+      { "name": "squish:sugar_pop", "stream": false }
+    ]
+  }
+}

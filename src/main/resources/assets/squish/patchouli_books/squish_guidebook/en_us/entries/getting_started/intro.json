@@ -1,0 +1,41 @@
+{
+  "name": "Welcome to Squish!",
+  "icon": "squish:squish_candy",
+  "category": "squish:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Squish introduces a new sugary way to make your pets and animals stay babies forever! Maybe adds some sweet treats along the way too!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:melted_sugar",
+      "title": "Melted Sugar",
+      "text": "Melt sugar over a campfire to create Melted Sugar! It can be placed to harden into Hardened Sugar after a few minutes."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:hardened_sugar_shard",
+      "title": "Hardened Sugar Shard",
+      "text": "Breaking Hardened Sugar yields Hardened Sugar Shards! You can also break Hardened Sugar with a Silk Touch pickaxe to use it as a building block (or craft into 4 shards)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:squish_essence",
+      "title": "Squish Essence",
+      "text": "To brew Squish Essence, place an Amethyst Shard and Bottles of Water into a Brewing Stand. This shimmering liquid is essential to all Squish-based recipes!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:lollipop",
+      "title": "Lollipop",
+      "text": "Craft a Lollipop using a Hardened Sugar Shard and a Stick. It provides quick hunger and saturation, but it’s also a key ingredient for making Squish Candy!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:squish_candy",
+      "title": "Squish Candy",
+      "text": "Throw Lollipops on the ground and splash them with Squish Essence to magically transform them into Squish Candy! Use these on your pets or animals to keep them babies forever. But beware... if you eat one yourself, things might get a bit crazy!"
+    }
+  ]
+}

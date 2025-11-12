@@ -3,16 +3,23 @@
   "package": "net.cozystudios.squish.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AnimalEntitySquishMixin",
     "BrewingRecipeRegistryMixin",
     "BrewingStandBlockEntityMixin",
+    "CreativeInventoryScreenAccessor",
+    "LivingEntityMixin",
     "PassiveEntitySquishMixin",
-    "AnimalEntitySquishMixin",
-    "VillagerEntitySquishMixin"
+    "PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-	}
+  },
+  "client": [
+    "HandledScreenAccessor",
+    "client.CreativeInventoryScreenMixin",
+    "client.InGameHudMixin"
+  ]
 }

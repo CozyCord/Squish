@@ -1,16 +1,19 @@
 package net.cozystudios.squish.mixin;
 
 import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.sound.SquishSounds;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,7 +31,7 @@ public abstract class AnimalEntitySquishMixin {
         ItemStack held = player.getStackInHand(hand);
         if (!held.isOf(SquishItems.SQUISH_CANDY)) return;
 
-        AnimalEntity animal = (AnimalEntity)(Object)this;
+        AnimalEntity animal = (AnimalEntity) (Object) this;
         World world = animal.getWorld();
         if (world.isClient) return;
 
@@ -42,12 +45,29 @@ public abstract class AnimalEntitySquishMixin {
         if (animal instanceof Squishable squishable) {
             squishable.squish$setSquished(true);
         }
+
         animal.setBreedingAge(-24000);
 
-        world.playSound(null, animal.getBlockPos(),
-                SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP,
+        ServerWorld server = (ServerWorld) world;
+        server.playSound(
+                null,
+                animal.getBlockPos(),
+                SquishSounds.SUGAR_POP,
                 SoundCategory.PLAYERS,
-                0.6f, 1.8f
+                0.9f,
+                1.3f
+        );
+
+        server.spawnParticles(
+                new DustParticleEffect(new Vector3f(1.0f, 0.0f, 1.0f), 1.0f),
+                animal.getX(),
+                animal.getBodyY(0.5),
+                animal.getZ(),
+                40,
+                0.5,
+                0.5,
+                0.5,
+                0.0
         );
 
         if (!player.getAbilities().creativeMode) {

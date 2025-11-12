@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hardened_sugar": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "squish:hardened_sugar"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "squish:hardened_sugar_shard_from_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_hardened_sugar",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "squish:hardened_sugar_shard_from_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

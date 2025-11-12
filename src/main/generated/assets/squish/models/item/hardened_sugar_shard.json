@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "squish:item/hardened_sugar_shard"
+  }
+}
