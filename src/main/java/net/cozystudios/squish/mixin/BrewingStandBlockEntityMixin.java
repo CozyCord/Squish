@@ -21,8 +21,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BrewingStandBlockEntityMixin {
 
     @Shadow int brewTime;
+    @Shadow int fuel;
+
     @Unique private int squish$customBrewTime = 0;
-    private static final int SQUISH_BREW_TIME = 400;
+    @Unique private static final int SQUISH_BREW_TIME = 400;
 
     @Inject(method = "tick", at = @At("TAIL"))
     private static void squish$customBrew(World world, BlockPos pos,
@@ -32,6 +34,12 @@ public abstract class BrewingStandBlockEntityMixin {
         if (world.isClient) return;
 
         BrewingStandBlockEntityMixin self = (BrewingStandBlockEntityMixin)(Object) stand;
+
+        if (self.fuel <= 0) {
+            self.squish$customBrewTime = 0;
+            self.brewTime = 0;
+            return;
+        }
 
         ItemStack ingredient = stand.getStack(3);
         if (!ingredient.isOf(Items.AMETHYST_SHARD)) {
@@ -48,6 +56,7 @@ public abstract class BrewingStandBlockEntityMixin {
                 break;
             }
         }
+
         if (!hasWater) {
             self.squish$customBrewTime = 0;
             self.brewTime = 0;
@@ -75,6 +84,7 @@ public abstract class BrewingStandBlockEntityMixin {
             }
 
             if (brewed) {
+                self.fuel = Math.max(0, self.fuel - 1);
                 ingredient.decrement(1);
                 stand.markDirty();
                 world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW,

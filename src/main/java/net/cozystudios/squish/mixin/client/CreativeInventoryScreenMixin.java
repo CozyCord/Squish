@@ -22,7 +22,6 @@ public abstract class CreativeInventoryScreenMixin {
     private static final Identifier SQUISH_GUI =
             new Identifier("squish", "textures/gui/squish_creative.png");
 
-    // Draw AFTER vanilla background, BEFORE widgets -> widgets remain visible
     @Inject(
             method = "drawBackground(Lnet/minecraft/client/gui/DrawContext;FII)V",
             at = @At("TAIL")

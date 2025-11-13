@@ -8,9 +8,12 @@ import net.cozystudios.squish.item.SquishItemGroups;
 import net.cozystudios.squish.sound.SquishSounds;
 import net.fabricmc.api.ModInitializer;
 import net.cozystudios.squish.item.SquishItems;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,13 +32,38 @@ public class Squish implements ModInitializer {
         SugarRushScaleHandler.register();
         SquishItemGroups.registerItemGroups();
 
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            PlayerEntity player = handler.player;
-            ItemStack book = new ItemStack(SquishItems.SQUISH_GUIDEBOOK);
-            book.getOrCreateNbt().putString("patchouli:book", "squish:squish_guidebook");
+        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 
-            if (!player.getInventory().contains(book)) {
-                player.giveItemStack(book);
+            if (!player.getStackInHand(hand).isOf(SquishItems.SQUISH_CANDY)) {
+                return ActionResult.PASS;
+            }
+
+            if (!(entity instanceof LivingEntity living)) {
+                return ActionResult.PASS;
+            }
+
+            if (player.isSneaking()) {
+
+                ActionResult result = player.getStackInHand(hand).useOnEntity(player, living, hand);
+
+                return ActionResult.SUCCESS;
+            }
+            return ActionResult.FAIL;
+        });
+
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            ServerPlayerEntity player = handler.getPlayer();
+
+            var state = net.cozystudios.squish.save.SquishFirstJoinBookState.get(server);
+
+            if (state.markIfNew(player.getUuid())) {
+
+                ItemStack book = new ItemStack(SquishItems.SQUISH_GUIDEBOOK);
+                book.getOrCreateNbt().putString("patchouli:book", "squish:squish_guidebook");
+
+                if (!player.getInventory().insertStack(book)) {
+                    player.dropItem(book, false);
+                }
             }
         });
     }

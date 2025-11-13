@@ -55,10 +55,10 @@ public abstract class InGameHudMixin {
             return text.setStyle(text.getStyle()
                     .withBold(true)
                     .withColor(TextColor.fromRgb(LILAC)));
-        } else {
-            return text.setStyle(text.getStyle().withBold(true));
         }
+        return original;
     }
+
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
     private void squish$hideHaste(DrawContext context, CallbackInfo ci) {

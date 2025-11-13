@@ -33,12 +33,20 @@ public class SquishCandyItem extends SquishBaseItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         ActionResult result = applySquish(user, entity, stack);
-        return result.isAccepted() ? ActionResult.SUCCESS : ActionResult.PASS;
+        if (result == ActionResult.SUCCESS || result == ActionResult.FAIL) {
+            return ActionResult.FAIL;
+        }
+        return ActionResult.PASS;
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
+
+        if (!user.isSneaking()) {
+            user.setCurrentHand(hand);
+            return TypedActionResult.consume(stack);
+        }
 
         if (world.isClient) return TypedActionResult.pass(stack);
 
@@ -64,8 +72,7 @@ public class SquishCandyItem extends SquishBaseItem {
             }
         }
 
-        user.setCurrentHand(hand);
-        return TypedActionResult.consume(stack);
+        return TypedActionResult.pass(stack);
     }
 
     @Override
@@ -110,11 +117,15 @@ public class SquishCandyItem extends SquishBaseItem {
     }
 
     private ActionResult applySquish(PlayerEntity user, LivingEntity entity, ItemStack stack) {
+
+        if (!user.isSneaking()) return ActionResult.PASS;
+
         if (!(entity instanceof AnimalEntity animal)) return ActionResult.PASS;
+
         World world = entity.getWorld();
         if (world.isClient) return ActionResult.SUCCESS;
 
-        boolean alreadySquished = entity instanceof Squishable squishable && squishable.squish$isSquished();
+        boolean alreadySquished = entity instanceof Squishable s && s.squish$isSquished();
         if (alreadySquished) {
             user.sendMessage(Text.literal("That mob is already squished!"), true);
             return ActionResult.FAIL;

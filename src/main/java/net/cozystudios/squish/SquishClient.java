@@ -17,6 +17,8 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 
@@ -30,15 +32,14 @@ public class SquishClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(SquishItems.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(SquishBlocks.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
+
         TooltipComponentCallback.EVENT.register(data -> {
             if (data instanceof SquishBadgeTooltipData d) {
                 return new SquishBadgeTooltipComponent(d);
             }
-
             if (data != null && data.getClass().getName().contains("ModNameTooltipData")) {
                 return null;
             }
-
             return null;
         });
 
@@ -69,24 +70,32 @@ public class SquishClient implements ClientModInitializer {
             var id = Registries.ITEM.getId(stack.getItem());
             if (!"squish".equals(id.getNamespace())) return;
 
-            var name = lines.get(0).copy().styled(s -> s.withBold(true));
+            Text original = lines.get(0);
+            String plain = original.getString();
+
+            MutableText name = Text.literal(plain).styled(s -> s.withBold(false));
 
             final int MAGENTA = 0xDF3C73;
             final int LILAC   = 0xCFBDDF;
 
             String path = id.getPath();
 
-            boolean isLilac =
-                    path.equals("lollipop") ||
-                            path.equals("melted_sugar") ||
-                            path.equals("hardened_sugar") ||
-                            path.equals("hardened_sugar_shard");
+            boolean isLilac = path.equals("lollipop")
+                    || path.equals("melted_sugar")
+                    || path.equals("hardened_sugar")
+                    || path.equals("hardened_sugar_shard");
 
-            if (path.equals("squish_candy") || path.equals("squish_essence") || path.equals("squish_guidebook") || path.equals("squish_guidebook_stack")) {
-                name = name.setStyle(name.getStyle().withColor(TextColor.fromRgb(MAGENTA)));
-            } else if (isLilac) {
-                name = name.setStyle(name.getStyle().withColor(TextColor.fromRgb(LILAC)));
+            if (path.equals("squish_candy")
+                    || path.equals("squish_essence")
+                    || path.equals("squish_guidebook"))
+            {
+                name = name.styled(style -> style.withColor(TextColor.fromRgb(MAGENTA)));
             }
+            else if (isLilac)
+            {
+                name = name.styled(style -> style.withColor(TextColor.fromRgb(LILAC)));
+            }
+
             lines.set(0, name);
         });
     }

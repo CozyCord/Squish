@@ -1,5 +1,6 @@
 package net.cozystudios.squish.block.entity;
 
+import net.cozystudios.squish.block.MeltedSugarBlock;
 import net.cozystudios.squish.block.SquishBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,6 +21,9 @@ public class MeltedSugarBlockEntity extends BlockEntity {
 
     public static void tickServer(World world, BlockPos pos, BlockState state, MeltedSugarBlockEntity be) {
         if (world.isClient) return;
+
+        if (state.get(MeltedSugarBlock.PRESERVED)) return;
+
         be.age++;
         if (be.age >= HARDEN_TICKS) {
             world.setBlockState(pos, SquishBlocks.HARDENED_SUGAR_BLOCK.getDefaultState(), 3);

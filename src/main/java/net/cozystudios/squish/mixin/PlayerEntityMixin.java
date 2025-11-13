@@ -14,7 +14,7 @@ public abstract class PlayerEntityMixin {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         if (player.hasStatusEffect(SquishEffects.SUGAR_RUSH)) {
-            return original * 25.0F;
+            return original * 7.0F;
         }
 
         return original;

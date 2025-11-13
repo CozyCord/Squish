@@ -40,7 +40,8 @@ public class SquishBlocks {
             FabricBlockSettings.create()
                     .mapColor(MapColor.ORANGE)
                     .strength(0.8f)
-                    .sounds(BlockSoundGroup.GLASS)
+                    .requiresTool()
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .nonOpaque()
     ) {
         @Override

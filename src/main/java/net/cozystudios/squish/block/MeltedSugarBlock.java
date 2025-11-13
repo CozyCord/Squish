@@ -2,17 +2,24 @@ package net.cozystudios.squish.block;
 
 import net.cozystudios.squish.block.entity.MeltedSugarBlockEntity;
 import net.cozystudios.squish.block.entity.SquishBlockEntities;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
@@ -20,12 +27,22 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
+@SuppressWarnings({"deprecation"})
 public class MeltedSugarBlock extends BlockWithEntity {
 
     private static final VoxelShape COLLISION = VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 0.9375, 1.0);
+    public static final BooleanProperty PRESERVED = BooleanProperty.of("preserved");
 
     public MeltedSugarBlock(Settings settings) {
         super(settings);
+        this.setDefaultState(this.stateManager.getDefaultState().with(PRESERVED, false));
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(PRESERVED);
     }
 
     @Override
@@ -42,9 +59,10 @@ public class MeltedSugarBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, SquishBlockEntities.MELTED_SUGAR_BE, MeltedSugarBlockEntity::tickServer);
+        return (!state.get(PRESERVED) && !world.isClient)
+                ? checkType(type, SquishBlockEntities.MELTED_SUGAR_BE, MeltedSugarBlockEntity::tickServer)
+                : null;
     }
-
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, net.minecraft.world.BlockView world, BlockPos pos, ShapeContext context) {
@@ -96,6 +114,48 @@ public class MeltedSugarBlock extends BlockWithEntity {
         if (random.nextFloat() < 0.03f) {
             world.playSound(x, y, z, SoundEvents.BLOCK_HONEY_BLOCK_HIT, SoundCategory.BLOCKS, 0.15f, 1.05f + random.nextFloat() * 0.2f, false);
         }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos,
+                              net.minecraft.entity.player.PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(hand);
+
+        if (!state.get(PRESERVED) && stack.isOf(Items.HONEYCOMB)) {
+            world.setBlockState(pos, state.with(PRESERVED, true), 3);
+            world.playSound(null, pos, SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!player.getAbilities().creativeMode) stack.decrement(1);
+            return ActionResult.SUCCESS;
+        }
+
+        if (state.get(PRESERVED) && stack.isIn(ItemTags.AXES)) {
+            world.setBlockState(pos, state.with(PRESERVED, false), 3);
+            world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+
+    @Override
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+        List<ItemStack> drops = super.getDroppedStacks(state, builder);
+        if (state.get(PRESERVED)) {
+            for (ItemStack s : drops) {
+                if (s.isOf(this.asItem())) {
+                    s.getOrCreateNbt().putBoolean("Preserved", true);
+                }
+            }
+        }
+        return drops;
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockState base = this.getDefaultState();
+        ItemStack stack = ctx.getStack();
+        boolean preserved = stack.hasNbt() && stack.getNbt().getBoolean("Preserved");
+        return base.with(PRESERVED, preserved);
     }
 
     private static boolean isTouchingSide(BlockPos pos, Entity entity) {
