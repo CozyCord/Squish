@@ -3,14 +3,14 @@
 	"id": "squish",
 	"version": "${version}",
 	"name": "Squish",
-	"description": "This is the Squish mod. Make your mobs forever babies!",
+	"description": "This is the Squish mod. Make your mobs forever babies! In a sugary way!",
 	"authors": [
 		"Tokimi",
         "CozyStudios"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://discord.gg/cozycord",
+		"sources": "https://github.com/CozyCord/Squish"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/squish/icon.png",

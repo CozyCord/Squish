@@ -42,7 +42,7 @@ public abstract class BrewingStandBlockEntityMixin {
         }
 
         ItemStack ingredient = stand.getStack(3);
-        if (!ingredient.isOf(Items.AMETHYST_SHARD)) {
+        if (!ingredient.isOf(SquishItems.HARDENED_SUGAR_SHARD)) {
             self.squish$customBrewTime = 0;
             self.brewTime = 0;
             return;

@@ -1,5 +1,6 @@
 package net.cozystudios.squish.mixin;
 
+import net.cozystudios.squish.item.SquishItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.BrewingRecipeRegistry;
@@ -13,7 +14,7 @@ public abstract class BrewingRecipeRegistryMixin {
 
     @Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
     private static void squish$allowAmethystShard(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (stack.isOf(Items.AMETHYST_SHARD)) {
+        if (stack.isOf(SquishItems.HARDENED_SUGAR_SHARD)) {
             cir.setReturnValue(true);
         }
     }
