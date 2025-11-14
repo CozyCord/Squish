@@ -40,7 +40,6 @@ public class SquishBlocks {
             FabricBlockSettings.create()
                     .mapColor(MapColor.ORANGE)
                     .strength(0.8f)
-                    .requiresTool()
                     .sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .nonOpaque()
     ) {
@@ -51,7 +50,7 @@ public class SquishBlocks {
                 return Collections.singletonList(new ItemStack(this));
             }
 
-            int count = 2 + builder.getWorld().random.nextInt(3); // 2–4 shards
+            int count = 2 + builder.getWorld().random.nextInt(3);
             return Collections.singletonList(new ItemStack(SquishItems.HARDENED_SUGAR_SHARD, count));
         }
     };

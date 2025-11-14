@@ -19,8 +19,5 @@ public class SquishBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(SquishBlocks.HARDENED_SUGAR_BLOCK);
-
-        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
-                .add(SquishBlocks.HARDENED_SUGAR_BLOCK);
     }
 }

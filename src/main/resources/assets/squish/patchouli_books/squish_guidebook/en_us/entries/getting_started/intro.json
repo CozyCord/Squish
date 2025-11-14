@@ -23,7 +23,7 @@
       "type": "patchouli:spotlight",
       "item": "squish:squish_essence",
       "title": "Squish Essence",
-      "text": "To brew Squish Essence, place an Amethyst Shard and Bottles of Water into a Brewing Stand. Make sure you have blaze powder! This shimmering liquid is essential to all Squish-based recipes!"
+      "text": "To brew Squish Essence, place a Hardened Sugar Shard and Bottles of Water into a Brewing Stand. Make sure you have blaze powder! This shimmering liquid is essential to all Squish-based recipes!"
     },
     {
       "type": "patchouli:spotlight",
@@ -35,7 +35,7 @@
       "type": "patchouli:spotlight",
       "item": "squish:squish_candy",
       "title": "Squish Candy",
-      "text": "Throw Lollipops on the ground and splash them with Squish Essence to magically transform them into Squish Candy! Use these on your pets or animals by shift right clicking them to keep them babies forever. But beware... if you eat one yourself, things might get a bit crazy!"
+      "text": "Throw Lollipops on the ground and splash them with Squish Essence to magically transform them into Squish Candy! Use these on your pets or animals by shift right clicking them to keep them babies forever. But beware... if you eat one yourself, things might get a bit crazy! NOTE: Your pets will forever stay babies, and cannot be turned back to normal, so only turn them if you want them to be baby forever!"
     }
   ]
 }
