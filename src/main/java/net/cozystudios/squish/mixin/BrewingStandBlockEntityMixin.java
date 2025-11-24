@@ -1,6 +1,7 @@
 package net.cozystudios.squish.mixin;
 
 import net.cozystudios.squish.item.SquishItems;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -23,28 +24,30 @@ public abstract class BrewingStandBlockEntityMixin {
     @Shadow int brewTime;
     @Shadow int fuel;
 
-    @Unique private int squish$customBrewTime = 0;
-    @Unique private static final int SQUISH_BREW_TIME = 400;
+    @Unique
+    private int squish$essenceBrewTime = 0;
+
+    @Unique
+    private static final int SQUISH_BREW_TIME = 400;
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private static void squish$customBrew(World world, BlockPos pos,
-                                          net.minecraft.block.BlockState state,
-                                          BrewingStandBlockEntity stand,
-                                          CallbackInfo ci) {
+    private static void squish$brewEssence(World world,
+                                           BlockPos pos,
+                                           BlockState state,
+                                           BrewingStandBlockEntity stand,
+                                           CallbackInfo ci) {
         if (world.isClient) return;
 
         BrewingStandBlockEntityMixin self = (BrewingStandBlockEntityMixin)(Object) stand;
 
-        if (self.fuel <= 0) {
-            self.squish$customBrewTime = 0;
-            self.brewTime = 0;
+        ItemStack ingredient = stand.getStack(3);
+        if (!ingredient.isOf(SquishItems.HARDENED_SUGAR_SHARD)) {
+            self.squish$essenceBrewTime = 0;
             return;
         }
 
-        ItemStack ingredient = stand.getStack(3);
-        if (!ingredient.isOf(SquishItems.HARDENED_SUGAR_SHARD)) {
-            self.squish$customBrewTime = 0;
-            self.brewTime = 0;
+        if (self.fuel <= 0) {
+            self.squish$essenceBrewTime = 0;
             return;
         }
 
@@ -58,23 +61,29 @@ public abstract class BrewingStandBlockEntityMixin {
         }
 
         if (!hasWater) {
-            self.squish$customBrewTime = 0;
-            self.brewTime = 0;
+            self.squish$essenceBrewTime = 0;
             return;
         }
 
-        if (self.squish$customBrewTime == 0) {
-            self.squish$customBrewTime = SQUISH_BREW_TIME;
+        if (self.squish$essenceBrewTime <= 0) {
+            self.squish$essenceBrewTime = SQUISH_BREW_TIME;
             self.brewTime = SQUISH_BREW_TIME;
-            world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW,
-                    SoundCategory.BLOCKS, 0.7F, 1.0F);
+            world.playSound(
+                    null,
+                    pos,
+                    SoundEvents.BLOCK_BREWING_STAND_BREW,
+                    SoundCategory.BLOCKS,
+                    0.7F,
+                    1.0F
+            );
         }
 
-        self.squish$customBrewTime--;
-        self.brewTime = self.squish$customBrewTime;
+        self.squish$essenceBrewTime--;
+        self.brewTime = self.squish$essenceBrewTime;
 
-        if (self.squish$customBrewTime <= 0) {
+        if (self.squish$essenceBrewTime <= 0) {
             boolean brewed = false;
+
             for (int i = 0; i < 3; i++) {
                 ItemStack stack = stand.getStack(i);
                 if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
@@ -87,11 +96,18 @@ public abstract class BrewingStandBlockEntityMixin {
                 self.fuel = Math.max(0, self.fuel - 1);
                 ingredient.decrement(1);
                 stand.markDirty();
-                world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW,
-                        SoundCategory.BLOCKS, 0.8F, 1.0F);
+
+                world.playSound(
+                        null,
+                        pos,
+                        SoundEvents.BLOCK_BREWING_STAND_BREW,
+                        SoundCategory.BLOCKS,
+                        0.8F,
+                        1.0F
+                );
             }
 
-            self.squish$customBrewTime = 0;
+            self.squish$essenceBrewTime = 0;
             self.brewTime = 0;
         }
     }
