@@ -2,8 +2,11 @@ package net.cozystudios.squish.item;
 
 import net.cozystudios.squish.effect.SquishEffects;
 import net.cozystudios.squish.sound.SquishSounds;
+import net.cozystudios.squish.util.CandyInfusion;
 import net.cozystudios.squish.util.Squishable;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,11 +15,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleType;
@@ -31,12 +36,23 @@ public class SquishCandyItem extends SquishBaseItem {
     }
 
     @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+
+        int level = CandyInfusion.getLevel(stack);
+        tooltip.add(Text.literal("Infusion: " + level + "/5").formatted(Formatting.LIGHT_PURPLE));
+    }
+
+
+    @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        ActionResult result = applySquish(user, entity, stack);
-        if (result == ActionResult.SUCCESS || result == ActionResult.FAIL) {
-            return ActionResult.FAIL;
+        if (!user.isSneaking()) {
+            return ActionResult.PASS;
         }
-        return ActionResult.PASS;
+
+        ActionResult result = applySquish(user, entity, stack);
+
+        return (result == ActionResult.SUCCESS || result == ActionResult.FAIL) ? ActionResult.SUCCESS : ActionResult.PASS;
     }
 
     @Override
@@ -48,19 +64,26 @@ public class SquishCandyItem extends SquishBaseItem {
             return TypedActionResult.consume(stack);
         }
 
-        if (world.isClient) return TypedActionResult.pass(stack);
+        if (world.isClient) {
+            return TypedActionResult.pass(stack);
+        }
 
         Vec3d lookVec = user.getRotationVec(1.0F);
         Box searchBox = user.getBoundingBox().stretch(lookVec.multiply(3.5D)).expand(1.0D);
-        List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, searchBox,
-                e -> e instanceof AnimalEntity && e.isAlive());
+
+        List<LivingEntity> entities = world.getEntitiesByClass(
+                LivingEntity.class,
+                searchBox,
+                e -> e instanceof AnimalEntity && e.isAlive()
+        );
 
         LivingEntity closest = null;
-        double closestDist = 3.5D;
+        double closestDistSq = 3.5D * 3.5D;
 
         for (LivingEntity e : entities) {
-            double dist = e.squaredDistanceTo(user);
-            if (dist < closestDist * closestDist) {
+            double distSq = e.squaredDistanceTo(user);
+            if (distSq < closestDistSq) {
+                closestDistSq = distSq;
                 closest = e;
             }
         }
@@ -70,6 +93,7 @@ public class SquishCandyItem extends SquishBaseItem {
             if (result.isAccepted()) {
                 return TypedActionResult.success(stack);
             }
+            return TypedActionResult.pass(stack);
         }
 
         return TypedActionResult.pass(stack);
@@ -80,9 +104,12 @@ public class SquishCandyItem extends SquishBaseItem {
         ItemStack result = super.finishUsing(stack, world, user);
 
         if (!world.isClient && user instanceof PlayerEntity player) {
-            player.addStatusEffect(new net.minecraft.entity.effect.StatusEffectInstance(
+            int infusionLevel = CandyInfusion.getLevel(stack);
+            int durationTicks = 20 * 60 * infusionLevel;
+
+            player.addStatusEffect(new StatusEffectInstance(
                     SquishEffects.SUGAR_RUSH,
-                    20 * 60,
+                    durationTicks,
                     0,
                     false,
                     true,
@@ -117,9 +144,7 @@ public class SquishCandyItem extends SquishBaseItem {
     }
 
     private ActionResult applySquish(PlayerEntity user, LivingEntity entity, ItemStack stack) {
-
         if (!user.isSneaking()) return ActionResult.PASS;
-
         if (!(entity instanceof AnimalEntity animal)) return ActionResult.PASS;
 
         World world = entity.getWorld();

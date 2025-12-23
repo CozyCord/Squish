@@ -1,6 +1,7 @@
 package net.cozystudios.squish.entity;
 
 import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.util.CandyInfusion;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -58,19 +59,28 @@ public class SquishEssenceEntity extends ThrownItemEntity {
             DustParticleEffect magentaDust = new DustParticleEffect(new Vec3d(1.0, 0.0, 1.0).toVector3f(), 1.0F);
             serverWorld.spawnParticles(magentaDust,
                     pos.x, pos.y, pos.z,
-                    40, // count
+                    40,
                     0.4, 0.4, 0.4, 0.05);
         }
 
         Box box = new Box(pos.add(-1.5, -1.5, -1.5), pos.add(1.5, 1.5, 1.5));
-        List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box,
-                e -> e.getStack().isOf(SquishItems.LOLLIPOP));
+        List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box, e -> {
+            ItemStack st = e.getStack();
+            return st.isOf(SquishItems.LOLLIPOP) || st.isOf(SquishItems.SQUISH_CANDY);
+        });
 
         for (ItemEntity it : items) {
             ItemStack s = it.getStack();
             int count = s.getCount();
-            ItemStack converted = new ItemStack(SquishItems.SQUISH_CANDY, count);
-            it.setStack(converted);
+
+            if (s.isOf(SquishItems.LOLLIPOP)) {
+                ItemStack converted = new ItemStack(SquishItems.SQUISH_CANDY, count);
+                CandyInfusion.setLevel(converted, 1);
+                it.setStack(converted);
+            } else {
+                CandyInfusion.increment(s);
+                it.setStack(s);
+            }
         }
 
         this.discard();
