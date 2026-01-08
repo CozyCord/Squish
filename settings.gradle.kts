@@ -3,6 +3,7 @@ pluginManagement {
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
+        // development maven
         maven("https://maven.kikugie.dev/releases")
         maven("https://maven.kikugie.dev/snapshots")
         maven("https://maven.fabricmc.net/")
