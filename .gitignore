@@ -1,9 +1,13 @@
 # gradle
 
+secrets.gradle
 .gradle/
 build/
+**/build/
 out/
 classes/
+versions/*-*/**
+!gradle-wrapper.jar
 
 # eclipse
 
@@ -28,7 +32,7 @@ bin/
 
 *.DS_Store
 
-# fabric
+# minecraft
 
 run/
 
