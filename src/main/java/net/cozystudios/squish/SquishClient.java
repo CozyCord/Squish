@@ -1,5 +1,21 @@
 package net.cozystudios.squish;
 
+//? if fabric {
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+//? }
+
+//? if forge {
+/*import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+*///? }
+
 import net.cozystudios.squish.block.SquishBlocks;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.render.entity.*;
@@ -9,12 +25,6 @@ import net.cozystudios.squish.entity.SquishEntities;
 import net.cozystudios.squish.item.SquishItems;
 import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
 import net.cozystudios.squish.mixin.HandledScreenAccessor;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -26,13 +36,27 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 
+//? if fabric {
 public class SquishClient implements ClientModInitializer {
+//? }
+
+//? if forge {
+/*@Mod.EventBusSubscriber(modid = Squish.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class SquishClient {
+*///? }
 
     private static final Identifier SQUISH_BADGE =
             new Identifier("squish", "textures/gui/tooltip_badges/squish_badge.png");
 
+    //? if fabric {
     @Override
     public void onInitializeClient() {
+    //? }
+
+    //? if forge {
+    /*@SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+    *///? }
 
         SquishModelLayers.register();
 
