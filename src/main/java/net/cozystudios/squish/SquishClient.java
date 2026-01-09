@@ -2,8 +2,7 @@ package net.cozystudios.squish;
 
 import net.cozystudios.squish.block.SquishBlocks;
 import net.cozystudios.squish.client.model.SquishModelLayers;
-import net.cozystudios.squish.client.model.baby.*;
-import net.cozystudios.squish.client.render.baby.*;
+import net.cozystudios.squish.client.render.entity.*;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipComponent;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
 import net.cozystudios.squish.item.SquishItems;
@@ -12,7 +11,6 @@ import net.cozystudios.squish.mixin.HandledScreenAccessor;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
@@ -35,7 +33,19 @@ public class SquishClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
+        SquishModelLayers.register();
+
         EntityRendererRegistry.register(SquishItems.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
+
+        EntityRendererRegistry.register(EntityType.CAT, SquishCatRenderer::new);
+        EntityRendererRegistry.register(EntityType.CHICKEN, SquishChickenRenderer::new);
+        EntityRendererRegistry.register(EntityType.COW, SquishCowRenderer::new);
+        EntityRendererRegistry.register(EntityType.PIG, SquishPigRenderer::new);
+        EntityRendererRegistry.register(EntityType.RABBIT, SquishRabbitRenderer::new);
+        EntityRendererRegistry.register(EntityType.SHEEP, SquishSheepRenderer::new);
+        EntityRendererRegistry.register(EntityType.WOLF, SquishWolfRenderer::new);
+
+        // Blocks
         BlockRenderLayerMap.INSTANCE.putBlock(SquishBlocks.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
 
         TooltipComponentCallback.EVENT.register(data -> {
@@ -47,30 +57,6 @@ public class SquishClient implements ClientModInitializer {
             }
             return null;
         });
-
-        //Entities//
-
-        // Baby model layers
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_COW, BabyCowEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_CHICKEN, BabyChickenEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_PIG, BabyPigEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_RABBIT, BabyRabbitEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_WOLF, BabyWolfEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_CAT, BabyCatEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_OCELOT, BabyOcelotEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(SquishModelLayers.BABY_SHEEP, BabySheepEntityModel::getTexturedModelData);
-
-        // Renderer overrides (replace vanilla factories)
-        EntityRendererRegistry.register(EntityType.COW, BabyAwareCowEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.CHICKEN, BabyAwareChickenEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.PIG, BabyAwarePigEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.RABBIT, BabyAwareRabbitEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.WOLF, BabyAwareWolfEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.CAT, BabyAwareCatEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.OCELOT, BabyAwareOcelotEntityRenderer::new);
-        EntityRendererRegistry.register(EntityType.SHEEP, BabyAwareSheepEntityRenderer::new);
-
-        //Other Things//
 
         ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
             if (!(screen instanceof CreativeInventoryScreen creative)) return;
