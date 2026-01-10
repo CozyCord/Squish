@@ -14,8 +14,11 @@ import net.minecraft.util.Identifier;
 
 public class SquishSheepRenderer extends EntityRenderer<SheepEntity> {
 
-    private static final Identifier BABY_TEXTURE =
+    private static final Identifier BABY_SHEEP_BASE =
             new Identifier(Squish.MOD_ID, "textures/entity/baby/sheep.png");
+
+    public static final Identifier BABY_SHEEP_WOOL =
+            new Identifier(Squish.MOD_ID, "textures/entity/baby/sheep_wool.png");
 
     private final EntityRenderer<SheepEntity> adult;
     private final BabyRenderer baby;
@@ -35,17 +38,19 @@ public class SquishSheepRenderer extends EntityRenderer<SheepEntity> {
 
     @Override
     public Identifier getTexture(SheepEntity entity) {
-        return entity.isBaby() ? BABY_TEXTURE : adult.getTexture(entity);
+        return entity.isBaby() ? BABY_SHEEP_BASE : adult.getTexture(entity);
     }
 
     private static final class BabyRenderer extends MobEntityRenderer<SheepEntity, BabySheepModel> {
         BabyRenderer(EntityRendererFactory.Context ctx) {
             super(ctx, new BabySheepModel(ctx.getPart(SquishModelLayers.BABY_SHEEP)), 0.30f);
+
+            this.addFeature(new BabySheepWoolFeatureRenderer(this));
         }
 
         @Override
         public Identifier getTexture(SheepEntity entity) {
-            return BABY_TEXTURE;
+            return BABY_SHEEP_BASE;
         }
 
         @Override

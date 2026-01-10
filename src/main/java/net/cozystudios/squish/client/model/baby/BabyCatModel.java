@@ -3,6 +3,7 @@ package net.cozystudios.squish.client.model.baby;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.entity.passive.CatEntity;
+import net.minecraft.util.math.MathHelper;
 
 public class BabyCatModel extends SinglePartEntityModel<CatEntity> {
     private final ModelPart root;
@@ -84,8 +85,12 @@ public class BabyCatModel extends SinglePartEntityModel<CatEntity> {
     @Override
     public void setAngles(CatEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         BabyAnimUtil.reset(this.root);
-
         BabyAnimUtil.applyHeadRotation(this.head, netHeadYaw, headPitch);
+
+        if (entity.isInSittingPose()) {
+            applySittingPose();
+            return;
+        }
 
         BabyAnimUtil.animateQuadrupedLegs(
                 this.right_front_leg, this.left_front_leg,
@@ -93,11 +98,48 @@ public class BabyCatModel extends SinglePartEntityModel<CatEntity> {
                 limbSwing, limbSwingAmount, 0.9F
         );
 
-        if (entity.isInSittingPose()) {
+
+        boolean sprinting = entity.isSprinting();
+        boolean sneaking = entity.isInSneakingPose();
+
+        if (sprinting) {
+            this.tail.pitch = 0.90F;
+            if (limbSwingAmount > 0.10F && entity.isOnGround()) {
+                float strength = MathHelper.clamp(limbSwingAmount, 0.0F, 1.0F);
+                this.tail.yaw = MathHelper.cos(limbSwing * 0.6662F) * 0.55F * strength;
+            } else {
+                this.tail.yaw = 0.0F;
+            }
+        } else if (sneaking) {
+            this.tail.pitch = 1.05F;
             this.tail.yaw = 0.0F;
-            this.tail.pitch = 0.35F;
         } else {
-            BabyAnimUtil.wagTailInBursts(this.tail, entity, ageInTicks, 0.0F, 0.55F);
+            this.tail.pitch = 0.55F;
+
+            if (limbSwingAmount > 0.08F && entity.isOnGround()) {
+                float strength = MathHelper.clamp(limbSwingAmount, 0.0F, 1.0F);
+                this.tail.yaw = MathHelper.cos(limbSwing * 0.6662F) * 0.45F * strength;
+            } else {
+                this.tail.yaw = MathHelper.cos(ageInTicks * 0.06F) * 0.04F;
+            }
         }
+
+        if (!entity.isOnGround()) {
+            this.tail.yaw = 0.0F;
+        }
+    }
+
+    private void applySittingPose() {
+        this.body.pitch = -0.35F;
+        this.body.pivotY -= 0.35F;
+
+        this.right_front_leg.pitch = 0.35F - this.body.pitch;
+        this.left_front_leg.pitch  = 0.35F - this.body.pitch;
+
+        this.right_hind_leg.pitch = 1.40F - this.body.pitch;
+        this.left_hind_leg.pitch  = 1.40F - this.body.pitch;
+
+        this.tail.yaw = 0.0F;
+        this.tail.pitch = 0.85F - this.body.pitch;
     }
 }

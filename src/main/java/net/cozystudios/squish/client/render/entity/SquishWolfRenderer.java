@@ -14,8 +14,12 @@ import net.minecraft.util.Identifier;
 
 public class SquishWolfRenderer extends EntityRenderer<WolfEntity> {
 
-    private static final Identifier BABY_TEXTURE =
+    private static final Identifier BABY_WOLF =
             new Identifier(Squish.MOD_ID, "textures/entity/baby/wolf.png");
+    private static final Identifier BABY_WOLF_TAME =
+            new Identifier(Squish.MOD_ID, "textures/entity/baby/wolf_tame_baby.png");
+    private static final Identifier BABY_WOLF_ANGRY =
+            new Identifier(Squish.MOD_ID, "textures/entity/baby/wolf_angry_baby.png");
 
     private final EntityRenderer<WolfEntity> adult;
     private final BabyRenderer baby;
@@ -35,17 +39,25 @@ public class SquishWolfRenderer extends EntityRenderer<WolfEntity> {
 
     @Override
     public Identifier getTexture(WolfEntity entity) {
-        return entity.isBaby() ? BABY_TEXTURE : adult.getTexture(entity);
+        return entity.isBaby() ? baby.getTexture(entity) : adult.getTexture(entity);
+    }
+
+    private static Identifier getBabyWolfTexture(WolfEntity wolf) {
+        if (wolf.isTamed()) return BABY_WOLF_TAME;
+        if (wolf.hasAngerTime()) return BABY_WOLF_ANGRY;
+        return BABY_WOLF;
     }
 
     private static final class BabyRenderer extends MobEntityRenderer<WolfEntity, BabyWolfModel> {
         BabyRenderer(EntityRendererFactory.Context ctx) {
             super(ctx, new BabyWolfModel(ctx.getPart(SquishModelLayers.BABY_WOLF)), 0.25f);
+
+            this.addFeature(new BabyWolfCollarFeatureRenderer(this));
         }
 
         @Override
         public Identifier getTexture(WolfEntity entity) {
-            return BABY_TEXTURE;
+            return getBabyWolfTexture(entity);
         }
 
         @Override

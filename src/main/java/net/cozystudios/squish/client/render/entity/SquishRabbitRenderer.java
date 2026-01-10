@@ -14,10 +14,7 @@ import net.minecraft.util.Identifier;
 
 public class SquishRabbitRenderer extends EntityRenderer<RabbitEntity> {
 
-    private static final Identifier BABY_TEXTURE =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/rabbit.png");
-
-    private final EntityRenderer<RabbitEntity> adult;
+    private final RabbitEntityRenderer adult;
     private final BabyRenderer baby;
 
     public SquishRabbitRenderer(EntityRendererFactory.Context ctx) {
@@ -35,17 +32,24 @@ public class SquishRabbitRenderer extends EntityRenderer<RabbitEntity> {
 
     @Override
     public Identifier getTexture(RabbitEntity entity) {
-        return entity.isBaby() ? BABY_TEXTURE : adult.getTexture(entity);
+        return entity.isBaby() ? baby.getTexture(entity) : adult.getTexture(entity);
     }
 
-    private static final class BabyRenderer extends MobEntityRenderer<RabbitEntity, BabyRabbitModel> {
+    private static Identifier babyFromVanillaRabbitTexture(Identifier vanillaRabbitTexture) {
+        String path = vanillaRabbitTexture.getPath();
+        String prefix = "textures/entity/rabbit/";
+        String file = path.startsWith(prefix) ? path.substring(prefix.length()) : path;
+        return new Identifier(Squish.MOD_ID, "textures/entity/baby/rabbit/" + file);
+    }
+
+    private final class BabyRenderer extends MobEntityRenderer<RabbitEntity, BabyRabbitModel> {
         BabyRenderer(EntityRendererFactory.Context ctx) {
             super(ctx, new BabyRabbitModel(ctx.getPart(SquishModelLayers.BABY_RABBIT)), 0.20f);
         }
 
         @Override
         public Identifier getTexture(RabbitEntity entity) {
-            return BABY_TEXTURE;
+            return babyFromVanillaRabbitTexture(adult.getTexture(entity));
         }
 
         @Override

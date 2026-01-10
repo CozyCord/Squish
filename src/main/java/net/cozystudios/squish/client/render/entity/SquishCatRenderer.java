@@ -14,10 +14,7 @@ import net.minecraft.util.Identifier;
 
 public class SquishCatRenderer extends EntityRenderer<CatEntity> {
 
-    private static final Identifier BABY_TEXTURE =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/cat.png");
-
-    private final EntityRenderer<CatEntity> adult;
+    private final CatEntityRenderer adult;
     private final BabyRenderer baby;
 
     public SquishCatRenderer(EntityRendererFactory.Context ctx) {
@@ -35,17 +32,24 @@ public class SquishCatRenderer extends EntityRenderer<CatEntity> {
 
     @Override
     public Identifier getTexture(CatEntity entity) {
-        return entity.isBaby() ? BABY_TEXTURE : adult.getTexture(entity);
+        return entity.isBaby() ? baby.getTexture(entity) : adult.getTexture(entity);
     }
 
-    private static final class BabyRenderer extends MobEntityRenderer<CatEntity, BabyCatModel> {
+    private static Identifier babyFromVanillaCatTexture(Identifier vanillaCatTexture) {
+        String path = vanillaCatTexture.getPath();
+        String prefix = "textures/entity/cat/";
+        String file = path.startsWith(prefix) ? path.substring(prefix.length()) : path;
+        return new Identifier(Squish.MOD_ID, "textures/entity/baby/cat/" + file);
+    }
+
+    private final class BabyRenderer extends MobEntityRenderer<CatEntity, BabyCatModel> {
         BabyRenderer(EntityRendererFactory.Context ctx) {
             super(ctx, new BabyCatModel(ctx.getPart(SquishModelLayers.BABY_CAT)), 0.25f);
         }
 
         @Override
         public Identifier getTexture(CatEntity entity) {
-            return BABY_TEXTURE;
+            return babyFromVanillaCatTexture(adult.getTexture(entity));
         }
 
         @Override
