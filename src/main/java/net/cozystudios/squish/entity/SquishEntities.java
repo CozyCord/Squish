@@ -22,9 +22,20 @@ public final class SquishEntities {
                     .build()
     );
 
+    public static final EntityType<BabyIronGolemEntity> BABY_IRON_GOLEM = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(Squish.MOD_ID, "baby_iron_golem"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabyIronGolemEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.7f, 0.95f))
+                    .trackRangeBlocks(8)
+                    .trackedUpdateRate(3)
+                    .build()
+    );
+
     private SquishEntities() {}
 
     public static void register() {
         FabricDefaultAttributeRegistry.register(BABY_CREEPER, BabyCreeperEntity.createBabyCreeperAttributes());
+        FabricDefaultAttributeRegistry.register(BABY_IRON_GOLEM, BabyIronGolemEntity.createBabyIronGolemAttributes());
     }
 }

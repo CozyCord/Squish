@@ -154,7 +154,6 @@ public class SquishCandyItem extends SquishBaseItem {
 
         if (entity instanceof CreeperEntity creeper) {
 
-            // Prevent re-squishing the pet itself
             if (entity instanceof BabyCreeperEntity) {
                 user.sendMessage(Text.literal("That mob is already squished!"), true);
                 return ActionResult.FAIL;
@@ -196,7 +195,52 @@ public class SquishCandyItem extends SquishBaseItem {
             if (!user.getAbilities().creativeMode) stack.decrement(1);
 
             user.sendMessage(Text.literal("...it worked?"), true);
+            return ActionResult.SUCCESS;
+        }
 
+        if (entity instanceof net.minecraft.entity.passive.IronGolemEntity golem) {
+
+            if (entity instanceof net.cozystudios.squish.entity.BabyIronGolemEntity) {
+                user.sendMessage(Text.literal("That mob is already squished!"), true);
+                return ActionResult.FAIL;
+            }
+
+            net.cozystudios.squish.entity.BabyIronGolemEntity baby = SquishEntities.BABY_IRON_GOLEM.create(world);
+            if (baby == null) return ActionResult.FAIL;
+
+            baby.refreshPositionAndAngles(golem.getX(), golem.getY(), golem.getZ(), golem.getYaw(), golem.getPitch());
+            baby.setBodyYaw(golem.getBodyYaw());
+            baby.setHeadYaw(golem.getHeadYaw());
+            baby.setAiDisabled(golem.isAiDisabled());
+
+            if (golem.hasCustomName()) {
+                baby.setCustomName(golem.getCustomName());
+                baby.setCustomNameVisible(golem.isCustomNameVisible());
+            }
+
+            world.spawnEntity(baby);
+            golem.discard();
+
+            float hue = (System.currentTimeMillis() % 3000L) / 3000f;
+            int rgb = Color.HSBtoRGB(hue, 0.9f, 1.0f) & 0xFFFFFF;
+            float r = ((rgb >> 16) & 0xFF) / 255f;
+            float g = ((rgb >> 8) & 0xFF) / 255f;
+            float b = (rgb & 0xFF) / 255f;
+
+            ServerWorld server = (ServerWorld) world;
+            server.spawnParticles(
+                    new DustParticleEffect(new Vector3f(r, g, b), 1.0f),
+                    baby.getX(), baby.getBodyY(0.5), baby.getZ(),
+                    45, 0.5, 0.5, 0.5, 0.01
+            );
+            server.playSound(null, baby.getBlockPos(),
+                    SquishSounds.SUGAR_POP,
+                    SoundCategory.PLAYERS,
+                    0.8f, 1.35f);
+
+            if (!user.getAbilities().creativeMode) stack.decrement(1);
+
+            user.sendMessage(Text.literal("...it worked?"), true);
             return ActionResult.SUCCESS;
         }
 

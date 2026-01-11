@@ -72,6 +72,7 @@ public class SquishClient {
         EntityRendererRegistry.register(EntityType.SHEEP, SquishSheepRenderer::new);
         EntityRendererRegistry.register(EntityType.WOLF, SquishWolfRenderer::new);
         EntityRendererRegistry.register(SquishEntities.BABY_CREEPER, SquishBabyCreeperRenderer::new);
+        EntityRendererRegistry.register(SquishEntities.BABY_IRON_GOLEM, SquishBabyIronGolemRenderer::new);
 
         // Blocks
         // TODO: move this
