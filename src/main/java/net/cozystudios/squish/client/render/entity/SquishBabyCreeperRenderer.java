@@ -3,7 +3,7 @@ package net.cozystudios.squish.client.render.entity;
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.model.baby.BabyCreeperModel;
-import net.cozystudios.squish.entity.BabyCreeperEntity;
+import net.cozystudios.squish.registry.entity.BabyCreeperEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;

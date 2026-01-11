@@ -1,6 +1,6 @@
 package net.cozystudios.squish.client.model.baby;
 
-import net.cozystudios.squish.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.util.math.MathHelper;

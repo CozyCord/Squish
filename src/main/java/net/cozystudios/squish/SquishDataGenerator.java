@@ -1,10 +1,10 @@
 package net.cozystudios.squish;
 
 //? if fabric {
-import net.cozystudios.squish.fabric.datagen.SquishBlockTagProvider;
-import net.cozystudios.squish.fabric.datagen.SquishLootTableProvider;
-import net.cozystudios.squish.fabric.datagen.SquishModelProvider;
-import net.cozystudios.squish.fabric.datagen.SquishRecipeProvider;
+import net.cozystudios.squish.loader.fabric.datagen.SquishBlockTagProvider;
+import net.cozystudios.squish.loader.fabric.datagen.SquishLootTableProvider;
+import net.cozystudios.squish.loader.fabric.datagen.SquishModelProvider;
+import net.cozystudios.squish.loader.fabric.datagen.SquishRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 //? }

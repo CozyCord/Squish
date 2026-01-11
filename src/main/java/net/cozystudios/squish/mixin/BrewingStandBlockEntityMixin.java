@@ -1,6 +1,6 @@
 package net.cozystudios.squish.mixin;
 
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.item.ItemStack;

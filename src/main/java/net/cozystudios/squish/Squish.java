@@ -1,7 +1,7 @@
 package net.cozystudios.squish;
 
 //? if fabric {
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.cozystudios.squish.event.EntityInteractHandler;
 import net.cozystudios.squish.event.PlayerJoinHandler;
 import net.fabricmc.api.ModInitializer;
@@ -20,9 +20,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 *///? }
 
-import net.cozystudios.squish.entity.SquishEntities;
+import net.cozystudios.squish.registry.entity.SquishEntities;
 import net.cozystudios.squish.event.SugarRushScaleHandler;
-import net.cozystudios.squish.sound.SquishSounds;
+import net.cozystudios.squish.registry.sound.SquishSounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

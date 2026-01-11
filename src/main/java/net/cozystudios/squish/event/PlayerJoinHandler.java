@@ -1,6 +1,6 @@
 package net.cozystudios.squish.event;
 
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;

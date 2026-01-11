@@ -3,7 +3,7 @@ package net.cozystudios.squish.client.render.entity;
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.model.baby.BabyIronGolemModel;
-import net.cozystudios.squish.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;

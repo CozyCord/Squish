@@ -1,6 +1,6 @@
 package net.cozystudios.squish.event;
 
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import virtuoel.pehkui.api.ScaleData;

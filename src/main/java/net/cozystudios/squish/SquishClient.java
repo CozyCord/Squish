@@ -1,7 +1,7 @@
 package net.cozystudios.squish;
 
 //? if fabric {
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -21,7 +21,7 @@ import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.render.entity.*;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipComponent;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
-import net.cozystudios.squish.entity.SquishEntities;
+import net.cozystudios.squish.registry.entity.SquishEntities;
 import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
 import net.cozystudios.squish.mixin.HandledScreenAccessor;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
