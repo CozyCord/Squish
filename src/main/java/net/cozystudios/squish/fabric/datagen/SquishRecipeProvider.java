@@ -1,3 +1,4 @@
+//? if fabric {
 package net.cozystudios.squish.fabric.datagen;
 
 import net.cozystudios.squish.fabric.RegistryHelper;
@@ -36,3 +37,4 @@ public class SquishRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier("squish", "hardened_sugar_shard_from_block"));
     }
 }
+//? }

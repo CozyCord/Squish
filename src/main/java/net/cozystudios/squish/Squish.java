@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 //? if forge {
 /*import net.cozystudios.squish.event.EntityInteractHandler;
 import net.cozystudios.squish.event.PlayerJoinHandler;
+import net.cozystudios.squish.forge.RegistryHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;

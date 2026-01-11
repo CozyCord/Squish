@@ -1,3 +1,4 @@
+//? if fabric {
 package net.cozystudios.squish.fabric.datagen;
 
 import net.cozystudios.squish.fabric.RegistryHelper;
@@ -26,3 +27,4 @@ public class SquishModelProvider extends FabricModelProvider {
         itemModelGenerator.register(RegistryHelper.HARDENED_SUGAR_SHARD, Models.GENERATED);
     }
 }
+//? }

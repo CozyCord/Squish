@@ -2,7 +2,9 @@ package net.cozystudios.squish.client.model;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.baby.*;
+//? if fabric {
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+//? }
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
@@ -22,13 +24,19 @@ public final class SquishModelLayers {
     private SquishModelLayers() {}
 
     private static EntityModelLayer layer(String name) {
+        //? if fabric {
         return new EntityModelLayer(new Identifier(Squish.MOD_ID, name), "main");
+        //? }
+        //? if forge {
+        /*return new EntityModelLayer(Identifier.of(Squish.MOD_ID, name), "main");
+        *///? }
     }
 
     public static void register() {
         if (REGISTERED) return;
         REGISTERED = true;
 
+        //? if fabric {
         EntityModelLayerRegistry.registerModelLayer(BABY_CAT, BabyCatModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_CHICKEN, BabyChickenModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_COW, BabyCowModel::getTexturedModelData);
@@ -37,5 +45,6 @@ public final class SquishModelLayers {
         EntityModelLayerRegistry.registerModelLayer(BABY_SHEEP, BabySheepModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_WOLF, BabyWolfModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_CREEPER, BabyCreeperModel::getTexturedModelData);
+        //? }
     }
 }

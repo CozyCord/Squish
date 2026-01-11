@@ -1,3 +1,4 @@
+//? if fabric {
 package net.cozystudios.squish.fabric;
 
 import net.cozystudios.squish.Squish;
@@ -164,3 +165,4 @@ public class RegistryHelper {
         return stack;
     }
 }
+//? }

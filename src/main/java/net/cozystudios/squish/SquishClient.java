@@ -44,8 +44,10 @@ public class SquishClient implements ClientModInitializer {
 public class SquishClient {
 *///? }
 
+    //? if fabric {
     private static final Identifier SQUISH_BADGE =
             new Identifier("squish", "textures/gui/tooltip_badges/squish_badge.png");
+     //? }
 
     //? if fabric {
     @Override
@@ -59,6 +61,7 @@ public class SquishClient {
 
         SquishModelLayers.register();
 
+        //? if fabric {
         EntityRendererRegistry.register(RegistryHelper.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
 
         EntityRendererRegistry.register(EntityType.CAT, SquishCatRenderer::new);
@@ -139,5 +142,6 @@ public class SquishClient {
 
             lines.set(0, name);
         });
+        //? }
     }
 }

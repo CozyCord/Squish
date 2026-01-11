@@ -1,6 +1,13 @@
 package net.cozystudios.squish.entity;
 
+//? if fabric {
 import net.cozystudios.squish.fabric.RegistryHelper;
+//? }
+
+//? if forge {
+/*import net.cozystudios.squish.forge.RegistryHelper;
+*///? }
+
 import net.cozystudios.squish.util.CandyInfusion;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;

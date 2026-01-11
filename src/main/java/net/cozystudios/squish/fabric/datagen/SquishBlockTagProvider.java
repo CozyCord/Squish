@@ -1,3 +1,4 @@
+//? if fabric {
 package net.cozystudios.squish.fabric.datagen;
 
 import net.cozystudios.squish.fabric.RegistryHelper;
@@ -20,3 +21,4 @@ public class SquishBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(RegistryHelper.HARDENED_SUGAR_BLOCK);
     }
 }
+//? }

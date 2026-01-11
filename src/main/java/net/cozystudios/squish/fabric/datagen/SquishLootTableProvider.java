@@ -1,3 +1,4 @@
+//? if fabric {
 package net.cozystudios.squish.fabric.datagen;
 
 import net.cozystudios.squish.fabric.RegistryHelper;
@@ -14,3 +15,4 @@ public class SquishLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(RegistryHelper.MELTED_SUGAR_BLOCK);
     }
 }
+//? }
