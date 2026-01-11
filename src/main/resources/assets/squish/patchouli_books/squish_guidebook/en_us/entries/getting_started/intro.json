@@ -36,6 +36,12 @@
       "item": "squish:squish_candy",
       "title": "Squish Candy",
       "text": "Throw Lollipops on the ground and splash them with Squish Essence to magically transform them into Squish Candy! Use these on your pets or animals by shift right clicking them to keep them babies forever. But beware... if you eat one yourself, things might get a bit crazy! Splash with more Squish Essence to up the Infusion level to make the Sugar Rush effect last longer! NOTE: Your pets will forever stay babies, and cannot be turned back to normal, so only turn them if you want them to be baby forever!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:egg",
+      "title": "???",
+      "text": "Not everything in Squish is meant to be found on purpose. Somewhere in this world, there are *two* tiny mistakes. If you’re the kind of player who seeks for things that shouldn't be, you might stumble into something the book won’t explain. They don’t spawn like the others. They don’t happen by accident. All we’ll say is this: keep your candy close… and your creepers closer."
     }
   ]
 }

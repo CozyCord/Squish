@@ -20,6 +20,7 @@
   "client": [
     "HandledScreenAccessor",
     "client.CreativeInventoryScreenMixin",
-    "client.InGameHudMixin"
+    "client.InGameHudMixin",
+    "compat.PatchouliJeiKeybindCrashFixMixin"
   ]
 }
