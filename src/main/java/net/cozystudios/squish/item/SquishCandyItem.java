@@ -107,13 +107,28 @@ public class SquishCandyItem extends SquishBaseItem {
         ItemStack result = super.finishUsing(stack, world, user);
 
         if (!world.isClient && user instanceof PlayerEntity player) {
+
             int infusionLevel = CandyInfusion.getLevel(stack);
-            int durationTicks = 20 * 60 * infusionLevel;
+
+            int addedTicks = 20 * 60 * infusionLevel;
+
+            int newAmplifier = 0;
+
+            StatusEffectInstance existing = player.getStatusEffect(RegistryHelper.SUGAR_RUSH);
+
+            int finalDuration = addedTicks;
+            int finalAmplifier = newAmplifier;
+
+            if (existing != null) {
+                finalDuration = existing.getDuration() + addedTicks;
+
+                finalAmplifier = Math.max(existing.getAmplifier(), newAmplifier);
+            }
 
             player.addStatusEffect(new StatusEffectInstance(
                     RegistryHelper.SUGAR_RUSH,
-                    durationTicks,
-                    0,
+                    finalDuration,
+                    finalAmplifier,
                     false,
                     true,
                     true
@@ -126,15 +141,23 @@ public class SquishCandyItem extends SquishBaseItem {
             float b = (rgb & 0xFF) / 255f;
 
             ServerWorld server = (ServerWorld) world;
-            server.playSound(null, player.getBlockPos(),
+            server.playSound(
+                    null,
+                    player.getBlockPos(),
                     SquishSounds.SUGAR_POP,
                     SoundCategory.PLAYERS,
-                    0.7f, 1.6f);
+                    0.7f,
+                    1.6f
+            );
 
             server.spawnParticles(
                     new DustParticleEffect(new Vector3f(r, g, b), 1.0f),
-                    player.getX(), player.getBodyY(0.5), player.getZ(),
-                    50, 0.5, 0.5, 0.5, 0.02
+                    player.getX(),
+                    player.getBodyY(0.5),
+                    player.getZ(),
+                    50,
+                    0.5, 0.5, 0.5,
+                    0.02
             );
 
             ScaleType scaleType = ScaleTypes.BASE;
