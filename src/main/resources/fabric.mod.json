@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "squish",
+	"id": "${id}",
 	"version": "${version}",
-	"name": "Squish",
-	"description": "This is the Squish mod. Make your mobs forever babies! In a sugary way!",
+	"name": "${name}",
+	"description": "${description}",
 	"authors": [
 		"Tokimi",
         "CozyStudios"
@@ -17,27 +17,24 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.cozystudios.squish.Squish"
+			"${group}.Squish"
 		],
 		"client": [
-			"net.cozystudios.squish.SquishClient"
+			"${group}.SquishClient"
 		],
 		"fabric-datagen": [
-			"net.cozystudios.squish.SquishDataGenerator"
+			"${group}.SquishDataGenerator"
 		]
 	},
 	"mixins": [
       "squish.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.17.2",
-		"minecraft": "~1.20.1",
+		"fabricloader": "*",
+		"minecraft": ">=${minecraftVersion}",
 		"java": ">=17",
 		"fabric-api": "*",
         "patchouli": "*",
         "pehkui": "*"
-    },
-	"suggests": {
-		"another-mod": "*"
-	}
+    }
 }
