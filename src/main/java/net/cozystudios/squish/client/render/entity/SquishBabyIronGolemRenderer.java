@@ -15,7 +15,7 @@ public class SquishBabyIronGolemRenderer
             new Identifier(Squish.MOD_ID, "textures/entity/baby/iron_golem.png");
 
     public SquishBabyIronGolemRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new BabyIronGolemModel(ctx.getPart(SquishModelLayers.IRO)), 0.30f);
+        super(ctx, new BabyIronGolemModel(ctx.getPart(SquishModelLayers.BABY_IRON_GOLEM)), 0.30f);
 
         this.addFeature(new SquishBabyIronGolemPoppyFeature(this));
     }
