@@ -1,13 +1,7 @@
 package net.cozystudios.squish.client.model;
 
 import net.cozystudios.squish.Squish;
-import net.cozystudios.squish.client.model.baby.BabyCatModel;
-import net.cozystudios.squish.client.model.baby.BabyChickenModel;
-import net.cozystudios.squish.client.model.baby.BabyCowModel;
-import net.cozystudios.squish.client.model.baby.BabyPigModel;
-import net.cozystudios.squish.client.model.baby.BabyRabbitModel;
-import net.cozystudios.squish.client.model.baby.BabySheepModel;
-import net.cozystudios.squish.client.model.baby.BabyWolfModel;
+import net.cozystudios.squish.client.model.baby.*;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
@@ -21,6 +15,7 @@ public final class SquishModelLayers {
     public static final EntityModelLayer BABY_RABBIT  = layer("baby_rabbit");
     public static final EntityModelLayer BABY_SHEEP   = layer("baby_sheep");
     public static final EntityModelLayer BABY_WOLF    = layer("baby_wolf");
+    public static final EntityModelLayer BABY_CREEPER = layer("baby_creeper");
 
     private static boolean REGISTERED = false;
 
@@ -41,5 +36,6 @@ public final class SquishModelLayers {
         EntityModelLayerRegistry.registerModelLayer(BABY_RABBIT, BabyRabbitModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_SHEEP, BabySheepModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_WOLF, BabyWolfModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_CREEPER, BabyCreeperModel::getTexturedModelData);
     }
 }

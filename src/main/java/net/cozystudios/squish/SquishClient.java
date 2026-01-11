@@ -5,6 +5,7 @@ import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.render.entity.*;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipComponent;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
+import net.cozystudios.squish.entity.SquishEntities;
 import net.cozystudios.squish.item.SquishItems;
 import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
 import net.cozystudios.squish.mixin.HandledScreenAccessor;
@@ -44,6 +45,7 @@ public class SquishClient implements ClientModInitializer {
         EntityRendererRegistry.register(EntityType.RABBIT, SquishRabbitRenderer::new);
         EntityRendererRegistry.register(EntityType.SHEEP, SquishSheepRenderer::new);
         EntityRendererRegistry.register(EntityType.WOLF, SquishWolfRenderer::new);
+        EntityRendererRegistry.register(SquishEntities.BABY_CREEPER, SquishBabyCreeperRenderer::new);
 
         // Blocks
         BlockRenderLayerMap.INSTANCE.putBlock(SquishBlocks.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());

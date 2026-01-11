@@ -1,0 +1,30 @@
+package net.cozystudios.squish.entity;
+
+import net.cozystudios.squish.Squish;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
+
+public final class SquishEntities {
+
+    public static final EntityType<BabyCreeperEntity> BABY_CREEPER = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(Squish.MOD_ID, "baby_creeper"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabyCreeperEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 0.9f))
+                    .trackRangeBlocks(8)
+                    .trackedUpdateRate(3)
+                    .build()
+    );
+
+    private SquishEntities() {}
+
+    public static void register() {
+        FabricDefaultAttributeRegistry.register(BABY_CREEPER, BabyCreeperEntity.createBabyCreeperAttributes());
+    }
+}

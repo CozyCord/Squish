@@ -3,6 +3,7 @@ package net.cozystudios.squish;
 import net.cozystudios.squish.block.SquishBlocks;
 import net.cozystudios.squish.block.entity.SquishBlockEntities;
 import net.cozystudios.squish.effect.SquishEffects;
+import net.cozystudios.squish.entity.SquishEntities;
 import net.cozystudios.squish.event.OnEntityInteract;
 import net.cozystudios.squish.event.SugarRushScaleHandler;
 import net.cozystudios.squish.item.SquishItemGroups;
@@ -27,6 +28,7 @@ public class Squish implements ModInitializer {
         SquishBlocks.register();
         SquishBlockEntities.register();
         SquishEffects.register();
+        SquishEntities.register();
         SquishSounds.register();
         SugarRushScaleHandler.register();
         SquishItemGroups.registerItemGroups();

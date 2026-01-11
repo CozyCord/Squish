@@ -1,12 +1,15 @@
 package net.cozystudios.squish.item;
 
 import net.cozystudios.squish.effect.SquishEffects;
+import net.cozystudios.squish.entity.BabyCreeperEntity;
+import net.cozystudios.squish.entity.SquishEntities;
 import net.cozystudios.squish.sound.SquishSounds;
 import net.cozystudios.squish.util.CandyInfusion;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -145,10 +148,59 @@ public class SquishCandyItem extends SquishBaseItem {
 
     private ActionResult applySquish(PlayerEntity user, LivingEntity entity, ItemStack stack) {
         if (!user.isSneaking()) return ActionResult.PASS;
-        if (!(entity instanceof AnimalEntity animal)) return ActionResult.PASS;
 
         World world = entity.getWorld();
         if (world.isClient) return ActionResult.SUCCESS;
+
+        if (entity instanceof CreeperEntity creeper) {
+
+            // Prevent re-squishing the pet itself
+            if (entity instanceof BabyCreeperEntity) {
+                user.sendMessage(Text.literal("That mob is already squished!"), true);
+                return ActionResult.FAIL;
+            }
+
+            BabyCreeperEntity baby = SquishEntities.BABY_CREEPER.create(world);
+            if (baby == null) return ActionResult.FAIL;
+
+            baby.refreshPositionAndAngles(creeper.getX(), creeper.getY(), creeper.getZ(), creeper.getYaw(), creeper.getPitch());
+            baby.setBodyYaw(creeper.getBodyYaw());
+            baby.setHeadYaw(creeper.getHeadYaw());
+            baby.setAiDisabled(creeper.isAiDisabled());
+
+            if (creeper.hasCustomName()) {
+                baby.setCustomName(creeper.getCustomName());
+                baby.setCustomNameVisible(creeper.isCustomNameVisible());
+            }
+
+            world.spawnEntity(baby);
+            creeper.discard();
+
+            float hue = (System.currentTimeMillis() % 3000L) / 3000f;
+            int rgb = Color.HSBtoRGB(hue, 0.9f, 1.0f) & 0xFFFFFF;
+            float r = ((rgb >> 16) & 0xFF) / 255f;
+            float g = ((rgb >> 8) & 0xFF) / 255f;
+            float b = (rgb & 0xFF) / 255f;
+
+            ServerWorld server = (ServerWorld) world;
+            server.spawnParticles(
+                    new DustParticleEffect(new Vector3f(r, g, b), 1.0f),
+                    baby.getX(), baby.getBodyY(0.5), baby.getZ(),
+                    35, 0.4, 0.4, 0.4, 0.01
+            );
+            server.playSound(null, baby.getBlockPos(),
+                    SquishSounds.SUGAR_POP,
+                    SoundCategory.PLAYERS,
+                    0.7f, 1.6f);
+
+            if (!user.getAbilities().creativeMode) stack.decrement(1);
+
+            user.sendMessage(Text.literal("...it worked?"), true);
+
+            return ActionResult.SUCCESS;
+        }
+
+        if (!(entity instanceof AnimalEntity animal)) return ActionResult.PASS;
 
         boolean alreadySquished = entity instanceof Squishable s && s.squish$isSquished();
         if (alreadySquished) {
