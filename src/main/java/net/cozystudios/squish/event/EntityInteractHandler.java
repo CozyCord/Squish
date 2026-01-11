@@ -1,6 +1,6 @@
 package net.cozystudios.squish.event;
 
-import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +32,7 @@ public class EntityInteractHandler {
     private static boolean handleInteraction(PlayerEntity player, Hand hand, Entity entity) {
         ItemStack stack = player.getStackInHand(hand);
 
-        if (!stack.isOf(SquishItems.SQUISH_CANDY)) {
+        if (!stack.isOf(RegistryHelper.SQUISH_CANDY)) {
             return false;
         }
 

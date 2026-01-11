@@ -1,6 +1,6 @@
 package net.cozystudios.squish.event;
 
-import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -33,7 +33,7 @@ public class PlayerJoinHandler {
         var state = net.cozystudios.squish.save.SquishFirstJoinBookState.get(server);
 
         if (state.markIfNew(player.getUuid())) {
-            ItemStack book = new ItemStack(SquishItems.SQUISH_GUIDEBOOK);
+            ItemStack book = new ItemStack(RegistryHelper.SQUISH_GUIDEBOOK);
             book.getOrCreateNbt().putString("patchouli:book", "squish:squish_guidebook");
 
             if (!player.getInventory().insertStack(book)) {

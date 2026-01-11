@@ -1,6 +1,6 @@
 package net.cozystudios.squish.mixin;
 
-import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.cozystudios.squish.sound.SquishSounds;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -29,7 +29,7 @@ public abstract class AnimalEntitySquishMixin {
     )
     private void squish$onInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack held = player.getStackInHand(hand);
-        if (!held.isOf(SquishItems.SQUISH_CANDY)) return;
+        if (!held.isOf(RegistryHelper.SQUISH_CANDY)) return;
 
         AnimalEntity animal = (AnimalEntity) (Object) this;
         World world = animal.getWorld();

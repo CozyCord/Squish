@@ -1,6 +1,6 @@
-package net.cozystudios.squish.datagen;
+package net.cozystudios.squish.fabric.datagen;
 
-import net.cozystudios.squish.block.SquishBlocks;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
@@ -16,8 +16,7 @@ public class SquishBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(SquishBlocks.HARDENED_SUGAR_BLOCK);
+                .add(RegistryHelper.HARDENED_SUGAR_BLOCK);
     }
 }

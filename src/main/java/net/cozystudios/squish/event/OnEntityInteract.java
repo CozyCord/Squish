@@ -1,6 +1,6 @@
 package net.cozystudios.squish.event;
 
-import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class OnEntityInteract {
     public static ActionResult onEntityInteract(PlayerEntity player, World world, Hand hand, Entity entity, EntityHitResult hitResult) {
-        if (!player.getStackInHand(hand).isOf(SquishItems.SQUISH_CANDY)) {
+        if (!player.getStackInHand(hand).isOf(RegistryHelper.SQUISH_CANDY)) {
             return ActionResult.PASS;
         }
 

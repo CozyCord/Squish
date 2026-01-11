@@ -1,7 +1,6 @@
 package net.cozystudios.squish.block.entity;
 
 import net.cozystudios.squish.block.MeltedSugarBlock;
-import net.cozystudios.squish.block.SquishBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -9,6 +8,10 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+//? if fabric {
+import net.cozystudios.squish.fabric.RegistryHelper;
+//? }
 
 public class MeltedSugarBlockEntity extends BlockEntity {
     private static final int HARDEN_TICKS = 1200;
@@ -26,7 +29,7 @@ public class MeltedSugarBlockEntity extends BlockEntity {
 
         be.age++;
         if (be.age >= HARDEN_TICKS) {
-            world.setBlockState(pos, SquishBlocks.HARDENED_SUGAR_BLOCK.getDefaultState(), 3);
+            world.setBlockState(pos, RegistryHelper.HARDENED_SUGAR_BLOCK.getDefaultState(), 3);
             world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_PLACE, SoundCategory.BLOCKS, 0.8f, 1.2f);
         }
     }

@@ -1,6 +1,6 @@
 package net.cozystudios.squish.mixin;
 
-import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.item.ItemStack;
@@ -41,7 +41,7 @@ public abstract class BrewingStandBlockEntityMixin {
         BrewingStandBlockEntityMixin self = (BrewingStandBlockEntityMixin)(Object) stand;
 
         ItemStack ingredient = stand.getStack(3);
-        if (!ingredient.isOf(SquishItems.HARDENED_SUGAR_SHARD)) {
+        if (!ingredient.isOf(RegistryHelper.HARDENED_SUGAR_SHARD)) {
             self.squish$essenceBrewTime = 0;
             return;
         }
@@ -87,7 +87,7 @@ public abstract class BrewingStandBlockEntityMixin {
             for (int i = 0; i < 3; i++) {
                 ItemStack stack = stand.getStack(i);
                 if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
-                    stand.setStack(i, new ItemStack(SquishItems.SQUISH_ESSENCE));
+                    stand.setStack(i, new ItemStack(RegistryHelper.SQUISH_ESSENCE));
                     brewed = true;
                 }
             }

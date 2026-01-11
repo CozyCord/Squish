@@ -1,6 +1,6 @@
 package net.cozystudios.squish.mixin.client;
 
-import net.cozystudios.squish.effect.SquishEffects;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -65,7 +65,7 @@ public abstract class InGameHudMixin {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
 
-        if (player.hasStatusEffect(SquishEffects.SUGAR_RUSH)) {
+        if (player.hasStatusEffect(RegistryHelper.SUGAR_RUSH)) {
             Iterator<Map.Entry<StatusEffect, StatusEffectInstance>> it =
                     player.getActiveStatusEffects().entrySet().iterator();
 

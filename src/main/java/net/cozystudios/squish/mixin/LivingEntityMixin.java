@@ -1,6 +1,6 @@
 package net.cozystudios.squish.mixin;
 
-import net.cozystudios.squish.effect.SquishEffects;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
     @Inject(method = "jump", at = @At("TAIL"))
 
     private void squish$boostJump(CallbackInfo ci) { LivingEntity entity = (LivingEntity) (Object)
-            this; if (entity.hasStatusEffect(SquishEffects.SUGAR_RUSH)) {
-                int amplifier = entity.getStatusEffect(SquishEffects.SUGAR_RUSH).getAmplifier();
+            this; if (entity.hasStatusEffect(RegistryHelper.SUGAR_RUSH)) {
+                int amplifier = entity.getStatusEffect(RegistryHelper.SUGAR_RUSH).getAmplifier();
                 double boost = 0.2D + (0.1D * amplifier);
                 entity.addVelocity(
                         0, boost,

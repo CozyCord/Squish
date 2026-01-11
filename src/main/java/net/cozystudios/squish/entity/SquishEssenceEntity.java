@@ -1,6 +1,6 @@
 package net.cozystudios.squish.entity;
 
-import net.cozystudios.squish.item.SquishItems;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.cozystudios.squish.util.CandyInfusion;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -26,16 +26,16 @@ public class SquishEssenceEntity extends ThrownItemEntity {
     }
 
     public SquishEssenceEntity(World world, LivingEntity owner) {
-        super(SquishItems.SQUISH_ESSENCE_ENTITY, owner, world);
+        super(RegistryHelper.SQUISH_ESSENCE_ENTITY, owner, world);
     }
 
     public SquishEssenceEntity(World world, double x, double y, double z) {
-        super(SquishItems.SQUISH_ESSENCE_ENTITY, x, y, z, world);
+        super(RegistryHelper.SQUISH_ESSENCE_ENTITY, x, y, z, world);
     }
 
     @Override
     protected Item getDefaultItem() {
-        return SquishItems.SQUISH_ESSENCE;
+        return RegistryHelper.SQUISH_ESSENCE;
     }
 
     @Override
@@ -66,15 +66,15 @@ public class SquishEssenceEntity extends ThrownItemEntity {
         Box box = new Box(pos.add(-1.5, -1.5, -1.5), pos.add(1.5, 1.5, 1.5));
         List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box, e -> {
             ItemStack st = e.getStack();
-            return st.isOf(SquishItems.LOLLIPOP) || st.isOf(SquishItems.SQUISH_CANDY);
+            return st.isOf(RegistryHelper.LOLLIPOP) || st.isOf(RegistryHelper.SQUISH_CANDY);
         });
 
         for (ItemEntity it : items) {
             ItemStack s = it.getStack();
             int count = s.getCount();
 
-            if (s.isOf(SquishItems.LOLLIPOP)) {
-                ItemStack converted = new ItemStack(SquishItems.SQUISH_CANDY, count);
+            if (s.isOf(RegistryHelper.LOLLIPOP)) {
+                ItemStack converted = new ItemStack(RegistryHelper.SQUISH_CANDY, count);
                 CandyInfusion.setLevel(converted, 1);
                 it.setStack(converted);
             } else {

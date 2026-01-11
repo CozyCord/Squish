@@ -1,6 +1,7 @@
 package net.cozystudios.squish;
 
 //? if fabric {
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -16,13 +17,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 *///? }
 
-import net.cozystudios.squish.block.SquishBlocks;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.render.entity.*;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipComponent;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
 import net.cozystudios.squish.entity.SquishEntities;
-import net.cozystudios.squish.item.SquishItems;
 import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
 import net.cozystudios.squish.mixin.HandledScreenAccessor;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
@@ -60,7 +59,7 @@ public class SquishClient {
 
         SquishModelLayers.register();
 
-        EntityRendererRegistry.register(SquishItems.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(RegistryHelper.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
 
         EntityRendererRegistry.register(EntityType.CAT, SquishCatRenderer::new);
         EntityRendererRegistry.register(EntityType.CHICKEN, SquishChickenRenderer::new);
@@ -72,7 +71,8 @@ public class SquishClient {
         EntityRendererRegistry.register(SquishEntities.BABY_CREEPER, SquishBabyCreeperRenderer::new);
 
         // Blocks
-        BlockRenderLayerMap.INSTANCE.putBlock(SquishBlocks.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
+        // TODO: move this
+        BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
 
         TooltipComponentCallback.EVENT.register(data -> {
             if (data instanceof SquishBadgeTooltipData d) {

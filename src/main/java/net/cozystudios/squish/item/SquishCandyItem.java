@@ -1,6 +1,6 @@
 package net.cozystudios.squish.item;
 
-import net.cozystudios.squish.effect.SquishEffects;
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.cozystudios.squish.entity.BabyCreeperEntity;
 import net.cozystudios.squish.entity.SquishEntities;
 import net.cozystudios.squish.sound.SquishSounds;
@@ -111,7 +111,7 @@ public class SquishCandyItem extends SquishBaseItem {
             int durationTicks = 20 * 60 * infusionLevel;
 
             player.addStatusEffect(new StatusEffectInstance(
-                    SquishEffects.SUGAR_RUSH,
+                    RegistryHelper.SUGAR_RUSH,
                     durationTicks,
                     0,
                     false,

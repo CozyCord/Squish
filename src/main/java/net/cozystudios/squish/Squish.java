@@ -1,6 +1,7 @@
 package net.cozystudios.squish;
 
 //? if fabric {
+import net.cozystudios.squish.fabric.RegistryHelper;
 import net.cozystudios.squish.event.EntityInteractHandler;
 import net.cozystudios.squish.event.PlayerJoinHandler;
 import net.fabricmc.api.ModInitializer;
@@ -18,15 +19,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 *///? }
 
-import net.cozystudios.squish.block.SquishBlocks;
-import net.cozystudios.squish.block.entity.SquishBlockEntities;
-import net.cozystudios.squish.effect.SquishEffects;
 import net.cozystudios.squish.entity.SquishEntities;
-import net.cozystudios.squish.event.OnEntityInteract;
 import net.cozystudios.squish.event.SugarRushScaleHandler;
-import net.cozystudios.squish.item.SquishItemGroups;
 import net.cozystudios.squish.sound.SquishSounds;
-import net.cozystudios.squish.item.SquishItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,14 +45,10 @@ public class Squish {
     /*public Squish(final FMLJavaModLoadingContext context) {
     *///? }
         LOGGER.info("Squish Initialized");
-        SquishItems.register();
-        SquishBlocks.register();
-        SquishBlockEntities.register();
-        SquishEffects.register();
+        RegistryHelper.register();
         SquishEntities.register();
         SquishSounds.register();
         SugarRushScaleHandler.register();
-        SquishItemGroups.registerItemGroups();
 
         //? if fabric {
         UseEntityCallback.EVENT.register(EntityInteractHandler::onEntityInteract);
