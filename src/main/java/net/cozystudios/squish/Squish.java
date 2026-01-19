@@ -4,7 +4,9 @@ package net.cozystudios.squish;
 import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.cozystudios.squish.event.EntityInteractHandler;
 import net.cozystudios.squish.event.PlayerJoinHandler;
+import net.cozystudios.squish.registry.item.ExplosiveCandyItem;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 //? }
@@ -74,6 +76,7 @@ public class Squish {
         //? if fabric {
         UseEntityCallback.EVENT.register(EntityInteractHandler::onEntityInteract);
         ServerPlayConnectionEvents.JOIN.register(PlayerJoinHandler::handleJoin);
+        ServerTickEvents.END_WORLD_TICK.register(world -> ExplosiveCandyItem.tickExplosions(world));
         //? }
 
         //? if forge {
