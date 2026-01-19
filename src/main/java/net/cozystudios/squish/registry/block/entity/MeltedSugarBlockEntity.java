@@ -1,6 +1,6 @@
-package net.cozystudios.squish.block.entity;
+package net.cozystudios.squish.registry.block.entity;
 
-import net.cozystudios.squish.block.MeltedSugarBlock;
+import net.cozystudios.squish.registry.block.MeltedSugarBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 //? if fabric {
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 //? }
 
 public class MeltedSugarBlockEntity extends BlockEntity {
@@ -19,7 +19,7 @@ public class MeltedSugarBlockEntity extends BlockEntity {
     private int age = 0;
 
     public MeltedSugarBlockEntity(BlockPos pos, BlockState state) {
-        super(net.cozystudios.squish.block.entity.SquishBlockEntities.MELTED_SUGAR_BE, pos, state);
+        super(SquishBlockEntities.MELTED_SUGAR_BE, pos, state);
     }
 
     public static void tickServer(World world, BlockPos pos, BlockState state, MeltedSugarBlockEntity be) {

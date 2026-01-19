@@ -1,4 +1,4 @@
-package net.cozystudios.squish.entity;
+package net.cozystudios.squish.registry.entity;
 
 //? if fabric {
 import net.cozystudios.squish.fabric.RegistryHelper;
@@ -12,7 +12,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,16 +24,16 @@ import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class BabyIronGolemEntity extends TameableEntity {
+public class BabyCreeperEntity extends TameableEntity {
 
-    public BabyIronGolemEntity(EntityType<? extends TameableEntity> type, World world) {
+    public BabyCreeperEntity(EntityType<? extends TameableEntity> type, World world) {
         super(type, world);
     }
 
-    public static DefaultAttributeContainer.Builder createBabyIronGolemAttributes() {
+    public static DefaultAttributeContainer.Builder createBabyCreeperAttributes() {
         return TameableEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.30)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
     }
 
@@ -42,7 +41,7 @@ public class BabyIronGolemEntity extends TameableEntity {
     protected void initGoals() {
         this.goalSelector.add(1, new SitGoal(this));
         this.goalSelector.add(2, new FollowOwnerGoal(this, 1.0, 3.0f, 1.0f, false));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.9));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(5, new LookAroundGoal(this));
     }
@@ -59,12 +58,12 @@ public class BabyIronGolemEntity extends TameableEntity {
         if (this.isTamed() && this.isOwner(player)) {
             if (!this.getWorld().isClient) {
                 this.setSitting(!this.isSitting());
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 0.8f, 1.4f);
+                this.playSound(SoundEvents.ENTITY_SLIME_SQUISH, 0.7f, 1.7f);
             }
             return ActionResult.success(this.getWorld().isClient);
         }
 
-        if (!this.isTamed() && held.isOf(RegistryHelper.POPPY_CANDY)) {
+        if (!this.isTamed() && held.isOf(RegistryHelper.EXPLOSIVE_CANDY)) {
             if (this.getWorld().isClient) return ActionResult.SUCCESS;
 
             if (!player.getAbilities().creativeMode) held.decrement(1);
@@ -74,16 +73,11 @@ public class BabyIronGolemEntity extends TameableEntity {
             this.setSitting(false);
 
             this.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 0.6f, 1.7f);
-            this.getWorld().sendEntityStatus(this, (byte) 7); // hearts
+            this.getWorld().sendEntityStatus(this, (byte) 7);
             return ActionResult.SUCCESS;
         }
 
         return super.interactMob(player, hand);
-    }
-
-    @Override
-    public boolean damage(DamageSource source, float amount) {
-        return super.damage(source, amount);
     }
 
     @Override

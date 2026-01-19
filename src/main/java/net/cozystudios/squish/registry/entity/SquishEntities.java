@@ -1,4 +1,4 @@
-package net.cozystudios.squish.entity;
+package net.cozystudios.squish.registry.entity;
 
 import net.cozystudios.squish.Squish;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;

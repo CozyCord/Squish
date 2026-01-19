@@ -1,4 +1,4 @@
-package net.cozystudios.squish.sound;
+package net.cozystudios.squish.registry.sound;
 
 import net.cozystudios.squish.Squish;
 import net.minecraft.registry.Registries;

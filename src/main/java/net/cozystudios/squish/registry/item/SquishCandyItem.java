@@ -1,9 +1,10 @@
-package net.cozystudios.squish.item;
+package net.cozystudios.squish.registry.item;
 
-import net.cozystudios.squish.fabric.RegistryHelper;
-import net.cozystudios.squish.entity.BabyCreeperEntity;
-import net.cozystudios.squish.entity.SquishEntities;
-import net.cozystudios.squish.sound.SquishSounds;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
+import net.cozystudios.squish.registry.entity.BabyCreeperEntity;
+import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.SquishEntities;
+import net.cozystudios.squish.registry.sound.SquishSounds;
 import net.cozystudios.squish.util.CandyInfusion;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.client.item.TooltipContext;
@@ -223,12 +224,12 @@ public class SquishCandyItem extends SquishBaseItem {
 
         if (entity instanceof net.minecraft.entity.passive.IronGolemEntity golem) {
 
-            if (entity instanceof net.cozystudios.squish.entity.BabyIronGolemEntity) {
+            if (entity instanceof BabyIronGolemEntity) {
                 user.sendMessage(Text.literal("That mob is already squished!"), true);
                 return ActionResult.FAIL;
             }
 
-            net.cozystudios.squish.entity.BabyIronGolemEntity baby = SquishEntities.BABY_IRON_GOLEM.create(world);
+            BabyIronGolemEntity baby = SquishEntities.BABY_IRON_GOLEM.create(world);
             if (baby == null) return ActionResult.FAIL;
 
             baby.refreshPositionAndAngles(golem.getX(), golem.getY(), golem.getZ(), golem.getYaw(), golem.getPitch());

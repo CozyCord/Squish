@@ -1,7 +1,7 @@
 //? if fabric {
-package net.cozystudios.squish.fabric.datagen;
+package net.cozystudios.squish.loader.fabric.datagen;
 
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;

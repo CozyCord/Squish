@@ -1,4 +1,4 @@
-package net.cozystudios.squish.effect;
+package net.cozystudios.squish.registry.effect;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;

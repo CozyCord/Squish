@@ -1,20 +1,19 @@
-package net.cozystudios.squish.item;
+package net.cozystudios.squish.registry.item;
 
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
-import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipData;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import vazkii.patchouli.common.item.ItemModBook;
 
 import java.util.Optional;
 
-public class SquishBaseBlockItem extends BlockItem {
+public class SquishGuidebookItem extends ItemModBook {
     private static final Identifier BADGE_TEXTURE =
             new Identifier("squish", "textures/gui/tooltip_badges/squish_badge.png");
 
-    public SquishBaseBlockItem(Block block, Settings settings) {
-        super(block, settings);
+    public SquishGuidebookItem(Settings settings) {
+        super();
     }
 
     @Override

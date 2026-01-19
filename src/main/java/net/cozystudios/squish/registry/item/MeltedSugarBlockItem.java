@@ -1,4 +1,4 @@
-package net.cozystudios.squish.item;
+package net.cozystudios.squish.registry.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

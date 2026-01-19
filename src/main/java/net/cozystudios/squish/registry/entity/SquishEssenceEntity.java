@@ -1,7 +1,7 @@
-package net.cozystudios.squish.entity;
+package net.cozystudios.squish.registry.entity;
 
 //? if fabric {
-import net.cozystudios.squish.fabric.RegistryHelper;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
 //? }
 
 //? if forge {

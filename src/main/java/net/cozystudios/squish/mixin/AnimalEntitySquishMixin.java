@@ -1,7 +1,7 @@
 package net.cozystudios.squish.mixin;
 
-import net.cozystudios.squish.fabric.RegistryHelper;
-import net.cozystudios.squish.sound.SquishSounds;
+import net.cozystudios.squish.loader.fabric.RegistryHelper;
+import net.cozystudios.squish.registry.sound.SquishSounds;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;

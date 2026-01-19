@@ -1,7 +1,7 @@
 package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.client.model.baby.BabyIronGolemModel;
-import net.cozystudios.squish.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;

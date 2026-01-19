@@ -1,4 +1,4 @@
-package net.cozystudios.squish.item;
+package net.cozystudios.squish.registry.item;
 
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
 import net.minecraft.client.item.TooltipData;
