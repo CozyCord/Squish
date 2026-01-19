@@ -4,6 +4,8 @@ package net.cozystudios.squish.fabric;
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.block.MeltedSugarBlock;
 import net.cozystudios.squish.effect.SugarRushStatusEffect;
+import net.cozystudios.squish.entity.ExplosiveEssenceEntity;
+import net.cozystudios.squish.entity.PoppyEssenceEntity;
 import net.cozystudios.squish.entity.SquishEssenceEntity;
 import net.cozystudios.squish.item.*;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -37,10 +39,11 @@ import java.util.List;
 
 import static net.cozystudios.squish.item.SquishItems.LOLLIPOP_FOOD;
 import static net.cozystudios.squish.item.SquishItems.SQUISH_CANDY_FOOD;
+import static net.cozystudios.squish.item.SquishItems.BITTER_CANDY_FOOD;
+import static net.cozystudios.squish.item.SquishItems.EXPLOSIVE_CANDY_FOOD;
+import static net.cozystudios.squish.item.SquishItems.POPPY_CANDY_FOOD;
 
 public class RegistryHelper {
-    private static final Identifier BADGE_TEXTURE = new Identifier(Squish.MOD_ID, "textures/gui/tooltip_badges/squish_badge.png");
-
     // block registry
     public static final Block MELTED_SUGAR_BLOCK = registerBlock(
             "melted_sugar",
@@ -58,7 +61,7 @@ public class RegistryHelper {
                     .suffocates((state, world, pos) -> false)
                     .blockVision((state, world, pos) -> false)
             ),
-            BlockItem.class
+            MeltedSugarBlockItem.class
     );
 
     public static final Block HARDENED_SUGAR_BLOCK = registerBlock(
@@ -82,15 +85,23 @@ public class RegistryHelper {
                     return Collections.singletonList(new ItemStack(RegistryHelper.HARDENED_SUGAR_SHARD, count));
                 }
             },
-            BlockItem.class
+            SquishBaseBlockItem.class
     );
 
     // item registry
     public static final Item SQUISH_CANDY = registerItem("squish_candy", new SquishCandyItem(new Item.Settings().maxCount(64).food(SQUISH_CANDY_FOOD)));
-    public static final Item LOLLIPOP = registerItem("lollipop", new SquishBaseItem(new Item.Settings().maxCount(64).food(LOLLIPOP_FOOD)));
+    public static final Item LOLLIPOP = registerItem("lollipop", new BlankLollipopItem(new Item.Settings().maxCount(64).food(LOLLIPOP_FOOD)));
     public static final Item SQUISH_ESSENCE = registerItem("squish_essence", new SquishEssenceItem(new Item.Settings().maxCount(16)));
     public static final Item HARDENED_SUGAR_SHARD = registerItem("hardened_sugar_shard", new SquishBaseItem(new Item.Settings()));
     public static final Item SQUISH_GUIDEBOOK = registerItem("squish_guidebook", new SquishGuidebookItem(new Item.Settings().maxCount(1)));
+
+    // new items
+    public static final Item BITTER_SUGAR_SHARD = registerItem("bitter_sugar_shard", new BitterSugarShardItem(new Item.Settings()));
+    public static final Item BITTER_CANDY = registerItem("bitter_candy", new BitterCandyItem(new Item.Settings().maxCount(64).food(BITTER_CANDY_FOOD)));
+    public static final Item EXPLOSIVE_ESSENCE = registerItem("explosive_essence", new ExplosiveEssenceItem(new Item.Settings().maxCount(16)));
+    public static final Item EXPLOSIVE_CANDY = registerItem("explosive_candy", new ExplosiveCandyItem(new Item.Settings().maxCount(64).food(EXPLOSIVE_CANDY_FOOD)));
+    public static final Item POPPY_ESSENCE = registerItem("poppy_essence", new PoppyEssenceItem(new Item.Settings().maxCount(16)));
+    public static final Item POPPY_CANDY = registerItem("poppy_candy", new PoppyCandyItem(new Item.Settings().maxCount(64).food(POPPY_CANDY_FOOD)));
 
     public static final ItemStack SQUISH_GUIDEBOOK_STACK = createGuidebookStack();
 
@@ -99,6 +110,24 @@ public class RegistryHelper {
             registerEntity("squish_essence",
                     FabricEntityTypeBuilder.<SquishEssenceEntity>create(SpawnGroup.MISC,
                                     (type, world) -> new SquishEssenceEntity(type, world))
+                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                            .trackRangeBlocks(4).trackedUpdateRate(10)
+                            .build()
+            );
+
+    public static final EntityType<ExplosiveEssenceEntity> EXPLOSIVE_ESSENCE_ENTITY =
+            registerEntity("explosive_essence",
+                    FabricEntityTypeBuilder.<ExplosiveEssenceEntity>create(SpawnGroup.MISC,
+                                    (type, world) -> new ExplosiveEssenceEntity(type, world))
+                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                            .trackRangeBlocks(4).trackedUpdateRate(10)
+                            .build()
+            );
+
+    public static final EntityType<PoppyEssenceEntity> POPPY_ESSENCE_ENTITY =
+            registerEntity("poppy_essence",
+                    FabricEntityTypeBuilder.<PoppyEssenceEntity>create(SpawnGroup.MISC,
+                                    (type, world) -> new PoppyEssenceEntity(type, world))
                             .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
                             .trackRangeBlocks(4).trackedUpdateRate(10)
                             .build()
@@ -147,11 +176,17 @@ public class RegistryHelper {
                 .icon(() -> new ItemStack(SQUISH_CANDY))
                 .entries((displayContext, entries) -> {
                     entries.add(SQUISH_CANDY);
+                    entries.add(BITTER_CANDY);
+                    entries.add(EXPLOSIVE_CANDY);
+                    entries.add(POPPY_CANDY);
                     entries.add(LOLLIPOP);
                     entries.add(SQUISH_ESSENCE);
+                    entries.add(EXPLOSIVE_ESSENCE);
+                    entries.add(POPPY_ESSENCE);
                     entries.add(MELTED_SUGAR_BLOCK);
                     entries.add(HARDENED_SUGAR_BLOCK);
                     entries.add(HARDENED_SUGAR_SHARD);
+                    entries.add(BITTER_SUGAR_SHARD);
                     entries.add(SQUISH_GUIDEBOOK_STACK);
                 })
                 .build());

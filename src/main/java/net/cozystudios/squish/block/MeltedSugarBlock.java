@@ -1,8 +1,17 @@
 package net.cozystudios.squish.block;
 
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
 import net.cozystudios.squish.block.entity.MeltedSugarBlockEntity;
 import net.cozystudios.squish.block.entity.SquishBlockEntities;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -11,8 +20,10 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -25,9 +36,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 @SuppressWarnings({"deprecation"})
 public class MeltedSugarBlock extends BlockWithEntity {
@@ -124,6 +132,9 @@ public class MeltedSugarBlock extends BlockWithEntity {
         if (!state.get(PRESERVED) && stack.isOf(Items.HONEYCOMB)) {
             world.setBlockState(pos, state.with(PRESERVED, true), 3);
             world.playSound(null, pos, SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!world.isClient) {
+                spawnWaxParticles((ServerWorld) world, pos);
+            }
             if (!player.getAbilities().creativeMode) stack.decrement(1);
             return ActionResult.SUCCESS;
         }
@@ -131,6 +142,9 @@ public class MeltedSugarBlock extends BlockWithEntity {
         if (state.get(PRESERVED) && stack.isIn(ItemTags.AXES)) {
             world.setBlockState(pos, state.with(PRESERVED, false), 3);
             world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!world.isClient) {
+                spawnWaxParticles((ServerWorld) world, pos);
+            }
             return ActionResult.SUCCESS;
         }
 
@@ -156,6 +170,19 @@ public class MeltedSugarBlock extends BlockWithEntity {
         ItemStack stack = ctx.getStack();
         boolean preserved = stack.hasNbt() && stack.getNbt().getBoolean("Preserved");
         return base.with(PRESERVED, preserved);
+    }
+
+    private static void spawnWaxParticles(ServerWorld world, BlockPos pos) {
+        float r = 207 / 255f;
+        float g = 189 / 255f;
+        float b = 223 / 255f;
+        DustParticleEffect lilacDust = new DustParticleEffect(new Vector3f(r, g, b), 1.0f);
+
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 0.5;
+        double z = pos.getZ() + 0.5;
+
+        world.spawnParticles(lilacDust, x, y, z, 20, 0.5, 0.5, 0.5, 0.05);
     }
 
     private static boolean isTouchingSide(BlockPos pos, Entity entity) {

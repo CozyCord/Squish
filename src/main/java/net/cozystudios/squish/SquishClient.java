@@ -63,6 +63,8 @@ public class SquishClient {
 
         //? if fabric {
         EntityRendererRegistry.register(RegistryHelper.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(RegistryHelper.EXPLOSIVE_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(RegistryHelper.POPPY_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
 
         EntityRendererRegistry.register(EntityType.CAT, SquishCatRenderer::new);
         EntityRendererRegistry.register(EntityType.CHICKEN, SquishChickenRenderer::new);
@@ -122,6 +124,9 @@ public class SquishClient {
 
             final int MAGENTA = 0xDF3C73;
             final int LILAC   = 0xCFBDDF;
+            final int POPPY_RED = 0xED1C24;
+            final int TNT_RED = 0xDB2E00;
+            final int DARK_GRAY = 0x555555;
 
             String path = id.getPath();
 
@@ -129,6 +134,15 @@ public class SquishClient {
                     || path.equals("melted_sugar")
                     || path.equals("hardened_sugar")
                     || path.equals("hardened_sugar_shard");
+
+            boolean isPoppy = path.equals("poppy_candy")
+                    || path.equals("poppy_essence");
+
+            boolean isExplosive = path.equals("explosive_candy")
+                    || path.equals("explosive_essence");
+
+            boolean isBitter = path.equals("bitter_candy")
+                    || path.equals("bitter_sugar_shard");
 
             if (path.equals("squish_candy")
                     || path.equals("squish_essence")
@@ -139,6 +153,18 @@ public class SquishClient {
             else if (isLilac)
             {
                 name = name.styled(style -> style.withColor(TextColor.fromRgb(LILAC)));
+            }
+            else if (isPoppy)
+            {
+                name = name.styled(style -> style.withColor(TextColor.fromRgb(POPPY_RED)));
+            }
+            else if (isExplosive)
+            {
+                name = name.styled(style -> style.withColor(TextColor.fromRgb(TNT_RED)));
+            }
+            else if (isBitter)
+            {
+                name = name.styled(style -> style.withColor(TextColor.fromRgb(DARK_GRAY)));
             }
 
             lines.set(0, name);

@@ -38,14 +38,22 @@ public abstract class InGameHudMixin {
 
         final int MAGENTA = 0xDF3C73;
         final int LILAC   = 0xCFBDDF;
+        final int POPPY_RED = 0xED1C24;
+        final int TNT_RED = 0xDB2E00;
+        final int DARK_GRAY = 0x555555;
 
         boolean isLilac = plain.contains("lollipop")
                 || plain.contains("melted sugar")
                 || plain.contains("hardened sugar");
 
         boolean isMagenta = plain.contains("squish")
-                || plain.contains("essence")
                 || plain.contains("manual");
+
+        boolean isPoppy = plain.contains("poppy");
+
+        boolean isExplosive = plain.contains("explosive");
+
+        boolean isBitter = plain.contains("bitter");
 
         if (isMagenta) {
             return text.setStyle(text.getStyle()
@@ -55,6 +63,18 @@ public abstract class InGameHudMixin {
             return text.setStyle(text.getStyle()
                     .withBold(true)
                     .withColor(TextColor.fromRgb(LILAC)));
+        } else if (isPoppy) {
+            return text.setStyle(text.getStyle()
+                    .withBold(true)
+                    .withColor(TextColor.fromRgb(POPPY_RED)));
+        } else if (isExplosive) {
+            return text.setStyle(text.getStyle()
+                    .withBold(true)
+                    .withColor(TextColor.fromRgb(TNT_RED)));
+        } else if (isBitter) {
+            return text.setStyle(text.getStyle()
+                    .withBold(true)
+                    .withColor(TextColor.fromRgb(DARK_GRAY)));
         }
         return original;
     }

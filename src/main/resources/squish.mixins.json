@@ -21,6 +21,7 @@
     "HandledScreenAccessor",
     "client.CreativeInventoryScreenMixin",
     "client.InGameHudMixin",
-    "compat.PatchouliJeiKeybindCrashFixMixin"
+    "compat.PatchouliJeiKeybindCrashFixMixin",
+    "compat.PatchouliHideEntryIndexMixin"
   ]
 }

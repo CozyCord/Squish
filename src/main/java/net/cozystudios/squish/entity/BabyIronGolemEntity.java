@@ -1,5 +1,13 @@
 package net.cozystudios.squish.entity;
 
+//? if fabric {
+import net.cozystudios.squish.fabric.RegistryHelper;
+//? }
+
+//? if forge {
+/*import net.cozystudios.squish.forge.RegistryHelper;
+*///? }
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -9,7 +17,6 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -44,6 +51,11 @@ public class BabyIronGolemEntity extends TameableEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack held = player.getStackInHand(hand);
 
+        // Allow Bitter Candy to handle the interaction (for unsquishing)
+        if (player.isSneaking() && held.isOf(RegistryHelper.BITTER_CANDY)) {
+            return ActionResult.PASS;
+        }
+
         if (this.isTamed() && this.isOwner(player)) {
             if (!this.getWorld().isClient) {
                 this.setSitting(!this.isSitting());
@@ -52,7 +64,7 @@ public class BabyIronGolemEntity extends TameableEntity {
             return ActionResult.success(this.getWorld().isClient);
         }
 
-        if (!this.isTamed() && held.isOf(Items.POPPY)) {
+        if (!this.isTamed() && held.isOf(RegistryHelper.POPPY_CANDY)) {
             if (this.getWorld().isClient) return ActionResult.SUCCESS;
 
             if (!player.getAbilities().creativeMode) held.decrement(1);

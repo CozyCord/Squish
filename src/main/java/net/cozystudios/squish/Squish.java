@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 *///? }
 
+import net.cozystudios.squish.block.entity.SquishBlockEntities;
 import net.cozystudios.squish.entity.SquishEntities;
 import net.cozystudios.squish.event.SugarRushScaleHandler;
 import net.cozystudios.squish.sound.SquishSounds;
@@ -46,7 +47,26 @@ public class Squish {
     /*public Squish(final FMLJavaModLoadingContext context) {
     *///? }
         LOGGER.info("Squish Initialized");
-        RegistryHelper.register();
+        try {
+            // Try fabric RegistryHelper first
+            Class.forName("net.cozystudios.squish.fabric.RegistryHelper")
+                .getMethod("register")
+                .invoke(null);
+        } catch (ClassNotFoundException e) {
+            try {
+                // Fallback to forge RegistryHelper
+                Class.forName("net.cozystudios.squish.forge.RegistryHelper")
+                    .getMethod("register")
+                    .invoke(null);
+            } catch (ClassNotFoundException ex) {
+                LOGGER.warn("No RegistryHelper found for fabric or forge; skipping registry registration");
+            } catch (Exception ex) {
+                LOGGER.warn("Failed to invoke forge RegistryHelper.register()", ex);
+            }
+        } catch (Exception e) {
+            LOGGER.warn("Failed to invoke fabric RegistryHelper.register()", e);
+        }
+        SquishBlockEntities.register();
         SquishEntities.register();
         SquishSounds.register();
         SugarRushScaleHandler.register();
