@@ -1,6 +1,6 @@
-package net.cozystudios.squish.item;
+package net.cozystudios.squish.registry.item;
 
-import net.cozystudios.squish.entity.PoppyEssenceEntity;
+import net.cozystudios.squish.registry.entity.PoppyEssenceEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;

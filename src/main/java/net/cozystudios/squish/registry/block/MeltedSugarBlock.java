@@ -1,12 +1,12 @@
-package net.cozystudios.squish.block;
+package net.cozystudios.squish.registry.block;
 
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-import net.cozystudios.squish.block.entity.MeltedSugarBlockEntity;
-import net.cozystudios.squish.block.entity.SquishBlockEntities;
+import net.cozystudios.squish.registry.block.entity.MeltedSugarBlockEntity;
+import net.cozystudios.squish.registry.block.entity.SquishBlockEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

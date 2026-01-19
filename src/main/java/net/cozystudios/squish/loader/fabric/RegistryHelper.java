@@ -1,13 +1,13 @@
 //? if fabric {
-package net.cozystudios.squish.fabric;
+package net.cozystudios.squish.loader.fabric;
 
 import net.cozystudios.squish.Squish;
-import net.cozystudios.squish.block.MeltedSugarBlock;
-import net.cozystudios.squish.effect.SugarRushStatusEffect;
-import net.cozystudios.squish.entity.ExplosiveEssenceEntity;
-import net.cozystudios.squish.entity.PoppyEssenceEntity;
-import net.cozystudios.squish.entity.SquishEssenceEntity;
-import net.cozystudios.squish.item.*;
+import net.cozystudios.squish.registry.block.MeltedSugarBlock;
+import net.cozystudios.squish.registry.effect.SugarRushStatusEffect;
+import net.cozystudios.squish.registry.entity.ExplosiveEssenceEntity;
+import net.cozystudios.squish.registry.entity.PoppyEssenceEntity;
+import net.cozystudios.squish.registry.entity.SquishEssenceEntity;
+import net.cozystudios.squish.registry.item.*;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -37,11 +37,11 @@ import net.minecraft.util.Identifier;
 import java.util.Collections;
 import java.util.List;
 
-import static net.cozystudios.squish.item.SquishItems.LOLLIPOP_FOOD;
-import static net.cozystudios.squish.item.SquishItems.SQUISH_CANDY_FOOD;
-import static net.cozystudios.squish.item.SquishItems.BITTER_CANDY_FOOD;
-import static net.cozystudios.squish.item.SquishItems.EXPLOSIVE_CANDY_FOOD;
-import static net.cozystudios.squish.item.SquishItems.POPPY_CANDY_FOOD;
+import static net.cozystudios.squish.registry.item.SquishItems.LOLLIPOP_FOOD;
+import static net.cozystudios.squish.registry.item.SquishItems.SQUISH_CANDY_FOOD;
+import static net.cozystudios.squish.registry.item.SquishItems.BITTER_CANDY_FOOD;
+import static net.cozystudios.squish.registry.item.SquishItems.EXPLOSIVE_CANDY_FOOD;
+import static net.cozystudios.squish.registry.item.SquishItems.POPPY_CANDY_FOOD;
 
 public class RegistryHelper {
     // block registry

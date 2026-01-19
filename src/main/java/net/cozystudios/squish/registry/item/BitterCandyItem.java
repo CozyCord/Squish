@@ -1,7 +1,7 @@
-package net.cozystudios.squish.item;
+package net.cozystudios.squish.registry.item;
 
-import net.cozystudios.squish.entity.BabyCreeperEntity;
-import net.cozystudios.squish.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.BabyCreeperEntity;
+import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

@@ -5,7 +5,7 @@ import net.cozystudios.squish.loader.fabric.RegistryHelper;
 //? }
 
 //? if forge {
-/*import net.cozystudios.squish.forge.RegistryHelper;
+/*import net.cozystudios.squish.loader.forge.RegistryHelper;
 *///? }
 
 import net.cozystudios.squish.util.CandyInfusion;
