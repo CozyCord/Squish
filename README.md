@@ -14,7 +14,7 @@
 <table align="center" style="width: 100%;">
   <tr>
     <td align="center" style="width: 33%;">
-      <a href="https://github.com/CozyCord/Squish/wiki">Read Wiki</a>
+      <a href="https://cozystudios.org/squish/intro/">Read Wiki</a>
     </td>
     <td align="center" style="width: 33%;">
       <a href="https://github.com/CozyCord/Squish/issues">Report Issues / Make Feature Requests</a>
