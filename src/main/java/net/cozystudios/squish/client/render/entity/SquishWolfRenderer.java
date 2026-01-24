@@ -3,6 +3,7 @@ package net.cozystudios.squish.client.render.entity;
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.model.baby.BabyWolfModel;
+import net.cozystudios.squish.client.render.entity.feature.BabyWolfCollarFeatureRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;

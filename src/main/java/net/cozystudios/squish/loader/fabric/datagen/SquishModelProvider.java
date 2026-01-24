@@ -31,6 +31,8 @@ public class SquishModelProvider extends FabricModelProvider {
         itemModelGenerator.register(RegistryHelper.EXPLOSIVE_CANDY, Models.GENERATED);
         itemModelGenerator.register(RegistryHelper.POPPY_ESSENCE, Models.GENERATED);
         itemModelGenerator.register(RegistryHelper.POPPY_CANDY, Models.GENERATED);
+        itemModelGenerator.register(RegistryHelper.ENDER_CANDY, Models.GENERATED);
+        itemModelGenerator.register(RegistryHelper.ENDER_ESSENCE, Models.GENERATED);        
     }
 }
 //? }

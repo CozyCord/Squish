@@ -65,6 +65,13 @@ public class SquishRecipeProvider extends FabricRecipeProvider {
                 .input(RegistryHelper.SQUISH_ESSENCE)
                 .criterion(hasItem(RegistryHelper.SQUISH_ESSENCE), conditionsFromItem(RegistryHelper.SQUISH_ESSENCE))
                 .offerTo(exporter, new Identifier("squish", "poppy_essence"));
+
+        // Ender essence: ender pearl + squish essence
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, RegistryHelper.ENDER_ESSENCE, 1)
+                .input(Items.ENDER_PEARL)
+                .input(RegistryHelper.SQUISH_ESSENCE)
+                .criterion(hasItem(RegistryHelper.SQUISH_ESSENCE), conditionsFromItem(RegistryHelper.SQUISH_ESSENCE))
+                .offerTo(exporter, new Identifier("squish", "ender_essence"));
     }
 }
 //? }

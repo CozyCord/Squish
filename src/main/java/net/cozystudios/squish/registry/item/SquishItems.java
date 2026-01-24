@@ -23,4 +23,7 @@ public class SquishItems {
     public static final FoodComponent POPPY_CANDY_FOOD = new FoodComponent.Builder()
             .hunger(3).saturationModifier(1.5f).snack().alwaysEdible().build();
 
+    public static final FoodComponent ENDER_CANDY_FOOD = new FoodComponent.Builder()
+            .hunger(3).saturationModifier(1.5f).snack().alwaysEdible().build();
+
 }

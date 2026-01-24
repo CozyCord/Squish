@@ -65,6 +65,7 @@ public class SquishClient {
         EntityRendererRegistry.register(RegistryHelper.SQUISH_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(RegistryHelper.EXPLOSIVE_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(RegistryHelper.POPPY_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(RegistryHelper.ENDER_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
 
         EntityRendererRegistry.register(EntityType.CAT, SquishCatRenderer::new);
         EntityRendererRegistry.register(EntityType.CHICKEN, SquishChickenRenderer::new);
@@ -75,6 +76,7 @@ public class SquishClient {
         EntityRendererRegistry.register(EntityType.WOLF, SquishWolfRenderer::new);
         EntityRendererRegistry.register(SquishEntities.BABY_CREEPER, SquishBabyCreeperRenderer::new);
         EntityRendererRegistry.register(SquishEntities.BABY_IRON_GOLEM, SquishBabyIronGolemRenderer::new);
+        EntityRendererRegistry.register(SquishEntities.BABY_ENDERMAN, SquishBabyEndermanRenderer::new);
 
         // Blocks
         // TODO: move this
@@ -127,6 +129,7 @@ public class SquishClient {
             final int POPPY_RED = 0xED1C24;
             final int TNT_RED = 0xDB2E00;
             final int DARK_GRAY = 0x555555;
+            final int ENDER_PURPLE = 0xCC00FA;
 
             String path = id.getPath();
 
@@ -143,6 +146,9 @@ public class SquishClient {
 
             boolean isBitter = path.equals("bitter_candy")
                     || path.equals("bitter_sugar_shard");
+
+            boolean isEnder = path.equals("ender_candy")
+                    || path.equals("ender_essence");
 
             if (path.equals("squish_candy")
                     || path.equals("squish_essence")
@@ -165,6 +171,10 @@ public class SquishClient {
             else if (isBitter)
             {
                 name = name.styled(style -> style.withColor(TextColor.fromRgb(DARK_GRAY)));
+            }
+            else if (isEnder)
+            {
+                name = name.styled(style -> style.withColor(TextColor.fromRgb(ENDER_PURPLE)));
             }
 
             lines.set(0, name);

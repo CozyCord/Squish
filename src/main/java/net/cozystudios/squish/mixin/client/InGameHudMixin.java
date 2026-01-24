@@ -1,7 +1,18 @@
 package net.cozystudios.squish.mixin.client;
 
+import net.cozystudios.squish.Squish;
+
+//? if fabric {
 import net.cozystudios.squish.loader.fabric.RegistryHelper;
+//? }
+
+//? if forge {
+/*import net.cozystudios.squish.loader.forge.RegistryHelper;
+*///? }
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -34,6 +45,15 @@ public abstract class InGameHudMixin {
     private Text squish$styleHotbarItemName(Text original) {
         if (!(original instanceof MutableText text)) return original;
 
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        if (player == null) return original;
+
+        ItemStack heldItem = player.getMainHandStack();
+        Identifier itemId = Registries.ITEM.getId(heldItem.getItem());
+        if (!itemId.getNamespace().equals(Squish.MOD_ID)) {
+            return original;
+        }
+
         String plain = text.getString().toLowerCase();
 
         final int MAGENTA = 0xDF3C73;
@@ -41,6 +61,7 @@ public abstract class InGameHudMixin {
         final int POPPY_RED = 0xED1C24;
         final int TNT_RED = 0xDB2E00;
         final int DARK_GRAY = 0x555555;
+        final int ENDER_PURPLE = 0xCC00FA;
 
         boolean isLilac = plain.contains("lollipop")
                 || plain.contains("melted sugar")
@@ -54,6 +75,8 @@ public abstract class InGameHudMixin {
         boolean isExplosive = plain.contains("explosive");
 
         boolean isBitter = plain.contains("bitter");
+
+        boolean isEnder = plain.contains("ender");
 
         if (isMagenta) {
             return text.setStyle(text.getStyle()
@@ -75,6 +98,10 @@ public abstract class InGameHudMixin {
             return text.setStyle(text.getStyle()
                     .withBold(true)
                     .withColor(TextColor.fromRgb(DARK_GRAY)));
+        } else if (isEnder) {
+            return text.setStyle(text.getStyle()
+                    .withBold(true)
+                    .withColor(TextColor.fromRgb(ENDER_PURPLE)));
         }
         return original;
     }

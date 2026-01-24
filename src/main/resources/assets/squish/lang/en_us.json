@@ -15,5 +15,10 @@
   "item.squish.hardened_sugar": "Hardened Sugar",
   "item.squish.hardened_sugar_shard": "Hardened Sugar Shard",
   "effect.squish.sugar_rush": "Sugar Rush",
-  "item.squish.squish_guidebook": "Squish Guidebook"
+  "item.squish.squish_guidebook": "Squish Guidebook",
+  "entity.squish.baby_creeper": "Baby Creeper",
+  "entity.squish.baby_iron_golem": "Baby Iron Golem",
+  "entity.squish.baby_enderman": "Baby Enderman",
+  "item.squish.ender_essence": "Ender Essence",
+  "item.squish.ender_candy": "Ender Candy"
 }

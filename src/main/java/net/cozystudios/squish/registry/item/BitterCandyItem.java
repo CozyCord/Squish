@@ -1,6 +1,7 @@
 package net.cozystudios.squish.registry.item;
 
 import net.cozystudios.squish.registry.entity.BabyCreeperEntity;
+import net.cozystudios.squish.registry.entity.BabyEndermanEntity;
 import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.entity.EntityType;
@@ -8,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,14 +61,15 @@ public class BitterCandyItem extends SquishBaseItem {
         Vec3d lookVec = user.getRotationVec(1.0F);
         Box searchBox = user.getBoundingBox().stretch(lookVec.multiply(3.5D)).expand(1.0D);
 
-        // Search for squished animals, baby creepers, and baby iron golems
+        // Search for squished animals, baby creepers, baby iron golems, and baby endermen
         List<LivingEntity> entities = world.getEntitiesByClass(
                 LivingEntity.class,
                 searchBox,
                 e -> e.isAlive() && (
                         (e instanceof AnimalEntity && e instanceof Squishable s && s.squish$isSquished()) ||
                         e instanceof BabyCreeperEntity ||
-                        e instanceof BabyIronGolemEntity
+                        e instanceof BabyIronGolemEntity ||
+                        e instanceof BabyEndermanEntity
                 )
         );
 
@@ -152,6 +155,34 @@ public class BitterCandyItem extends SquishBaseItem {
                 babyGolem.discard();
 
                 playUnsquishEffects(world, golem.getX(), golem.getY(), golem.getZ());
+
+                if (!user.getAbilities().creativeMode) {
+                    stack.decrement(1);
+                }
+            }
+            return ActionResult.success(world.isClient);
+        }
+
+        // Handle Baby Enderman -> Enderman
+        if (entity instanceof BabyEndermanEntity babyEnderman) {
+            if (!world.isClient) {
+                EndermanEntity enderman = EntityType.ENDERMAN.create(world);
+                if (enderman == null) return ActionResult.FAIL;
+
+                enderman.refreshPositionAndAngles(babyEnderman.getX(), babyEnderman.getY(), babyEnderman.getZ(),
+                        babyEnderman.getYaw(), babyEnderman.getPitch());
+                enderman.setBodyYaw(babyEnderman.getBodyYaw());
+                enderman.setHeadYaw(babyEnderman.getHeadYaw());
+
+                if (babyEnderman.hasCustomName()) {
+                    enderman.setCustomName(babyEnderman.getCustomName());
+                    enderman.setCustomNameVisible(babyEnderman.isCustomNameVisible());
+                }
+
+                world.spawnEntity(enderman);
+                babyEnderman.discard();
+
+                playUnsquishEffects(world, enderman.getX(), enderman.getY(), enderman.getZ());
 
                 if (!user.getAbilities().creativeMode) {
                     stack.decrement(1);

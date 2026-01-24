@@ -72,6 +72,18 @@
       "item": "squish:poppy_candy",
       "title": "Poppy Candy",
       "text": "This treat can tame Baby Iron Golems! Feed it to a Baby Iron Golem to make it your loyal friend. Eating it yourself grants 30 seconds of Regeneration II!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:ender_essence",
+      "title": "Ender Essence",
+      "text": "Combine an Ender Pearl with Squish Essence in a crafting table to create this mystical elixir! Throw it at Lollipops on the ground to transform them into Ender Candy."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:ender_candy",
+      "title": "Ender Candy",
+      "text": "This treat can tame Baby Endermen! Feed it to a Baby Enderman to make it your loyal companion. Eating it yourself will teleport you randomly, just like a Chorus Fruit!"
     }
   ]
 }

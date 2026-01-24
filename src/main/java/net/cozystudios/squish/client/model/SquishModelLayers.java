@@ -17,6 +17,7 @@ public final class SquishModelLayers {
     public static final EntityModelLayer BABY_WOLF    = layer("baby_wolf");
     public static final EntityModelLayer BABY_CREEPER = layer("baby_creeper");
     public static final EntityModelLayer BABY_IRON_GOLEM = layer("baby_iron_golem");
+    public static final EntityModelLayer BABY_ENDERMAN = layer("baby_enderman");
 
     private static boolean REGISTERED = false;
 
@@ -39,5 +40,6 @@ public final class SquishModelLayers {
         EntityModelLayerRegistry.registerModelLayer(BABY_WOLF, BabyWolfModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_CREEPER, BabyCreeperModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_IRON_GOLEM, BabyIronGolemModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_ENDERMAN, BabyEndermanModel::getTexturedModelData);
     }
 }
