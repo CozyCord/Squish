@@ -19,8 +19,16 @@ public class EnderCandyItem extends SquishBaseItem {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!world.isClient && user instanceof PlayerEntity player) {
-            // Give night vision for 60 seconds (1200 ticks)
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1200, 0));
+            // Give night vision for 60 seconds (1200 ticks), stackable duration
+            int additionalDuration = 1200;
+            StatusEffectInstance existingEffect = player.getStatusEffect(StatusEffects.NIGHT_VISION);
+            if (existingEffect != null) {
+                // Add to existing duration
+                int newDuration = existingEffect.getDuration() + additionalDuration;
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, newDuration, 0));
+            } else {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, additionalDuration, 0));
+            }
 
             // Teleport like chorus fruit
             teleportRandomly(player, world);
