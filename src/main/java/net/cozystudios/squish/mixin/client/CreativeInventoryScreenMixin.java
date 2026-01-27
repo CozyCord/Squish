@@ -3,6 +3,7 @@ package net.cozystudios.squish.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
 import net.cozystudios.squish.mixin.HandledScreenAccessor;
+import net.cozystudios.squish.util.SquishId;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -20,7 +21,7 @@ public abstract class CreativeInventoryScreenMixin {
 
     @Unique
     private static final Identifier SQUISH_GUI =
-            new Identifier("squish", "textures/gui/squish_creative.png");
+            SquishId.of("squish", "textures/gui/squish_creative.png");
 
     @Inject(
             method = "drawBackground(Lnet/minecraft/client/gui/DrawContext;FII)V",
@@ -31,7 +32,7 @@ public abstract class CreativeInventoryScreenMixin {
         if (selected == null) return;
 
         Identifier id = Registries.ITEM_GROUP.getId(selected);
-        if (id == null || !id.equals(new Identifier("squish", "squish_group"))) return;
+        if (id == null || !id.equals(SquishId.of("squish", "squish_group"))) return;
 
         int x = ((HandledScreenAccessor) this).getX();
         int y = ((HandledScreenAccessor) this).getY();

@@ -8,5 +8,6 @@
   "book_texture": "squish:textures/gui/squish_patchouli.png",
   "use_resource_pack": true,
   "show_category_index": false,
-  "id": "squish:squish_guidebook"
+  "dont_generate_book": true,
+  "custom_book_item": "squish:squish_guidebook"
 }

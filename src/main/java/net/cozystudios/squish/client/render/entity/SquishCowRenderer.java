@@ -2,6 +2,7 @@ package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.model.baby.BabyCowModel;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.CowEntityRenderer;
@@ -15,7 +16,7 @@ import net.minecraft.util.Identifier;
 public class SquishCowRenderer extends EntityRenderer<CowEntity> {
 
     private static final Identifier BABY_TEXTURE =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/cow.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/cow.png");
 
     private final EntityRenderer<CowEntity> adult;
     private final BabyRenderer baby;

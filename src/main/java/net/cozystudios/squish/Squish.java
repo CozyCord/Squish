@@ -1,7 +1,6 @@
 package net.cozystudios.squish;
 
 //? if fabric {
-import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.cozystudios.squish.event.EntityInteractHandler;
 import net.cozystudios.squish.event.PlayerJoinHandler;
 import net.cozystudios.squish.registry.item.ExplosiveCandyItem;

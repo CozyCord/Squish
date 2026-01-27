@@ -26,10 +26,11 @@ public class BabySheepWoolFeatureRenderer extends FeatureRenderer<SheepEntity, B
         if (entity.isSheared() || entity.isInvisible()) return;
 
         DyeColor color = entity.getColor();
-        float[] rgb = SheepEntity.getRgbColor(color);
 
         VertexConsumer vc = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(SquishSheepRenderer.BABY_SHEEP_WOOL));
 
+        //? if <=1.20.4 {
+        /*float[] rgb = SheepEntity.getRgbColor(color);
         this.getContextModel().render(
                 matrices,
                 vc,
@@ -37,5 +38,15 @@ public class BabySheepWoolFeatureRenderer extends FeatureRenderer<SheepEntity, B
                 LivingEntityRenderer.getOverlay(entity, 0.0F),
                 rgb[0], rgb[1], rgb[2], 1.0F
         );
+        *///?} else {
+        int rgb = SheepEntity.getRgbColor(color);
+        this.getContextModel().render(
+                matrices,
+                vc,
+                light,
+                LivingEntityRenderer.getOverlay(entity, 0.0F),
+                rgb
+        );
+        //?}
     }
 }

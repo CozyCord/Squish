@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 
 import net.cozystudios.squish.registry.block.entity.MeltedSugarBlockEntity;
 import net.cozystudios.squish.registry.block.entity.SquishBlockEntities;
+import net.cozystudios.squish.util.StackNbt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -36,9 +37,21 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
+//? if >1.20.4 {
+import com.mojang.serialization.MapCodec;
+//?}
 
 @SuppressWarnings({"deprecation"})
 public class MeltedSugarBlock extends BlockWithEntity {
+
+    //? if >1.20.4 {
+    public static final MapCodec<MeltedSugarBlock> CODEC = createCodec(MeltedSugarBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
+    //?}
 
     private static final VoxelShape COLLISION = VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 0.9375, 1.0);
     public static final BooleanProperty PRESERVED = BooleanProperty.of("preserved");
@@ -67,9 +80,15 @@ public class MeltedSugarBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return (!state.get(PRESERVED) && !world.isClient)
+        //? if <=1.20.4 {
+        /*return (!state.get(PRESERVED) && !world.isClient)
                 ? checkType(type, SquishBlockEntities.MELTED_SUGAR_BE, MeltedSugarBlockEntity::tickServer)
                 : null;
+        *///?} else {
+        return (!state.get(PRESERVED) && !world.isClient)
+                ? validateTicker(type, SquishBlockEntities.MELTED_SUGAR_BE, MeltedSugarBlockEntity::tickServer)
+                : null;
+        //?}
     }
 
     @Override
@@ -124,7 +143,8 @@ public class MeltedSugarBlock extends BlockWithEntity {
         }
     }
 
-    @Override
+    //? if <=1.20.4 {
+    /*@Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
                               net.minecraft.entity.player.PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack stack = player.getStackInHand(hand);
@@ -150,6 +170,34 @@ public class MeltedSugarBlock extends BlockWithEntity {
 
         return ActionResult.PASS;
     }
+    *///?} else {
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos,
+                              net.minecraft.entity.player.PlayerEntity player, BlockHitResult hit) {
+        ItemStack stack = player.getMainHandStack();
+
+        if (!state.get(PRESERVED) && stack.isOf(Items.HONEYCOMB)) {
+            world.setBlockState(pos, state.with(PRESERVED, true), 3);
+            world.playSound(null, pos, SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!world.isClient) {
+                spawnWaxParticles((ServerWorld) world, pos);
+            }
+            if (!player.getAbilities().creativeMode) stack.decrement(1);
+            return ActionResult.SUCCESS;
+        }
+
+        if (state.get(PRESERVED) && stack.isIn(ItemTags.AXES)) {
+            world.setBlockState(pos, state.with(PRESERVED, false), 3);
+            world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!world.isClient) {
+                spawnWaxParticles((ServerWorld) world, pos);
+            }
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
+    }
+    //?}
 
     @Override
     public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
@@ -157,7 +205,7 @@ public class MeltedSugarBlock extends BlockWithEntity {
         if (state.get(PRESERVED)) {
             for (ItemStack s : drops) {
                 if (s.isOf(this.asItem())) {
-                    s.getOrCreateNbt().putBoolean("Preserved", true);
+                    StackNbt.putBoolean(s, "Preserved", true);
                 }
             }
         }
@@ -168,7 +216,7 @@ public class MeltedSugarBlock extends BlockWithEntity {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState base = this.getDefaultState();
         ItemStack stack = ctx.getStack();
-        boolean preserved = stack.hasNbt() && stack.getNbt().getBoolean("Preserved");
+        boolean preserved = StackNbt.getBoolean(stack, "Preserved");
         return base.with(PRESERVED, preserved);
     }
 

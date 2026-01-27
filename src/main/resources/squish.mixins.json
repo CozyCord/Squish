@@ -6,7 +6,6 @@
     "AnimalEntitySquishMixin",
     "BrewingRecipeRegistryMixin",
     "BrewingStandBlockEntityMixin",
-    "CreativeInventoryScreenAccessor",
     "LivingEntityMixin",
     "PassiveEntitySquishMixin",
     "PlayerEntityMixin"
@@ -18,9 +17,11 @@
     "requireAnnotations": true
   },
   "client": [
+    "CreativeInventoryScreenAccessor",
     "HandledScreenAccessor",
     "client.CreativeInventoryScreenMixin",
     "client.InGameHudMixin",
+    "client.ItemStackTooltipMixin",
     "compat.PatchouliJeiKeybindCrashFixMixin",
     "compat.PatchouliHideEntryIndexMixin"
   ]

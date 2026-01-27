@@ -1,6 +1,11 @@
 package net.cozystudios.squish.event;
 
+//? if fabric {
 import net.cozystudios.squish.loader.fabric.RegistryHelper;
+//?}
+//? if forge {
+/*import net.cozystudios.squish.loader.forge.RegistryHelper;
+*///?}
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -33,8 +38,8 @@ public class PlayerJoinHandler {
         var state = net.cozystudios.squish.save.SquishFirstJoinBookState.get(server);
 
         if (state.markIfNew(player.getUuid())) {
+            // Patchouli recognizes this item via custom_book_item in book.json
             ItemStack book = new ItemStack(RegistryHelper.SQUISH_GUIDEBOOK);
-            book.getOrCreateNbt().putString("patchouli:book", "squish:squish_guidebook");
 
             if (!player.getInventory().insertStack(book)) {
                 player.dropItem(book, false);

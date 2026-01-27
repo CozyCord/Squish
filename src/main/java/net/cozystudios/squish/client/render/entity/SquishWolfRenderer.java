@@ -2,6 +2,7 @@ package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.model.baby.BabyWolfModel;
 import net.cozystudios.squish.client.render.entity.feature.BabyWolfCollarFeatureRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -16,11 +17,11 @@ import net.minecraft.util.Identifier;
 public class SquishWolfRenderer extends EntityRenderer<WolfEntity> {
 
     private static final Identifier BABY_WOLF =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/wolf.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/wolf.png");
     private static final Identifier BABY_WOLF_TAME =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/wolf_tame_baby.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/wolf_tame_baby.png");
     private static final Identifier BABY_WOLF_ANGRY =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/wolf_angry_baby.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/wolf_angry_baby.png");
 
     private final EntityRenderer<WolfEntity> adult;
     private final BabyRenderer baby;

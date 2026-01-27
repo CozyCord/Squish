@@ -1,6 +1,7 @@
 package net.cozystudios.squish.registry.sound;
 
 import net.cozystudios.squish.Squish;
+import net.cozystudios.squish.util.SquishId;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -11,7 +12,7 @@ public class SquishSounds {
             register("sugar_pop");
 
     private static SoundEvent register(String id) {
-        Identifier identifier = new Identifier(Squish.MOD_ID, id);
+        Identifier identifier = SquishId.of(Squish.MOD_ID, id);
         return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier));
     }
 

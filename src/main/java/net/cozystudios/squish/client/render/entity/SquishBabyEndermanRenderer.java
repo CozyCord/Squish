@@ -3,6 +3,7 @@ package net.cozystudios.squish.client.render.entity;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.client.model.baby.BabyEndermanModel;
 import net.cozystudios.squish.registry.entity.BabyEndermanEntity;
+import net.cozystudios.squish.util.SquishId;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.cozystudios.squish.client.render.entity.feature.BabyEndermanEyesFeatureRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -12,7 +13,7 @@ import net.minecraft.util.Identifier;
 
 public class SquishBabyEndermanRenderer extends MobEntityRenderer<BabyEndermanEntity, BabyEndermanModel> {
 
-    private static final Identifier TEXTURE = new Identifier("squish", "textures/entity/baby/baby_enderman.png");
+    private static final Identifier TEXTURE = SquishId.of("squish", "textures/entity/baby/baby_enderman.png");
 
     public SquishBabyEndermanRenderer(EntityRendererFactory.Context context) {
         super(context, new BabyEndermanModel(context.getPart(SquishModelLayers.BABY_ENDERMAN)), 0.3f);

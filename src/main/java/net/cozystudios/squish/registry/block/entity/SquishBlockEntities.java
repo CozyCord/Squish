@@ -1,6 +1,7 @@
 package net.cozystudios.squish.registry.block.entity;
 
 import net.cozystudios.squish.Squish;
+import net.cozystudios.squish.util.SquishId;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -15,7 +16,7 @@ public class SquishBlockEntities {
     public static void register() {
         MELTED_SUGAR_BE = Registry.register(
                 Registries.BLOCK_ENTITY_TYPE,
-                new Identifier(Squish.MOD_ID, "melted_sugar"),
+                SquishId.of(Squish.MOD_ID, "melted_sugar"),
                 BlockEntityType.Builder.create(MeltedSugarBlockEntity::new, RegistryHelper.MELTED_SUGAR_BLOCK).build(null)
         );
     }

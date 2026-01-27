@@ -16,9 +16,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.effect.StatusEffect;
+//? if <=1.20.4 {
+/*import net.minecraft.entity.effect.StatusEffect;
+*///?}
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+//? if >1.20.4 {
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.client.render.RenderTickCounter;
+//?}
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -34,7 +40,8 @@ import java.util.Map;
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
 
-    @ModifyArg(
+    //? if <=1.20.4 {
+    /*@ModifyArg(
             method = "renderHeldItemTooltip",
             at = @At(
                     value = "INVOKE",
@@ -105,9 +112,10 @@ public abstract class InGameHudMixin {
         }
         return original;
     }
+    *///?}
 
-
-    @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
+    //? if <=1.20.4 {
+    /*@Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
     private void squish$hideHaste(DrawContext context, CallbackInfo ci) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
@@ -124,4 +132,23 @@ public abstract class InGameHudMixin {
             }
         }
     }
+    *///?} else {
+    @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
+    private void squish$hideHaste(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        if (player == null) return;
+
+        if (player.hasStatusEffect(RegistryHelper.SUGAR_RUSH)) {
+            Iterator<Map.Entry<RegistryEntry<net.minecraft.entity.effect.StatusEffect>, StatusEffectInstance>> it =
+                    player.getActiveStatusEffects().entrySet().iterator();
+
+            while (it.hasNext()) {
+                Map.Entry<RegistryEntry<net.minecraft.entity.effect.StatusEffect>, StatusEffectInstance> e = it.next();
+                if (e.getKey() == StatusEffects.HASTE) {
+                    it.remove();
+                }
+            }
+        }
+    }
+    //?}
 }

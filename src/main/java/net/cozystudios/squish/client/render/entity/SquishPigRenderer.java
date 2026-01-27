@@ -2,6 +2,7 @@ package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.model.baby.BabyPigModel;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
@@ -15,7 +16,7 @@ import net.minecraft.util.Identifier;
 public class SquishPigRenderer extends MobEntityRenderer<PigEntity, net.minecraft.client.render.entity.model.EntityModel<PigEntity>> {
 
     private static final Identifier BABY_TEXTURE =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/pig.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/pig.png");
 
     private final PigEntityModel<PigEntity> adultModel;
     private final BabyPigModel babyModel;

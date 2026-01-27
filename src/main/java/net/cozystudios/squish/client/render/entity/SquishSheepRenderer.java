@@ -2,6 +2,7 @@ package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.model.baby.BabySheepModel;
 import net.cozystudios.squish.client.render.entity.feature.BabySheepWoolFeatureRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -16,10 +17,10 @@ import net.minecraft.util.Identifier;
 public class SquishSheepRenderer extends EntityRenderer<SheepEntity> {
 
     private static final Identifier BABY_SHEEP_BASE =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/sheep.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/sheep.png");
 
     public static final Identifier BABY_SHEEP_WOOL =
-            new Identifier(Squish.MOD_ID, "textures/entity/baby/sheep_wool.png");
+            SquishId.of(Squish.MOD_ID, "textures/entity/baby/sheep_wool.png");
 
     private final EntityRenderer<SheepEntity> adult;
     private final BabyRenderer baby;

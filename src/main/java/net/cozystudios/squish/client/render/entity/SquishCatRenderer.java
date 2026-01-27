@@ -2,6 +2,7 @@ package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.model.baby.BabyCatModel;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.CatEntityRenderer;
@@ -39,7 +40,7 @@ public class SquishCatRenderer extends EntityRenderer<CatEntity> {
         String path = vanillaCatTexture.getPath();
         String prefix = "textures/entity/cat/";
         String file = path.startsWith(prefix) ? path.substring(prefix.length()) : path;
-        return new Identifier(Squish.MOD_ID, "textures/entity/baby/cat/" + file);
+        return SquishId.of(Squish.MOD_ID, "textures/entity/baby/cat/" + file);
     }
 
     private final class BabyRenderer extends MobEntityRenderer<CatEntity, BabyCatModel> {

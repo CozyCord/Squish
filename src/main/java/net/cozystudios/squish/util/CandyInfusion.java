@@ -1,7 +1,6 @@
 package net.cozystudios.squish.util;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 
 public final class CandyInfusion {
     private CandyInfusion() {}
@@ -11,15 +10,13 @@ public final class CandyInfusion {
     public static final int MAX = 5;
 
     public static int getLevel(ItemStack stack) {
-        NbtCompound nbt = stack.getNbt();
-        if (nbt == null || !nbt.contains(KEY)) return MIN;
-
-        int lvl = nbt.getInt(KEY);
+        if (!StackNbt.hasKey(stack, KEY)) return MIN;
+        int lvl = StackNbt.getInt(stack, KEY);
         return clamp(lvl);
     }
 
     public static void setLevel(ItemStack stack, int level) {
-        stack.getOrCreateNbt().putInt(KEY, clamp(level));
+        StackNbt.putInt(stack, KEY, clamp(level));
     }
 
     public static int increment(ItemStack stack) {

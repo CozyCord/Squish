@@ -1,5 +1,6 @@
 package net.cozystudios.squish.mixin.compat;
 
+import net.cozystudios.squish.util.SquishId;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,7 +15,7 @@ import vazkii.patchouli.common.book.Book;
 @Mixin(targets = "vazkii.patchouli.client.book.gui.GuiBookLanding", remap = false)
 public abstract class PatchouliHideEntryIndexMixin extends GuiBook {
 
-    private static final Identifier SQUISH_BOOK_ID = new Identifier("squish", "squish_guidebook");
+    private static final Identifier SQUISH_BOOK_ID = SquishId.of("squish", "squish_guidebook");
 
     protected PatchouliHideEntryIndexMixin(Book book, Text title) {
         super(book, title);

@@ -6,7 +6,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+//? if <=1.20.4 {
+/*import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+*///?}
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 //? }
 
@@ -18,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 *///? }
 
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.render.entity.*;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipComponent;
 import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
@@ -46,7 +49,7 @@ public class SquishClient {
 
     //? if fabric {
     private static final Identifier SQUISH_BADGE =
-            new Identifier("squish", "textures/gui/tooltip_badges/squish_badge.png");
+            SquishId.of("squish", "textures/gui/tooltip_badges/squish_badge.png");
      //? }
 
     //? if fabric {
@@ -82,7 +85,8 @@ public class SquishClient {
         // TODO: move this
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
 
-        TooltipComponentCallback.EVENT.register(data -> {
+        //? if <=1.20.4 {
+        /*TooltipComponentCallback.EVENT.register(data -> {
             if (data instanceof SquishBadgeTooltipData d) {
                 return new SquishBadgeTooltipComponent(d);
             }
@@ -91,6 +95,7 @@ public class SquishClient {
             }
             return null;
         });
+        *///?}
 
         ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
             if (!(screen instanceof CreativeInventoryScreen creative)) return;
@@ -100,7 +105,7 @@ public class SquishClient {
                 if (selectedTab == null) return;
 
                 Identifier tabId = Registries.ITEM_GROUP.getId(selectedTab);
-                if (tabId == null || !tabId.equals(new Identifier("squish", "squish_group"))) return;
+                if (tabId == null || !tabId.equals(SquishId.of("squish", "squish_group"))) return;
 
                 int left = ((HandledScreenAccessor) creative).getX();
                 int top = ((HandledScreenAccessor) creative).getY();
@@ -113,7 +118,11 @@ public class SquishClient {
             });
         });
 
-        ItemTooltipCallback.EVENT.register((stack, ctx, lines) -> {
+        //? if <=1.20.4 {
+        /*ItemTooltipCallback.EVENT.register((stack, ctx, lines) -> {
+        *///?} else {
+        ItemTooltipCallback.EVENT.register((stack, ctx, type, lines) -> {
+        //?}
             if (lines.isEmpty()) return;
 
             var id = Registries.ITEM.getId(stack.getItem());

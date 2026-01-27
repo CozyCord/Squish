@@ -27,6 +27,7 @@ stonecutter {
         }
 
         mc("1.20.1", "fabric", "forge")
+        mc("1.21.1", "fabric")
 
         vcsVersion = "1.20.1-fabric"
     }

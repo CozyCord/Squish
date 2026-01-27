@@ -13,6 +13,10 @@ import net.minecraft.world.World;
 import net.cozystudios.squish.loader.fabric.RegistryHelper;
 //? }
 
+//? if >1.20.4 {
+import net.minecraft.registry.RegistryWrapper;
+//?}
+
 public class MeltedSugarBlockEntity extends BlockEntity {
     private static final int HARDEN_TICKS = 1200;
 
@@ -34,7 +38,8 @@ public class MeltedSugarBlockEntity extends BlockEntity {
         }
     }
 
-    @Override
+    //? if <=1.20.4 {
+    /*@Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         nbt.putInt("Age", age);
@@ -45,4 +50,17 @@ public class MeltedSugarBlockEntity extends BlockEntity {
         super.readNbt(nbt);
         age = nbt.getInt("Age");
     }
+    *///?} else {
+    @Override
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        nbt.putInt("Age", age);
+    }
+
+    @Override
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        age = nbt.getInt("Age");
+    }
+    //?}
 }

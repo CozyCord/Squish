@@ -2,6 +2,7 @@ package net.cozystudios.squish.client.render.entity;
 
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.client.model.SquishModelLayers;
+import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.model.baby.BabyRabbitModel;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -39,7 +40,7 @@ public class SquishRabbitRenderer extends EntityRenderer<RabbitEntity> {
         String path = vanillaRabbitTexture.getPath();
         String prefix = "textures/entity/rabbit/";
         String file = path.startsWith(prefix) ? path.substring(prefix.length()) : path;
-        return new Identifier(Squish.MOD_ID, "textures/entity/baby/rabbit/" + file);
+        return SquishId.of(Squish.MOD_ID, "textures/entity/baby/rabbit/" + file);
     }
 
     private final class BabyRenderer extends MobEntityRenderer<RabbitEntity, BabyRabbitModel> {
