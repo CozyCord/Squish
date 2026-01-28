@@ -1,8 +1,8 @@
 package net.cozystudios.squish.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
-import net.cozystudios.squish.mixin.HandledScreenAccessor;
+import net.cozystudios.squish.mixin.accessor.CreativeInventoryScreenAccessor;
+import net.cozystudios.squish.mixin.accessor.HandledScreenAccessor;
 import net.cozystudios.squish.util.SquishId;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;

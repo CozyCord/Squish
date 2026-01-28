@@ -3,5 +3,240 @@
     "sounds": [
       { "name": "squish:sugar_pop", "stream": false }
     ]
+  },
+  "entity.baby_cat.ambient": {
+    "sounds": [
+      "squish:baby_cat/ambient1",
+      "squish:baby_cat/ambient2",
+      "squish:baby_cat/ambient3",
+      "squish:baby_cat/ambient4",
+      "squish:baby_cat/ambient5",
+      "squish:baby_cat/ambient6",
+      "squish:baby_cat/ambient7"
+    ],
+    "subtitle": "subtitles.entity.cat.ambient"
+  },
+  "entity.baby_cat.death": {
+    "sounds": [
+      "squish:baby_cat/death"
+    ],
+    "subtitle": "subtitles.entity.cat.death"
+  },
+  "entity.baby_cat.hurt": {
+    "sounds": [
+      "squish:baby_cat/hurt1",
+      "squish:baby_cat/hurt2",
+      "squish:baby_cat/hurt3"
+    ],
+    "subtitle": "subtitles.entity.cat.hurt"
+  },
+  "entity.baby_chicken.ambient": {
+    "sounds": [
+      "squish:baby_chicken/ambient1",
+      "squish:baby_chicken/ambient2"
+    ],
+    "subtitle": "subtitles.entity.chicken.ambient"
+  },
+  "entity.baby_chicken.death": {
+    "sounds": [
+      "squish:baby_chicken/death"
+    ],
+    "subtitle": "subtitles.entity.chicken.death"
+  },
+  "entity.baby_chicken.hurt": {
+    "sounds": [
+      "squish:baby_chicken/hurt1",
+      "squish:baby_chicken/hurt2",
+      "squish:baby_chicken/hurt3",
+      "squish:baby_chicken/hurt4"
+    ],
+    "subtitle": "subtitles.entity.chicken.hurt"
+  },
+  "entity.baby_horse.ambient": {
+    "sounds": [
+      "squish:baby_horse/ambient1",
+      "squish:baby_horse/ambient2",
+      "squish:baby_horse/ambient3",
+      "squish:baby_horse/ambient4",
+      "squish:baby_horse/ambient5",
+      "squish:baby_horse/ambient6",
+      "squish:baby_horse/ambient7",
+      "squish:baby_horse/ambient8"
+    ],
+    "subtitle": "subtitles.entity.horse.ambient"
+  },
+  "entity.baby_horse.angry": {
+    "sounds": [
+      "squish:baby_horse/angry"
+    ],
+    "subtitle": "subtitles.entity.horse.angry"
+  },
+  "entity.baby_horse.death": {
+    "sounds": [
+      "squish:baby_horse/death"
+    ],
+    "subtitle": "subtitles.entity.horse.death"
+  },
+  "entity.baby_horse.eat": {
+    "sounds": [
+      "squish:baby_horse/eat1",
+      "squish:baby_horse/eat2",
+      "squish:baby_horse/eat3",
+      "squish:baby_horse/eat4",
+      "squish:baby_horse/eat5"
+    ],
+    "subtitle": "subtitles.entity.horse.eat"
+  },
+  "entity.baby_horse.hurt": {
+    "sounds": [
+      "squish:baby_horse/hurt1",
+      "squish:baby_horse/hurt2",
+      "squish:baby_horse/hurt3"
+    ],
+    "subtitle": "subtitles.entity.horse.hurt"
+  },
+  "entity.baby_horse.land": {
+    "sounds": [
+      "squish:baby_horse/land"
+    ],
+    "subtitle": "subtitles.entity.horse.land"
+  },
+  "entity.baby_horse.step": {
+    "sounds": [
+      "squish:baby_horse/step1",
+      "squish:baby_horse/step2",
+      "squish:baby_horse/step3",
+      "squish:baby_horse/step4",
+      "squish:baby_horse/step5",
+      "squish:baby_horse/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.baby_pig.ambient": {
+    "sounds": [
+      "squish:baby_pig/ambient1",
+      "squish:baby_pig/ambient2",
+      "squish:baby_pig/ambient3",
+      "squish:baby_pig/ambient4",
+      "squish:baby_pig/ambient5",
+      "squish:baby_pig/ambient6"
+    ],
+    "subtitle": "subtitles.entity.pig.ambient"
+  },
+  "entity.baby_pig.death": {
+    "sounds": [
+      "squish:baby_pig/death"
+    ],
+    "subtitle": "subtitles.entity.pig.death"
+  },
+  "entity.baby_pig.hurt": {
+    "sounds": [
+      "squish:baby_pig/hit1",
+      "squish:baby_pig/hit2",
+      "squish:baby_pig/hit3"
+    ],
+    "subtitle": "subtitles.entity.pig.hurt"
+  },
+  "entity.baby_pig.step": {
+    "sounds": [
+      "squish:baby_pig/step1",
+      "squish:baby_pig/step2",
+      "squish:baby_pig/step3",
+      "squish:baby_pig/step4",
+      "squish:baby_pig/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.baby_turtle.death": {
+    "sounds": [
+      "squish:baby_turtle/death1",
+      "squish:baby_turtle/death2"
+    ],
+    "subtitle": "subtitles.entity.turtle.death_baby"
+  },
+  "entity.baby_turtle.egg_hatched": {
+    "sounds": [
+      "squish:baby_turtle/egg_hatched1",
+      "squish:baby_turtle/egg_hatched2",
+      "squish:baby_turtle/egg_hatched3"
+    ],
+    "subtitle": "subtitles.entity.turtle.egg_hatched"
+  },
+  "entity.baby_turtle.hurt": {
+    "sounds": [
+      "squish:baby_turtle/hurt1",
+      "squish:baby_turtle/hurt2"
+    ],
+    "subtitle": "subtitles.entity.turtle.hurt_baby"
+  },
+  "entity.baby_turtle.shamble": {
+    "sounds": [
+      "squish:baby_turtle/shamble1",
+      "squish:baby_turtle/shamble2",
+      "squish:baby_turtle/shamble3",
+      "squish:baby_turtle/shamble4"
+    ],
+    "subtitle": "subtitles.entity.turtle.shamble_baby"
+  },
+  "entity.baby_wolf.ambient": {
+    "sounds": [
+      "squish:baby_wolf/ambient1",
+      "squish:baby_wolf/ambient2",
+      "squish:baby_wolf/ambient3",
+      "squish:baby_wolf/ambient4",
+      "squish:baby_wolf/ambient5",
+      "squish:baby_wolf/ambient6",
+      "squish:baby_wolf/ambient7",
+      "squish:baby_wolf/ambient8"
+    ],
+    "subtitle": "subtitles.entity.wolf.ambient"
+  },
+  "entity.baby_wolf.angry": {
+    "sounds": [
+      "squish:baby_wolf/angry1",
+      "squish:baby_wolf/angry2",
+      "squish:baby_wolf/angry3",
+      "squish:baby_wolf/angry4"
+    ],
+    "subtitle": "subtitles.entity.wolf.growl"
+  },
+  "entity.baby_wolf.death": {
+    "sounds": [
+      "squish:baby_wolf/death"
+    ],
+    "subtitle": "subtitles.entity.wolf.death"
+  },
+  "entity.baby_wolf.hurt": {
+    "sounds": [
+      "squish:baby_wolf/hurt1",
+      "squish:baby_wolf/hurt2",
+      "squish:baby_wolf/hurt3"
+    ],
+    "subtitle": "subtitles.entity.wolf.hurt"
+  },
+  "entity.baby_wolf.pant": {
+    "sounds": [
+      "squish:baby_wolf/pant1",
+      "squish:baby_wolf/pant2",
+      "squish:baby_wolf/pant3"
+    ],
+    "subtitle": "subtitles.entity.wolf.pant"
+  },
+  "entity.baby_wolf.step": {
+    "sounds": [
+      "squish:baby_wolf/step1",
+      "squish:baby_wolf/step2",
+      "squish:baby_wolf/step3",
+      "squish:baby_wolf/step4",
+      "squish:baby_wolf/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.baby_wolf.whine": {
+    "sounds": [
+      "squish:baby_wolf/whine1",
+      "squish:baby_wolf/whine2"
+    ],
+    "subtitle": "subtitles.entity.wolf.whine"
   }
 }
