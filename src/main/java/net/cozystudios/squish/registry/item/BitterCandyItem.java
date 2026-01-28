@@ -3,6 +3,7 @@ package net.cozystudios.squish.registry.item;
 import net.cozystudios.squish.registry.entity.BabyCreeperEntity;
 import net.cozystudios.squish.registry.entity.BabyEndermanEntity;
 import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.BabySkeletonEntity;
 import net.cozystudios.squish.util.Squishable;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,9 +37,7 @@ public class BitterCandyItem extends SquishBaseItem {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!world.isClient && user instanceof PlayerEntity player) {
-            // Give nausea for 5 seconds (100 ticks)
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 100, 0));
-            // Give instant damage
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 1, 0));
         }
         return super.finishUsing(stack, world, user);
@@ -47,13 +47,11 @@ public class BitterCandyItem extends SquishBaseItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
 
-        // If not sneaking, allow eating
         if (!user.isSneaking()) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
         }
 
-        // If sneaking, try to find a nearby squished animal to unsquish
         if (world.isClient) {
             return TypedActionResult.pass(stack);
         }
@@ -61,15 +59,15 @@ public class BitterCandyItem extends SquishBaseItem {
         Vec3d lookVec = user.getRotationVec(1.0F);
         Box searchBox = user.getBoundingBox().stretch(lookVec.multiply(3.5D)).expand(1.0D);
 
-        // Search for squished animals, baby creepers, baby iron golems, and baby endermen
         List<LivingEntity> entities = world.getEntitiesByClass(
                 LivingEntity.class,
                 searchBox,
                 e -> e.isAlive() && (
-                        (e instanceof AnimalEntity && e instanceof Squishable s && s.squish$isSquished()) ||
+                        (e instanceof Squishable s && s.squish$isSquished()) ||
                         e instanceof BabyCreeperEntity ||
                         e instanceof BabyIronGolemEntity ||
-                        e instanceof BabyEndermanEntity
+                        e instanceof BabyEndermanEntity ||
+                        e instanceof BabySkeletonEntity
                 )
         );
 
@@ -96,18 +94,17 @@ public class BitterCandyItem extends SquishBaseItem {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        // Only unsquish when sneaking
         if (!user.isSneaking()) {
             return ActionResult.PASS;
         }
 
-        return applyUnsquish(user, entity, stack);
+        ActionResult result = applyUnsquish(user, entity, stack);
+        return (result == ActionResult.SUCCESS || result == ActionResult.FAIL) ? ActionResult.SUCCESS : ActionResult.PASS;
     }
 
     private ActionResult applyUnsquish(PlayerEntity user, LivingEntity entity, ItemStack stack) {
         World world = user.getWorld();
 
-        // Handle Baby Creeper -> Creeper
         if (entity instanceof BabyCreeperEntity babyCreeper) {
             if (!world.isClient) {
                 CreeperEntity creeper = EntityType.CREEPER.create(world);
@@ -135,7 +132,6 @@ public class BitterCandyItem extends SquishBaseItem {
             return ActionResult.success(world.isClient);
         }
 
-        // Handle Baby Iron Golem -> Iron Golem
         if (entity instanceof BabyIronGolemEntity babyGolem) {
             if (!world.isClient) {
                 IronGolemEntity golem = EntityType.IRON_GOLEM.create(world);
@@ -163,7 +159,6 @@ public class BitterCandyItem extends SquishBaseItem {
             return ActionResult.success(world.isClient);
         }
 
-        // Handle Baby Enderman -> Enderman
         if (entity instanceof BabyEndermanEntity babyEnderman) {
             if (!world.isClient) {
                 EndermanEntity enderman = EntityType.ENDERMAN.create(world);
@@ -191,13 +186,38 @@ public class BitterCandyItem extends SquishBaseItem {
             return ActionResult.success(world.isClient);
         }
 
-        // Handle squished animals -> grow them back to adult
+        if (entity instanceof BabySkeletonEntity babySkeleton) {
+            if (!world.isClient) {
+                SkeletonEntity skeleton = EntityType.SKELETON.create(world);
+                if (skeleton == null) return ActionResult.FAIL;
+
+                skeleton.refreshPositionAndAngles(babySkeleton.getX(), babySkeleton.getY(), babySkeleton.getZ(),
+                        babySkeleton.getYaw(), babySkeleton.getPitch());
+                skeleton.setBodyYaw(babySkeleton.getBodyYaw());
+                skeleton.setHeadYaw(babySkeleton.getHeadYaw());
+
+                if (babySkeleton.hasCustomName()) {
+                    skeleton.setCustomName(babySkeleton.getCustomName());
+                    skeleton.setCustomNameVisible(babySkeleton.isCustomNameVisible());
+                }
+
+                world.spawnEntity(skeleton);
+                babySkeleton.discard();
+
+                playUnsquishEffects(world, skeleton.getX(), skeleton.getY(), skeleton.getZ());
+
+                if (!user.getAbilities().creativeMode) {
+                    stack.decrement(1);
+                }
+            }
+            return ActionResult.success(world.isClient);
+        }
+
         if (entity instanceof AnimalEntity animal && animal instanceof Squishable squishable) {
             if (squishable.squish$isSquished()) {
                 if (!world.isClient) {
-                    // Unsquish the animal and make it an adult
                     squishable.squish$setSquished(false);
-                    animal.setBreedingAge(0); // Set to adult
+                    animal.setBreedingAge(0);
 
                     playUnsquishEffects(world, animal.getX(), animal.getY(), animal.getZ());
 
@@ -208,6 +228,20 @@ public class BitterCandyItem extends SquishBaseItem {
                 return ActionResult.success(world.isClient);
             }
         }
+
+        if (entity instanceof Squishable squishable && squishable.squish$isSquished()) {
+            if (!world.isClient) {
+                squishable.squish$setSquished(false);
+
+                playUnsquishEffects(world, entity.getX(), entity.getY(), entity.getZ());
+
+                if (!user.getAbilities().creativeMode) {
+                    stack.decrement(1);
+                }
+            }
+            return ActionResult.success(world.isClient);
+        }
+
         return ActionResult.PASS;
     }
 

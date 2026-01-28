@@ -91,6 +91,13 @@ public class SquishRecipeProvider extends FabricRecipeProvider {
                 .input(RegistryHelper.SQUISH_ESSENCE)
                 .criterion(hasItem(RegistryHelper.SQUISH_ESSENCE), conditionsFromItem(RegistryHelper.SQUISH_ESSENCE))
                 .offerTo(exporter, SquishId.of("squish", "ender_essence"));
+
+        // Skelly essence: bone + squish essence
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, RegistryHelper.SKELLY_ESSENCE, 1)
+                .input(Items.BONE)
+                .input(RegistryHelper.SQUISH_ESSENCE)
+                .criterion(hasItem(RegistryHelper.SQUISH_ESSENCE), conditionsFromItem(RegistryHelper.SQUISH_ESSENCE))
+                .offerTo(exporter, SquishId.of("squish", "skelly_essence"));
     }
 }
 //? }

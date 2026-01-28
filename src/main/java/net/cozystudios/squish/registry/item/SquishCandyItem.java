@@ -4,6 +4,7 @@ import net.cozystudios.squish.loader.fabric.RegistryHelper;
 import net.cozystudios.squish.registry.entity.BabyCreeperEntity;
 import net.cozystudios.squish.registry.entity.BabyEndermanEntity;
 import net.cozystudios.squish.registry.entity.BabyIronGolemEntity;
+import net.cozystudios.squish.registry.entity.BabySkeletonEntity;
 import net.cozystudios.squish.registry.entity.SquishEntities;
 import net.cozystudios.squish.registry.sound.SquishSounds;
 import net.cozystudios.squish.util.CandyInfusion;
@@ -94,7 +95,7 @@ public class SquishCandyItem extends SquishBaseItem {
         List<LivingEntity> entities = world.getEntitiesByClass(
                 LivingEntity.class,
                 searchBox,
-                e -> e instanceof AnimalEntity && e.isAlive()
+                e -> (e instanceof AnimalEntity || e instanceof Squishable) && e.isAlive()
         );
 
         LivingEntity closest = null;
@@ -330,7 +331,51 @@ public class SquishCandyItem extends SquishBaseItem {
             return ActionResult.SUCCESS;
         }
 
-        if (!(entity instanceof AnimalEntity animal)) return ActionResult.PASS;
+        if (entity instanceof net.minecraft.entity.mob.SkeletonEntity skeleton) {
+
+            if (entity instanceof BabySkeletonEntity) {
+                user.sendMessage(Text.literal("That mob is already squished!"), true);
+                return ActionResult.FAIL;
+            }
+
+            BabySkeletonEntity baby = SquishEntities.BABY_SKELETON.create(world);
+            if (baby == null) return ActionResult.FAIL;
+
+            baby.refreshPositionAndAngles(skeleton.getX(), skeleton.getY(), skeleton.getZ(), skeleton.getYaw(), skeleton.getPitch());
+            baby.setBodyYaw(skeleton.getBodyYaw());
+            baby.setHeadYaw(skeleton.getHeadYaw());
+            baby.setAiDisabled(skeleton.isAiDisabled());
+
+            if (skeleton.hasCustomName()) {
+                baby.setCustomName(skeleton.getCustomName());
+                baby.setCustomNameVisible(skeleton.isCustomNameVisible());
+            }
+
+            world.spawnEntity(baby);
+            skeleton.discard();
+
+            float hue = (System.currentTimeMillis() % 3000L) / 3000f;
+            int rgb = Color.HSBtoRGB(hue, 0.9f, 1.0f) & 0xFFFFFF;
+            float r = ((rgb >> 16) & 0xFF) / 255f;
+            float g = ((rgb >> 8) & 0xFF) / 255f;
+            float b = (rgb & 0xFF) / 255f;
+
+            ServerWorld server = (ServerWorld) world;
+            server.spawnParticles(
+                    new DustParticleEffect(new Vector3f(r, g, b), 1.0f),
+                    baby.getX(), baby.getBodyY(0.5), baby.getZ(),
+                    45, 0.5, 0.5, 0.5, 0.01
+            );
+            server.playSound(null, baby.getBlockPos(),
+                    SquishSounds.SUGAR_POP,
+                    SoundCategory.PLAYERS,
+                    0.8f, 1.35f);
+
+            if (!user.getAbilities().creativeMode) stack.decrement(1);
+
+            user.sendMessage(Text.literal("...it worked?"), true);
+            return ActionResult.SUCCESS;
+        }
 
         boolean alreadySquished = entity instanceof Squishable s && s.squish$isSquished();
         if (alreadySquished) {
@@ -338,11 +383,17 @@ public class SquishCandyItem extends SquishBaseItem {
             return ActionResult.FAIL;
         }
 
+        if (!(entity instanceof Squishable) && !(entity instanceof AnimalEntity)) {
+            return ActionResult.PASS;
+        }
+
         if (entity instanceof Squishable squishable) {
             squishable.squish$setSquished(true);
         }
 
-        animal.setBreedingAge(-24000);
+        if (entity instanceof AnimalEntity animal) {
+            animal.setBreedingAge(-24000);
+        }
 
         float hue = (System.currentTimeMillis() % 3000L) / 3000f;
         int rgb = Color.HSBtoRGB(hue, 0.9f, 1.0f) & 0xFFFFFF;

@@ -1,42 +1,23 @@
 package net.cozystudios.squish.registry.item;
 
-//? if <=1.20.4 {
-/*import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
-import net.minecraft.client.item.TooltipData;
-*///?}
-import net.cozystudios.squish.util.SquishId;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-
-import java.util.Optional;
 
 public class SquishBaseItem extends Item {
-    //? if <=1.20.4 {
-    /*private static final Identifier BADGE_TEXTURE =
-            SquishId.of("squish", "textures/gui/tooltip_badges/squish_badge.png");
-    *///?}
-
     protected static final int MAGENTA = 0xDF3C73;
     protected static final int LILAC = 0xCFBDDF;
     protected static final int POPPY_RED = 0xED1C24;
     protected static final int TNT_RED = 0xDB2E00;
     protected static final int DARK_GRAY = 0x555555;
     protected static final int ENDER_PURPLE = 0xCC00FA;
+    protected static final int SKELETON_WHITE = 0xE0DED8;
 
     public SquishBaseItem(Settings settings) {
         super(settings);
     }
-
-    //? if <=1.20.4 {
-    /*@Override
-    public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        return Optional.of(new SquishBadgeTooltipData(BADGE_TEXTURE, 64, 17));
-    }
-    *///?}
 
     //? if >1.20.4 {
     @Override
@@ -64,6 +45,8 @@ public class SquishBaseItem extends Item {
             color = DARK_GRAY;
         } else if (plain.contains("ender")) {
             color = ENDER_PURPLE;
+        } else if (plain.contains("skelly")) {
+            color = SKELETON_WHITE;
         }
 
         final int finalColor = color;

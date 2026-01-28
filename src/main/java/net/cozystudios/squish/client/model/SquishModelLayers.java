@@ -19,6 +19,14 @@ public final class SquishModelLayers {
     public static final EntityModelLayer BABY_CREEPER = layer("baby_creeper");
     public static final EntityModelLayer BABY_IRON_GOLEM = layer("baby_iron_golem");
     public static final EntityModelLayer BABY_ENDERMAN = layer("baby_enderman");
+    public static final EntityModelLayer BABY_AXOLOTL = layer("baby_axolotl");
+    public static final EntityModelLayer BABY_DOLPHIN = layer("baby_dolphin");
+    public static final EntityModelLayer BABY_HORSE = layer("baby_horse");
+    public static final EntityModelLayer BABY_DONKEY = layer("baby_donkey");
+    public static final EntityModelLayer BABY_MULE = layer("baby_mule");
+    public static final EntityModelLayer BABY_SQUID = layer("baby_squid");
+    public static final EntityModelLayer BABY_TURTLE = layer("baby_turtle");
+    public static final EntityModelLayer BABY_SKELETON = layer("baby_skeleton");
 
     private static boolean REGISTERED = false;
 
@@ -42,5 +50,13 @@ public final class SquishModelLayers {
         EntityModelLayerRegistry.registerModelLayer(BABY_CREEPER, BabyCreeperModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_IRON_GOLEM, BabyIronGolemModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(BABY_ENDERMAN, BabyEndermanModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_AXOLOTL, BabyAxolotlModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_DOLPHIN, BabyDolphinModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_HORSE, BabyHorseModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_DONKEY, BabyDonkeyModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_MULE, BabyMuleModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_SQUID, BabySquidModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_TURTLE, BabyTurtleModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BABY_SKELETON, BabySkeletonModel::getTexturedModelData);
     }
 }

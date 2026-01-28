@@ -20,5 +20,8 @@
   "entity.squish.baby_iron_golem": "Baby Iron Golem",
   "entity.squish.baby_enderman": "Baby Enderman",
   "item.squish.ender_essence": "Ender Essence",
-  "item.squish.ender_candy": "Ender Candy"
+  "item.squish.ender_candy": "Ender Candy",
+  "item.squish.skelly_essence": "Skelly Essence",
+  "item.squish.skelly_candy": "Skelly Candy",
+  "entity.squish.baby_skeleton": "Baby Skeleton"
 }

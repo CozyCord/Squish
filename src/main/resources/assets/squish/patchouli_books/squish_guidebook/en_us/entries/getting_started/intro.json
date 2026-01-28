@@ -84,6 +84,18 @@
       "item": "squish:ender_candy",
       "title": "Ender Candy",
       "text": "This treat can tame Baby Endermen! Feed it to a Baby Enderman to make it your loyal companion. Eating it yourself will teleport you randomly, just like a Chorus Fruit!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:skelly_essence",
+      "title": "Skelly Essence",
+      "text": "Combine a Bone with Squish Essence in a crafting table to create this skeletal concoction! Throw it at Lollipops on the ground to transform them into Skelly Candy."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "squish:skelly_candy",
+      "title": "Skelly Candy",
+      "text": "This treat can tame Baby Skeletons! Feed it to a Baby Skeleton to make it your loyal companion. Eating it yourself grants 30 seconds of Resistance II!"
     }
   ]
 }

@@ -18,6 +18,14 @@ public final class BabyAnimUtil {
         head.pitch += headPitch  * DEG_TO_RAD;
     }
 
+    public static void applyHorseHeadRotation(ModelPart head, float netHeadYaw, float headPitch) {
+
+        head.yaw += netHeadYaw * DEG_TO_RAD;
+
+        float clampedPitch = MathHelper.clamp(headPitch, -30.0F, 60.0F);
+        head.pitch += clampedPitch * DEG_TO_RAD * 0.3F;
+    }
+
     public static void animateQuadrupedLegs(
             ModelPart rightFront, ModelPart leftFront,
             ModelPart rightHind, ModelPart leftHind,

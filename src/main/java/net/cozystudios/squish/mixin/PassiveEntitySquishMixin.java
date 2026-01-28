@@ -21,6 +21,7 @@ public abstract class PassiveEntitySquishMixin extends LivingEntity implements S
     @Shadow public abstract void setBreedingAge(int age);
 
     @Unique private boolean squish$permaBaby = false;
+    @Unique private boolean squish$unsquishing = false;
 
     protected PassiveEntitySquishMixin(EntityType<? extends LivingEntity> type, World world) {
         super(type, world);
@@ -51,4 +52,6 @@ public abstract class PassiveEntitySquishMixin extends LivingEntity implements S
 
     @Override public boolean squish$isSquished() { return squish$permaBaby; }
     @Override public void squish$setSquished(boolean squished) { this.squish$permaBaby = squished; }
+    public boolean squish$isUnsquishing() { return squish$unsquishing; }
+    public void squish$setUnsquishing(boolean unsquishing) { this.squish$unsquishing = unsquishing; }
 }

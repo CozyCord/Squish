@@ -41,11 +41,22 @@ public final class SquishEntities {
                     .build()
     );
 
+    public static final EntityType<BabySkeletonEntity> BABY_SKELETON = Registry.register(
+            Registries.ENTITY_TYPE,
+            SquishId.of("baby_skeleton"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabySkeletonEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.9f))
+                    .trackRangeBlocks(8)
+                    .trackedUpdateRate(3)
+                    .build()
+    );
+
     private SquishEntities() {}
 
     public static void register() {
         FabricDefaultAttributeRegistry.register(BABY_CREEPER, BabyCreeperEntity.createBabyCreeperAttributes());
         FabricDefaultAttributeRegistry.register(BABY_IRON_GOLEM, BabyIronGolemEntity.createBabyIronGolemAttributes());
         FabricDefaultAttributeRegistry.register(BABY_ENDERMAN, BabyEndermanEntity.createBabyEndermanAttributes());
+        FabricDefaultAttributeRegistry.register(BABY_SKELETON, BabySkeletonEntity.createBabySkeletonAttributes());
     }
 }

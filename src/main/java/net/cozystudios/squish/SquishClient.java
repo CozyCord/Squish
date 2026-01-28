@@ -6,9 +6,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-//? if <=1.20.4 {
-/*import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-*///?}
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 //? }
 
@@ -22,8 +19,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.cozystudios.squish.client.model.SquishModelLayers;
 import net.cozystudios.squish.util.SquishId;
 import net.cozystudios.squish.client.render.entity.*;
-import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipComponent;
-import net.cozystudios.squish.client.tooltip.SquishBadgeTooltipData;
 import net.cozystudios.squish.registry.entity.SquishEntities;
 import net.cozystudios.squish.mixin.CreativeInventoryScreenAccessor;
 import net.cozystudios.squish.mixin.HandledScreenAccessor;
@@ -33,9 +28,7 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.Identifier;
 
 //? if fabric {
@@ -69,6 +62,7 @@ public class SquishClient {
         EntityRendererRegistry.register(RegistryHelper.EXPLOSIVE_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(RegistryHelper.POPPY_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(RegistryHelper.ENDER_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(RegistryHelper.SKELLY_ESSENCE_ENTITY, FlyingItemEntityRenderer::new);
 
         EntityRendererRegistry.register(EntityType.CAT, SquishCatRenderer::new);
         EntityRendererRegistry.register(EntityType.CHICKEN, SquishChickenRenderer::new);
@@ -80,22 +74,19 @@ public class SquishClient {
         EntityRendererRegistry.register(SquishEntities.BABY_CREEPER, SquishBabyCreeperRenderer::new);
         EntityRendererRegistry.register(SquishEntities.BABY_IRON_GOLEM, SquishBabyIronGolemRenderer::new);
         EntityRendererRegistry.register(SquishEntities.BABY_ENDERMAN, SquishBabyEndermanRenderer::new);
+        EntityRendererRegistry.register(SquishEntities.BABY_SKELETON, SquishBabySkeletonRenderer::new);
+        EntityRendererRegistry.register(EntityType.AXOLOTL, SquishAxolotlRenderer::new);
+        EntityRendererRegistry.register(EntityType.DOLPHIN, SquishDolphinRenderer::new);
+        EntityRendererRegistry.register(EntityType.HORSE, SquishHorseRenderer::new);
+        EntityRendererRegistry.register(EntityType.DONKEY, SquishDonkeyRenderer::new);
+        EntityRendererRegistry.register(EntityType.MULE, SquishMuleRenderer::new);
+        EntityRendererRegistry.register(EntityType.SQUID, SquishSquidRenderer::new);
+        EntityRendererRegistry.register(EntityType.GLOW_SQUID, SquishGlowSquidRenderer::new);
+        EntityRendererRegistry.register(EntityType.TURTLE, SquishTurtleRenderer::new);
 
         // Blocks
         // TODO: move this
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
-
-        //? if <=1.20.4 {
-        /*TooltipComponentCallback.EVENT.register(data -> {
-            if (data instanceof SquishBadgeTooltipData d) {
-                return new SquishBadgeTooltipComponent(d);
-            }
-            if (data != null && data.getClass().getName().contains("ModNameTooltipData")) {
-                return null;
-            }
-            return null;
-        });
-        *///?}
 
         ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
             if (!(screen instanceof CreativeInventoryScreen creative)) return;
@@ -129,64 +120,7 @@ public class SquishClient {
             if (!"squish".equals(id.getNamespace())) return;
 
             Text original = lines.get(0);
-            String plain = original.getString();
-
-            MutableText name = Text.literal(plain).styled(s -> s.withBold(false));
-
-            final int MAGENTA = 0xDF3C73;
-            final int LILAC   = 0xCFBDDF;
-            final int POPPY_RED = 0xED1C24;
-            final int TNT_RED = 0xDB2E00;
-            final int DARK_GRAY = 0x555555;
-            final int ENDER_PURPLE = 0xCC00FA;
-
-            String path = id.getPath();
-
-            boolean isLilac = path.equals("lollipop")
-                    || path.equals("melted_sugar")
-                    || path.equals("hardened_sugar")
-                    || path.equals("hardened_sugar_shard");
-
-            boolean isPoppy = path.equals("poppy_candy")
-                    || path.equals("poppy_essence");
-
-            boolean isExplosive = path.equals("explosive_candy")
-                    || path.equals("explosive_essence");
-
-            boolean isBitter = path.equals("bitter_candy")
-                    || path.equals("bitter_sugar_shard");
-
-            boolean isEnder = path.equals("ender_candy")
-                    || path.equals("ender_essence");
-
-            if (path.equals("squish_candy")
-                    || path.equals("squish_essence")
-                    || path.equals("squish_guidebook"))
-            {
-                name = name.styled(style -> style.withColor(TextColor.fromRgb(MAGENTA)));
-            }
-            else if (isLilac)
-            {
-                name = name.styled(style -> style.withColor(TextColor.fromRgb(LILAC)));
-            }
-            else if (isPoppy)
-            {
-                name = name.styled(style -> style.withColor(TextColor.fromRgb(POPPY_RED)));
-            }
-            else if (isExplosive)
-            {
-                name = name.styled(style -> style.withColor(TextColor.fromRgb(TNT_RED)));
-            }
-            else if (isBitter)
-            {
-                name = name.styled(style -> style.withColor(TextColor.fromRgb(DARK_GRAY)));
-            }
-            else if (isEnder)
-            {
-                name = name.styled(style -> style.withColor(TextColor.fromRgb(ENDER_PURPLE)));
-            }
-
-            lines.set(0, name);
+            lines.set(0, net.cozystudios.squish.registry.item.SquishBaseItem.applySquishStyle(original));
         });
         //? }
     }

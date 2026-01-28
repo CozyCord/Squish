@@ -12,9 +12,11 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+
 //? if <=1.20.4 {
 /*import net.minecraft.util.math.MathHelper;
-*///?}
+*/
+//?}
 
 public class BabyWolfCollarFeatureRenderer extends FeatureRenderer<WolfEntity, BabyWolfModel> {
 
@@ -34,17 +36,7 @@ public class BabyWolfCollarFeatureRenderer extends FeatureRenderer<WolfEntity, B
 
         VertexConsumer vc = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(BABY_COLLAR_TEX));
 
-        //? if >1.20.4 {
-        DyeColor dyeColor = entity.getCollarColor();
-        int color = dyeColor.getEntityColor() | 0xFF000000; // Add full alpha
-        this.getContextModel().render(
-                matrices,
-                vc,
-                light,
-                LivingEntityRenderer.getOverlay(entity, 0.0F),
-                color
-        );
-        //?} else {
+        //? if <=1.20.4 {
         /*float[] rgb = entity.getCollarColor().getColorComponents();
         float r = MathHelper.clamp(rgb[0], 0.0F, 1.0F);
         float g = MathHelper.clamp(rgb[1], 0.0F, 1.0F);
@@ -56,6 +48,17 @@ public class BabyWolfCollarFeatureRenderer extends FeatureRenderer<WolfEntity, B
                 LivingEntityRenderer.getOverlay(entity, 0.0F),
                 r, g, b, 1.0F
         );
-        *///?}
+        */
+        //?} else {
+        DyeColor dyeColor = entity.getCollarColor();
+        int color = dyeColor.getEntityColor() | 0xFF000000;
+        this.getContextModel().render(
+                matrices,
+                vc,
+                light,
+                LivingEntityRenderer.getOverlay(entity, 0.0F),
+                color
+        );
+        //?}
     }
 }

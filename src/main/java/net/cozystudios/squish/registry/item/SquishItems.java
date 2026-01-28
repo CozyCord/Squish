@@ -26,6 +26,9 @@ public class SquishItems {
 
     public static final FoodComponent ENDER_CANDY_FOOD = new FoodComponent.Builder()
             .nutrition(3).saturationModifier(1.5f).snack().alwaysEdible().build();
+
+    public static final FoodComponent SKELLY_CANDY_FOOD = new FoodComponent.Builder()
+            .nutrition(3).saturationModifier(1.5f).snack().alwaysEdible().build();
     //?} else {
     /*public static final FoodComponent LOLLIPOP_FOOD = new FoodComponent.Builder()
             .hunger(2).saturationModifier(1.0f).snack().alwaysEdible().build();
@@ -43,6 +46,9 @@ public class SquishItems {
             .hunger(3).saturationModifier(1.5f).snack().alwaysEdible().build();
 
     public static final FoodComponent ENDER_CANDY_FOOD = new FoodComponent.Builder()
+            .hunger(3).saturationModifier(1.5f).snack().alwaysEdible().build();
+
+    public static final FoodComponent SKELLY_CANDY_FOOD = new FoodComponent.Builder()
             .hunger(3).saturationModifier(1.5f).snack().alwaysEdible().build();
     *///?}
 

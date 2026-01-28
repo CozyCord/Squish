@@ -8,6 +8,7 @@ import net.cozystudios.squish.registry.effect.SugarRushStatusEffect;
 import net.cozystudios.squish.registry.entity.EnderEssenceEntity;
 import net.cozystudios.squish.registry.entity.ExplosiveEssenceEntity;
 import net.cozystudios.squish.registry.entity.PoppyEssenceEntity;
+import net.cozystudios.squish.registry.entity.SkellyEssenceEntity;
 import net.cozystudios.squish.registry.entity.SquishEssenceEntity;
 import net.cozystudios.squish.registry.item.*;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -41,6 +42,7 @@ import static net.cozystudios.squish.registry.item.SquishItems.BITTER_CANDY_FOOD
 import static net.cozystudios.squish.registry.item.SquishItems.EXPLOSIVE_CANDY_FOOD;
 import static net.cozystudios.squish.registry.item.SquishItems.POPPY_CANDY_FOOD;
 import static net.cozystudios.squish.registry.item.SquishItems.ENDER_CANDY_FOOD;
+import static net.cozystudios.squish.registry.item.SquishItems.SKELLY_CANDY_FOOD;
 
 public class RegistryHelper {
     // block registry
@@ -93,6 +95,8 @@ public class RegistryHelper {
     public static final Item POPPY_CANDY = registerItem("poppy_candy", new PoppyCandyItem(new Item.Settings().maxCount(64).food(POPPY_CANDY_FOOD)));
     public static final Item ENDER_ESSENCE = registerItem("ender_essence", new EnderEssenceItem(new Item.Settings().maxCount(16)));
     public static final Item ENDER_CANDY = registerItem("ender_candy", new EnderCandyItem(new Item.Settings().maxCount(64).food(ENDER_CANDY_FOOD)));
+    public static final Item SKELLY_ESSENCE = registerItem("skelly_essence", new SkellyEssenceItem(new Item.Settings().maxCount(16)));
+    public static final Item SKELLY_CANDY = registerItem("skelly_candy", new SkellyCandyItem(new Item.Settings().maxCount(64).food(SKELLY_CANDY_FOOD)));
 
     public static final ItemStack SQUISH_GUIDEBOOK_STACK = createGuidebookStack();
 
@@ -128,6 +132,15 @@ public class RegistryHelper {
             registerEntity("ender_essence",
                     FabricEntityTypeBuilder.<EnderEssenceEntity>create(SpawnGroup.MISC,
                                     (type, world) -> new EnderEssenceEntity(type, world))
+                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                            .trackRangeBlocks(4).trackedUpdateRate(10)
+                            .build()
+            );
+
+    public static final EntityType<SkellyEssenceEntity> SKELLY_ESSENCE_ENTITY =
+            registerEntity("skelly_essence",
+                    FabricEntityTypeBuilder.<SkellyEssenceEntity>create(SpawnGroup.MISC,
+                                    (type, world) -> new SkellyEssenceEntity(type, world))
                             .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
                             .trackRangeBlocks(4).trackedUpdateRate(10)
                             .build()
@@ -191,11 +204,13 @@ public class RegistryHelper {
                     entries.add(EXPLOSIVE_CANDY);
                     entries.add(POPPY_CANDY);
                     entries.add(ENDER_CANDY);
+                    entries.add(SKELLY_CANDY);
                     entries.add(LOLLIPOP);
                     entries.add(SQUISH_ESSENCE);
                     entries.add(EXPLOSIVE_ESSENCE);
                     entries.add(POPPY_ESSENCE);
                     entries.add(ENDER_ESSENCE);
+                    entries.add(SKELLY_ESSENCE);
                     entries.add(MELTED_SUGAR_BLOCK);
                     entries.add(HARDENED_SUGAR_BLOCK);
                     entries.add(HARDENED_SUGAR_SHARD);

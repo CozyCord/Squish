@@ -3,12 +3,19 @@
   "package": "net.cozystudios.squish.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractDonkeyEntitySquishMixin",
+    "AbstractHorseEntitySquishMixin",
     "AnimalEntitySquishMixin",
     "BrewingRecipeRegistryMixin",
     "BrewingStandBlockEntityMixin",
+    "DolphinEntitySquishMixin",
+    "GlowSquidEntitySquishMixin",
+    "HorseEntitySquishMixin",
     "LivingEntityMixin",
     "PassiveEntitySquishMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "SquidEntitySquishMixin",
+    "TurtleEntitySquishMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -21,7 +28,6 @@
     "HandledScreenAccessor",
     "client.CreativeInventoryScreenMixin",
     "client.InGameHudMixin",
-    "client.ItemStackTooltipMixin",
     "compat.PatchouliJeiKeybindCrashFixMixin",
     "compat.PatchouliHideEntryIndexMixin"
   ]

@@ -34,33 +34,33 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
 
-        // Model is 16 units tall, grounded at Y=24
-        // Head: Y=8 to Y=14 (top of head to neck)
+        
+        
         modelPartData.addChild("head", ModelPartBuilder.create()
                         .uv(0, 0).cuboid(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F, new Dilation(0.0F)),
                 ModelTransform.pivot(0.0F, 14.0F, 0.0F));
 
-        // Body: Y=14 to Y=19
+        
         modelPartData.addChild("body", ModelPartBuilder.create()
                         .uv(0, 12).cuboid(-3.0F, 0.0F, -2.0F, 6.0F, 5.0F, 4.0F, new Dilation(0.0F)),
                 ModelTransform.pivot(0.0F, 14.0F, 0.0F));
 
-        // Left leg: Y=19 to Y=24 (ground)
+        
         modelPartData.addChild("left_leg", ModelPartBuilder.create()
                         .uv(0, 21).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 5.0F, 1.0F, new Dilation(0.0F)),
                 ModelTransform.pivot(-1.5F, 19.0F, 0.0F));
 
-        // Right leg: Y=19 to Y=24 (ground)
+        
         modelPartData.addChild("right_leg", ModelPartBuilder.create()
                         .uv(0, 21).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 5.0F, 1.0F, new Dilation(0.0F)),
                 ModelTransform.pivot(1.5F, 19.0F, 0.0F));
 
-        // Left arm: Y=14 to Y=22
+        
         modelPartData.addChild("left_arm", ModelPartBuilder.create()
                         .uv(20, 12).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 8.0F, 1.0F, new Dilation(0.0F)),
                 ModelTransform.pivot(-3.5F, 14.0F, 0.0F));
 
-        // Right arm: Y=14 to Y=22
+        
         modelPartData.addChild("right_arm", ModelPartBuilder.create()
                         .uv(20, 12).cuboid(-0.5F, 0.0F, -0.5F, 1.0F, 8.0F, 1.0F, new Dilation(0.0F)),
                 ModelTransform.pivot(3.5F, 14.0F, 0.0F));
@@ -73,25 +73,25 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
         this.head.yaw = netHeadYaw * ((float) Math.PI / 180F);
         this.head.pitch = headPitch * ((float) Math.PI / 180F);
 
-        // Sitting animation - lower body by 4.5 units to sit just above ground
+        
         if (entity.isInSittingPose()) {
-            // Lower upper body parts by 4.5 units (raised 0.5 from ground)
+            
             this.head.pivotY = 18.5F;
             this.body.pivotY = 18.5F;
             this.leftArm.pivotY = 18.5F;
             this.rightArm.pivotY = 18.5F;
 
-            // Move legs down and point forward
+            
             this.leftLeg.pivotY = 23.5F;
             this.rightLeg.pivotY = 23.5F;
             this.leftLeg.pitch = -1.5707963F;
             this.rightLeg.pitch = -1.5707963F;
 
-            // Rotate arms forward so they don't clip into the ground
+            
             this.leftArm.pitch = -0.5F;
             this.rightArm.pitch = -0.5F;
         } else {
-            // Reset to standing positions
+            
             this.head.pivotY = 14.0F;
             this.body.pivotY = 14.0F;
             this.leftArm.pivotY = 14.0F;
@@ -99,7 +99,7 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
             this.leftLeg.pivotY = 19.0F;
             this.rightLeg.pivotY = 19.0F;
 
-            // Walking animations
+            
             this.rightLeg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
             this.leftLeg.pitch = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
@@ -128,5 +128,6 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
         leftArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         rightArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
-    *///?}
+    */
+    //?}
 }
