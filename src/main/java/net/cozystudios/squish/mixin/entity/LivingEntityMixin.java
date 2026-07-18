@@ -29,7 +29,6 @@ public abstract class LivingEntityMixin {
     @Inject(method = "isBaby", at = @At("RETURN"), cancellable = true)
     private void squish$modifyIsBabyForWaterCreatures(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        // Check if this is a water creature that we've made squishable
         if (entity instanceof DolphinEntity || entity instanceof SquidEntity || entity instanceof GlowSquidEntity) {
             if (entity instanceof Squishable squishable && squishable.squish$isSquished()) {
                 cir.setReturnValue(true);

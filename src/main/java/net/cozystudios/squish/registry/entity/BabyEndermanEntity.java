@@ -55,7 +55,6 @@ public class BabyEndermanEntity extends TameableEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack held = player.getStackInHand(hand);
 
-        // Allow Bitter Candy to handle the interaction (for unsquishing)
         if (player.isSneaking() && held.isOf(RegistryHelper.BITTER_CANDY)) {
             return ActionResult.PASS;
         }
@@ -92,7 +91,6 @@ public class BabyEndermanEntity extends TameableEntity {
     @Override
     public void tickMovement() {
         super.tickMovement();
-        // Spawn occasional portal particles like endermen do
         if (this.getWorld().isClient && this.random.nextFloat() < 0.05f) {
             this.getWorld().addParticle(ParticleTypes.PORTAL,
                     this.getX() + (this.random.nextDouble() - 0.5) * 0.5,

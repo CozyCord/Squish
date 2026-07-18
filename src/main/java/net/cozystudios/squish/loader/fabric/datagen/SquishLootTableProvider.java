@@ -78,8 +78,6 @@ public class SquishLootTableProvider extends FabricBlockLootTableProvider {
         *///?} else {
         RegistryEntry<Enchantment> fortune = registries.getWrapperOrThrow(RegistryKeys.ENCHANTMENT)
                 .getOrThrow(net.minecraft.enchantment.Enchantments.FORTUNE);
-        // For 1.21+, use uniformBonusCount which adds 0 to (level*3) extra items
-        // Base: 2-4, Fortune adds roughly 3 per level
         addDrop(RegistryHelper.HARDENED_SUGAR_BLOCK,
                 dropsWithSilkTouch(RegistryHelper.HARDENED_SUGAR_BLOCK,
                         applyExplosionDecay(RegistryHelper.HARDENED_SUGAR_BLOCK,

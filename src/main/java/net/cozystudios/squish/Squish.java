@@ -49,13 +49,11 @@ public class Squish {
     *///? }
         LOGGER.info("Squish Initialized");
         try {
-            // Try fabric RegistryHelper first
             Class.forName("net.cozystudios.squish.loader.fabric.RegistryHelper")
                 .getMethod("register")
                 .invoke(null);
         } catch (ClassNotFoundException e) {
             try {
-                // Fallback to forge RegistryHelper
                 Class.forName("net.cozystudios.squish.loader.forge.RegistryHelper")
                     .getMethod("register")
                     .invoke(null);

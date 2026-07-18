@@ -55,7 +55,6 @@ public class BabyIronGolemEntity extends TameableEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack held = player.getStackInHand(hand);
 
-        // Allow Bitter Candy to handle the interaction (for unsquishing)
         if (player.isSneaking() && held.isOf(RegistryHelper.BITTER_CANDY)) {
             return ActionResult.PASS;
         }
@@ -82,7 +81,7 @@ public class BabyIronGolemEntity extends TameableEntity {
             this.setSitting(false);
 
             this.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 0.6f, 1.7f);
-            this.getWorld().sendEntityStatus(this, (byte) 7); // hearts
+            this.getWorld().sendEntityStatus(this, (byte) 7);
             return ActionResult.SUCCESS;
         }
 

@@ -31,15 +31,6 @@ public class BabySheepWoolFeatureRenderer extends FeatureRenderer<SheepEntity, B
 
         
         //? if <=1.20.4 {
-        /*float[] rgb = SheepEntity.getRgbColor(color);
-        this.getContextModel().render(
-                matrices,
-                vc,
-                light,
-                LivingEntityRenderer.getOverlay(entity, 0.0F),
-                rgb[0], rgb[1], rgb[2], 1.0F
-        );
-        */
         //?} else {
         int rgb = SheepEntity.getRgbColor(color);
         this.getContextModel().render(

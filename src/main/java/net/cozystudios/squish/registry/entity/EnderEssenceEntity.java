@@ -61,28 +61,23 @@ public class EnderEssenceEntity extends ThrownItemEntity {
         World world = this.getWorld();
         Vec3d pos = this.getPos();
 
-        // Play ender teleport sound
         world.playSound(null, getX(), getY(), getZ(),
                 SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL,
                 0.8F, 1.2F);
 
-        // Spawn purple/ender particles
         if (world instanceof ServerWorld serverWorld) {
-            // Ender purple color
             DustParticleEffect enderDust = new DustParticleEffect(new Vector3f(0.5f, 0.0f, 0.5f), 1.0F);
             serverWorld.spawnParticles(enderDust,
                     pos.x, pos.y, pos.z,
                     40,
                     0.4, 0.4, 0.4, 0.05);
 
-            // Also spawn portal particles for effect
             serverWorld.spawnParticles(ParticleTypes.PORTAL,
                     pos.x, pos.y, pos.z,
                     20,
                     0.3, 0.3, 0.3, 0.5);
         }
 
-        // Convert lollipops to ender candy
         Box box = new Box(pos.add(-1.5, -1.5, -1.5), pos.add(1.5, 1.5, 1.5));
         List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box, e -> {
             ItemStack st = e.getStack();

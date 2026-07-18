@@ -45,7 +45,6 @@ import static net.cozystudios.squish.registry.item.SquishItems.ENDER_CANDY_FOOD;
 import static net.cozystudios.squish.registry.item.SquishItems.SKELLY_CANDY_FOOD;
 
 public class RegistryHelper {
-    // block registry
     public static final Block MELTED_SUGAR_BLOCK = registerBlock(
             "melted_sugar",
             new MeltedSugarBlock(
@@ -79,14 +78,12 @@ public class RegistryHelper {
             SquishBaseBlockItem.class
     );
 
-    // item registry
     public static final Item SQUISH_CANDY = registerItem("squish_candy", new SquishCandyItem(new Item.Settings().maxCount(64).food(SQUISH_CANDY_FOOD)));
     public static final Item LOLLIPOP = registerItem("lollipop", new BlankLollipopItem(new Item.Settings().maxCount(64).food(LOLLIPOP_FOOD)));
     public static final Item SQUISH_ESSENCE = registerItem("squish_essence", new SquishEssenceItem(new Item.Settings().maxCount(16)));
     public static final Item HARDENED_SUGAR_SHARD = registerItem("hardened_sugar_shard", new SquishBaseItem(new Item.Settings()));
     public static final Item SQUISH_GUIDEBOOK = registerItem("squish_guidebook", new SquishGuidebookItem(new Item.Settings().maxCount(1)));
 
-    // new items
     public static final Item BITTER_SUGAR_SHARD = registerItem("bitter_sugar_shard", new BitterSugarShardItem(new Item.Settings()));
     public static final Item BITTER_CANDY = registerItem("bitter_candy", new BitterCandyItem(new Item.Settings().maxCount(64).food(BITTER_CANDY_FOOD)));
     public static final Item EXPLOSIVE_ESSENCE = registerItem("explosive_essence", new ExplosiveEssenceItem(new Item.Settings().maxCount(16)));
@@ -100,7 +97,6 @@ public class RegistryHelper {
 
     public static final ItemStack SQUISH_GUIDEBOOK_STACK = createGuidebookStack();
 
-    // entity registry
     public static final EntityType<SquishEssenceEntity> SQUISH_ESSENCE_ENTITY =
             registerEntity("squish_essence",
                     FabricEntityTypeBuilder.<SquishEssenceEntity>create(SpawnGroup.MISC,
@@ -146,14 +142,12 @@ public class RegistryHelper {
                             .build()
             );
 
-    // effects registry
     //? if <=1.20.4 {
     /*public static final StatusEffect SUGAR_RUSH = registerEffect("sugar_rush", new SugarRushStatusEffect());
     *///?} else {
     public static final RegistryEntry<StatusEffect> SUGAR_RUSH = registerEffect("sugar_rush", new SugarRushStatusEffect());
     //?}
 
-    // helpers
     public static Block registerBlock(String name, Block block, Class<? extends BlockItem> blockItemClass) {
         registerBlockItem(name, block, blockItemClass);
         Identifier id = SquishId.of(Squish.MOD_ID, name);

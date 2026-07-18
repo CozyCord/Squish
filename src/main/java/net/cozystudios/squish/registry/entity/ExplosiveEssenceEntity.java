@@ -60,14 +60,11 @@ public class ExplosiveEssenceEntity extends ThrownItemEntity {
         World world = this.getWorld();
         Vec3d pos = this.getPos();
 
-        // Play explosion-like sound
         world.playSound(null, getX(), getY(), getZ(),
                 SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.NEUTRAL,
                 0.8F, 1.2F);
 
-        // Spawn orange/red particles
         if (world instanceof ServerWorld serverWorld) {
-            // Orange color for explosive
             DustParticleEffect orangeDust = new DustParticleEffect(new Vector3f(1.0f, 0.5f, 0.0f), 1.0F);
             serverWorld.spawnParticles(orangeDust,
                     pos.x, pos.y, pos.z,
@@ -75,7 +72,6 @@ public class ExplosiveEssenceEntity extends ThrownItemEntity {
                     0.4, 0.4, 0.4, 0.05);
         }
 
-        // Convert lollipops to explosive candy
         Box box = new Box(pos.add(-1.5, -1.5, -1.5), pos.add(1.5, 1.5, 1.5));
         List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box, e -> {
             ItemStack st = e.getStack();

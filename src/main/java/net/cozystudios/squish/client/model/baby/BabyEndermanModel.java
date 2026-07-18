@@ -128,6 +128,5 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
         leftArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         rightArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
-    */
-    //?}
+    *///?}
 }

@@ -38,7 +38,6 @@ public class PlayerJoinHandler {
         var state = net.cozystudios.squish.save.SquishFirstJoinBookState.get(server);
 
         if (state.markIfNew(player.getUuid())) {
-            // Patchouli recognizes this item via custom_book_item in book.json
             ItemStack book = new ItemStack(RegistryHelper.SQUISH_GUIDEBOOK);
 
             if (!player.getInventory().insertStack(book)) {

@@ -36,14 +36,6 @@ public class BabyHorseMarkingsFeatureRenderer extends FeatureRenderer<HorseEntit
 
         
         //? if <=1.20.4 {
-        /*this.getContextModel().render(
-                matrices,
-                vc,
-                light,
-                net.minecraft.client.render.entity.LivingEntityRenderer.getOverlay(entity, 0.0F),
-                1.0F, 1.0F, 1.0F, 1.0F
-        );
-        */
         //?} else {
         this.getContextModel().render(
                 matrices,

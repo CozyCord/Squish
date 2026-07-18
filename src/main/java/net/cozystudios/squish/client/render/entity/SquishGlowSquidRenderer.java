@@ -59,8 +59,7 @@ public class SquishGlowSquidRenderer extends EntityRenderer<GlowSquidEntity> {
         //?} else {
         /*@Override
         protected void setupTransforms(GlowSquidEntity entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
-        */
-        //?}
+        *///?}
             float tiltAngle = MathHelper.lerp(tickDelta, entity.prevTiltAngle, entity.tiltAngle);
             float rollAngle = MathHelper.lerp(tickDelta, entity.prevRollAngle, entity.rollAngle);
 

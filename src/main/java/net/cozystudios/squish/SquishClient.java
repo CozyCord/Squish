@@ -84,8 +84,6 @@ public class SquishClient {
         EntityRendererRegistry.register(EntityType.GLOW_SQUID, SquishGlowSquidRenderer::new);
         EntityRendererRegistry.register(EntityType.TURTLE, SquishTurtleRenderer::new);
 
-        // Blocks
-        // TODO: move this
         BlockRenderLayerMap.INSTANCE.putBlock(RegistryHelper.MELTED_SUGAR_BLOCK, RenderLayer.getTranslucent());
 
         ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {

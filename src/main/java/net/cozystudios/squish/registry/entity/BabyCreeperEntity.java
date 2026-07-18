@@ -54,7 +54,6 @@ public class BabyCreeperEntity extends TameableEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack held = player.getStackInHand(hand);
 
-        // Allow Bitter Candy to handle the interaction (for unsquishing)
         if (player.isSneaking() && held.isOf(RegistryHelper.BITTER_CANDY)) {
             return ActionResult.PASS;
         }

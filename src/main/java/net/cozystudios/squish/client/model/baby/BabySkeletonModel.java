@@ -110,6 +110,5 @@ public class BabySkeletonModel extends EntityModel<BabySkeletonEntity> {
         leftArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         rightArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
-    */
-    //?}
+    *///?}
 }

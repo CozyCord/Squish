@@ -15,7 +15,6 @@ public class PoppyCandyItem extends SquishBaseItem {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!world.isClient && user instanceof PlayerEntity player) {
-            // Give regeneration for 30 seconds (600 ticks)
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 600, 1));
         }
         return super.finishUsing(stack, world, user);

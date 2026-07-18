@@ -60,14 +60,11 @@ public class PoppyEssenceEntity extends ThrownItemEntity {
         World world = this.getWorld();
         Vec3d pos = this.getPos();
 
-        // Play flower-like sound
         world.playSound(null, getX(), getY(), getZ(),
                 SoundEvents.BLOCK_FLOWERING_AZALEA_PLACE, SoundCategory.NEUTRAL,
                 0.8F, 1.2F);
 
-        // Spawn red particles (poppy color)
         if (world instanceof ServerWorld serverWorld) {
-            // Red color for poppy
             DustParticleEffect redDust = new DustParticleEffect(new Vector3f(0.9f, 0.2f, 0.2f), 1.0F);
             serverWorld.spawnParticles(redDust,
                     pos.x, pos.y, pos.z,
@@ -75,7 +72,6 @@ public class PoppyEssenceEntity extends ThrownItemEntity {
                     0.4, 0.4, 0.4, 0.05);
         }
 
-        // Convert lollipops to poppy candy
         Box box = new Box(pos.add(-1.5, -1.5, -1.5), pos.add(1.5, 1.5, 1.5));
         List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, box, e -> {
             ItemStack st = e.getStack();
