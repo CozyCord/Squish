@@ -26,9 +26,9 @@ public class SquishGuidebookItem extends Item {
     }
 
     //? if >1.20.4 {
-    @Override
+    /*@Override
     public net.minecraft.text.Text getName(ItemStack stack) {
         return SquishBaseItem.applySquishStyle(super.getName(stack));
     }
-    //?}
+    *///?}
 }

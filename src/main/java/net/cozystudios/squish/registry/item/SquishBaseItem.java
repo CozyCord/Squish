@@ -20,12 +20,12 @@ public class SquishBaseItem extends Item {
     }
 
     //? if >1.20.4 {
-    @Override
+    /*@Override
     public Text getName(ItemStack stack) {
         Text original = super.getName(stack);
         return applySquishStyle(original);
     }
-    //?}
+    *///?}
 
     public static Text applySquishStyle(Text original) {
         String plainString = original.getString();

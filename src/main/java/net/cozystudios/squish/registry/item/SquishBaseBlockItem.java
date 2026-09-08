@@ -11,10 +11,10 @@ public class SquishBaseBlockItem extends BlockItem {
     }
 
     //? if >1.20.4 {
-    @Override
+    /*@Override
     public Text getName(ItemStack stack) {
         Text original = super.getName(stack);
         return SquishBaseItem.applySquishStyle(original);
     }
-    //?}
+    *///?}
 }

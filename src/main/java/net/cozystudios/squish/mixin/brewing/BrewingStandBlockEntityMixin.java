@@ -6,11 +6,11 @@ import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 //? if <=1.20.4 {
-/*import net.minecraft.potion.PotionUtil;
-*///?} else {
-import net.minecraft.component.DataComponentTypes;
+import net.minecraft.potion.PotionUtil;
+//?} else {
+/*import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
-//?}
+*///?}
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -60,12 +60,12 @@ public abstract class BrewingStandBlockEntityMixin {
         for (int i = 0; i < 3; i++) {
             ItemStack stack = stand.getStack(i);
             //? if <=1.20.4 {
-            /*if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
-            *///?} else {
-            if (stack.isOf(Items.POTION) && stack.contains(DataComponentTypes.POTION_CONTENTS) &&
+            if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
+            //?} else {
+            /*if (stack.isOf(Items.POTION) && stack.contains(DataComponentTypes.POTION_CONTENTS) &&
                     stack.get(DataComponentTypes.POTION_CONTENTS).potion().isPresent() &&
                     stack.get(DataComponentTypes.POTION_CONTENTS).potion().get() == Potions.WATER) {
-            //?}
+            *///?}
                 hasWater = true;
                 break;
             }
@@ -98,12 +98,12 @@ public abstract class BrewingStandBlockEntityMixin {
             for (int i = 0; i < 3; i++) {
                 ItemStack stack = stand.getStack(i);
                 //? if <=1.20.4 {
-                /*if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
-                *///?} else {
-                if (stack.isOf(Items.POTION) && stack.contains(DataComponentTypes.POTION_CONTENTS) &&
+                if (stack.isOf(Items.POTION) && PotionUtil.getPotion(stack) == Potions.WATER) {
+                //?} else {
+                /*if (stack.isOf(Items.POTION) && stack.contains(DataComponentTypes.POTION_CONTENTS) &&
                         stack.get(DataComponentTypes.POTION_CONTENTS).potion().isPresent() &&
                         stack.get(DataComponentTypes.POTION_CONTENTS).potion().get() == Potions.WATER) {
-                //?}
+                *///?}
                     stand.setStack(i, new ItemStack(RegistryHelper.SQUISH_ESSENCE));
                     brewed = true;
                 }

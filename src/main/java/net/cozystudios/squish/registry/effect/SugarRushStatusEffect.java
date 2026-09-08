@@ -10,17 +10,17 @@ import net.minecraft.util.math.random.Random;
 import java.awt.Color;
 
 //? if <=1.20.4 {
-/*import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import java.util.UUID;
-*///?}
+//?}
 
 public class SugarRushStatusEffect extends StatusEffect {
 
     //? if <=1.20.4 {
-    /*private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("6a6c8d24-8f3b-4f1c-bc9c-9a0e3dbb2f63");
+    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("6a6c8d24-8f3b-4f1c-bc9c-9a0e3dbb2f63");
     private static final UUID ATTACK_SPEED_UUID = UUID.fromString("2c2d5c44-5aa4-40cc-a8b1-1a8b1df59b22");
 
     public SugarRushStatusEffect() {
@@ -80,9 +80,9 @@ public class SugarRushStatusEffect extends StatusEffect {
             );
         }
     }
-    *///?} else {
+    //?} else {
     
-    public SugarRushStatusEffect() {
+    /*public SugarRushStatusEffect() {
         super(StatusEffectCategory.BENEFICIAL, 0xdf3c73);
     }
 
@@ -112,10 +112,10 @@ public class SugarRushStatusEffect extends StatusEffect {
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         return true;
     }
-    //?}
+    *///?}
 
     //? if <=1.20.4 {
-    /*@Override
+    @Override
     public int getColor() {
         float hue = (System.currentTimeMillis() % 1200L) / 1200f;
         return Color.HSBtoRGB(hue, 0.9f, 1.0f) & 0xFFFFFF;
@@ -129,5 +129,5 @@ public class SugarRushStatusEffect extends StatusEffect {
         return Text.literal("Sugar Rush")
                 .styled(s -> s.withBold(true).withColor(TextColor.fromRgb(rgb)));
     }
-    *///?}
+    //?}
 }

@@ -109,7 +109,7 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
     }
 
     //? if >1.20.4 {
-    @Override
+    /*@Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
         head.render(matrices, vertexConsumer, light, overlay, color);
         body.render(matrices, vertexConsumer, light, overlay, color);
@@ -118,8 +118,8 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
         leftArm.render(matrices, vertexConsumer, light, overlay, color);
         rightArm.render(matrices, vertexConsumer, light, overlay, color);
     }
-    //?} else {
-    /*@Override
+    *///?} else {
+    @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
@@ -128,5 +128,5 @@ public class BabyEndermanModel extends EntityModel<BabyEndermanEntity> {
         leftArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
         rightArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
-    *///?}
+    //?}
 }

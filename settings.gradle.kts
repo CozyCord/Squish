@@ -3,7 +3,6 @@ pluginManagement {
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
-        // development maven
         maven("https://maven.kikugie.dev/releases")
         maven("https://maven.kikugie.dev/snapshots")
         maven("https://maven.fabricmc.net/")
@@ -22,7 +21,6 @@ stonecutter {
     kotlinController = true
     shared {
         fun mc(version: String, vararg loaders: String) {
-            // Make the relevant version directories named "1.20.2-fabric", "1.20.2-forge", etc.
             for (it in loaders) version("$version-$it", version)
         }
 

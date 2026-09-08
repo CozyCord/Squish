@@ -13,8 +13,8 @@ import java.util.Set;
 import java.util.UUID;
 
 //? if >1.20.4 {
-import net.minecraft.registry.RegistryWrapper;
-//?}
+/*import net.minecraft.registry.RegistryWrapper;
+*///?}
 
 public class SquishFirstJoinBookState extends PersistentState {
     private static final String KEY = "squish_first_join_book";
@@ -22,7 +22,7 @@ public class SquishFirstJoinBookState extends PersistentState {
     private final Set<UUID> gifted = new HashSet<>();
 
     //? if <=1.20.4 {
-    /*public static SquishFirstJoinBookState get(MinecraftServer server) {
+    public static SquishFirstJoinBookState get(MinecraftServer server) {
         PersistentStateManager mgr = server.getOverworld().getPersistentStateManager();
         return mgr.getOrCreate(SquishFirstJoinBookState::fromNbt, SquishFirstJoinBookState::new, KEY);
     }
@@ -43,9 +43,9 @@ public class SquishFirstJoinBookState extends PersistentState {
         nbt.put(TAG, list);
         return nbt;
     }
-    *///?} else {
+    //?} else {
     
-    private static final Type<SquishFirstJoinBookState> TYPE = new Type<>(
+    /*private static final Type<SquishFirstJoinBookState> TYPE = new Type<>(
             SquishFirstJoinBookState::new,
             SquishFirstJoinBookState::fromNbt,
             null
@@ -72,7 +72,7 @@ public class SquishFirstJoinBookState extends PersistentState {
         nbt.put(TAG, list);
         return nbt;
     }
-    //?}
+    *///?}
 
     public boolean markIfNew(UUID uuid) {
         boolean added = gifted.add(uuid);

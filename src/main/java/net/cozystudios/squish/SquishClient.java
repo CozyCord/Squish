@@ -108,10 +108,10 @@ public class SquishClient {
         });
 
         //? if <=1.20.4 {
-        /*ItemTooltipCallback.EVENT.register((stack, ctx, lines) -> {
-        *///?} else {
-        ItemTooltipCallback.EVENT.register((stack, ctx, type, lines) -> {
-        //?}
+        ItemTooltipCallback.EVENT.register((stack, ctx, lines) -> {
+        //?} else {
+        /*ItemTooltipCallback.EVENT.register((stack, ctx, type, lines) -> {
+        *///?}
             if (lines.isEmpty()) return;
 
             var id = Registries.ITEM.getId(stack.getItem());

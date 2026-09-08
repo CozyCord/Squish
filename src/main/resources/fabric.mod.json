@@ -24,6 +24,9 @@
 		],
 		"fabric-datagen": [
 			"${group}.SquishDataGenerator"
+		],
+		"jei_mod_plugin": [
+			"${group}.compat.jei.SquishJEIPlugin"
 		]
 	},
 	"mixins": [

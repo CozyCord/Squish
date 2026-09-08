@@ -13,9 +13,9 @@ public final class SquishId {
 
     public static Identifier of(String namespace, String path) {
         //? if >1.20.4 {
-        return Identifier.of(namespace, path);
-        //?} else {
-        /*return new Identifier(namespace, path);
-        *///?}
+        /*return Identifier.of(namespace, path);
+        *///?} else {
+        return new Identifier(namespace, path);
+        //?}
     }
 }

@@ -17,16 +17,16 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 //? if <=1.20.4 {
-/*import net.minecraft.block.enums.Instrument;
-*///?}
+import net.minecraft.block.enums.Instrument;
+//?}
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.effect.StatusEffect;
 //? if >1.20.4 {
-import net.minecraft.registry.entry.RegistryEntry;
-//?}
+/*import net.minecraft.registry.entry.RegistryEntry;
+*///?}
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -51,8 +51,8 @@ public class RegistryHelper {
                 FabricBlockSettings.create()
                     .mapColor(MapColor.ORANGE)
                     //? if <=1.20.4 {
-                    /*.instrument(Instrument.BASS)
-                    *///?}
+                    .instrument(Instrument.BASS)
+                    //?}
                     .strength(0.0f)
                     .velocityMultiplier(0.4F)
                     .jumpVelocityMultiplier(0.5F)
@@ -143,10 +143,10 @@ public class RegistryHelper {
             );
 
     //? if <=1.20.4 {
-    /*public static final StatusEffect SUGAR_RUSH = registerEffect("sugar_rush", new SugarRushStatusEffect());
-    *///?} else {
-    public static final RegistryEntry<StatusEffect> SUGAR_RUSH = registerEffect("sugar_rush", new SugarRushStatusEffect());
-    //?}
+    public static final StatusEffect SUGAR_RUSH = registerEffect("sugar_rush", new SugarRushStatusEffect());
+    //?} else {
+    /*public static final RegistryEntry<StatusEffect> SUGAR_RUSH = registerEffect("sugar_rush", new SugarRushStatusEffect());
+    *///?}
 
     public static Block registerBlock(String name, Block block, Class<? extends BlockItem> blockItemClass) {
         registerBlockItem(name, block, blockItemClass);
@@ -172,16 +172,16 @@ public class RegistryHelper {
     }
 
     //? if <=1.20.4 {
-    /*public static StatusEffect registerEffect(String name, StatusEffect effect) {
+    public static StatusEffect registerEffect(String name, StatusEffect effect) {
         Identifier id = SquishId.of(Squish.MOD_ID, name);
         return Registry.register(Registries.STATUS_EFFECT, id, effect);
     }
-    *///?} else {
-    public static RegistryEntry<StatusEffect> registerEffect(String name, StatusEffect effect) {
+    //?} else {
+    /*public static RegistryEntry<StatusEffect> registerEffect(String name, StatusEffect effect) {
         Identifier id = SquishId.of(Squish.MOD_ID, name);
         return Registry.registerReference(Registries.STATUS_EFFECT, id, effect);
     }
-    //?}
+    *///?}
 
     public static Item registerItem(String name, Item item) {
         Identifier id = SquishId.of(Squish.MOD_ID, name);

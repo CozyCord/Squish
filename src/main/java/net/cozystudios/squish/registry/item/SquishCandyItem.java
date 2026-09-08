@@ -10,11 +10,11 @@ import net.cozystudios.squish.registry.sound.SquishSounds;
 import net.cozystudios.squish.util.CandyInfusion;
 import net.cozystudios.squish.util.Squishable;
 //? if <=1.20.4 {
-/*import net.minecraft.client.item.TooltipContext;
-*///?} else {
-import net.minecraft.item.Item.TooltipContext;
+import net.minecraft.client.item.TooltipContext;
+//?} else {
+/*import net.minecraft.item.Item.TooltipContext;
 import net.minecraft.item.tooltip.TooltipType;
-//?}
+*///?}
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.CreeperEntity;
@@ -47,22 +47,22 @@ public class SquishCandyItem extends SquishBaseItem {
     }
 
     //? if <=1.20.4 {
-    /*@Override
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
 
         int level = CandyInfusion.getLevel(stack);
         tooltip.add(Text.literal("Infusion: " + level + "/5").formatted(Formatting.LIGHT_PURPLE));
     }
-    *///?} else {
-    @Override
+    //?} else {
+    /*@Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
 
         int level = CandyInfusion.getLevel(stack);
         tooltip.add(Text.literal("Infusion: " + level + "/5").formatted(Formatting.LIGHT_PURPLE));
     }
-    //?}
+    *///?}
 
 
     @Override

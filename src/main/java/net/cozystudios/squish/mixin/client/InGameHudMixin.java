@@ -17,14 +17,14 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 //? if <=1.20.4 {
-/*import net.minecraft.entity.effect.StatusEffect;
-*///?}
+import net.minecraft.entity.effect.StatusEffect;
+//?}
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 //? if >1.20.4 {
-import net.minecraft.registry.entry.RegistryEntry;
+/*import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.client.render.RenderTickCounter;
-//?}
+*///?}
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -41,7 +41,7 @@ import java.util.Map;
 public abstract class InGameHudMixin {
 
     //? if <=1.20.4 {
-    /*@ModifyArg(
+    @ModifyArg(
             method = "renderHeldItemTooltip",
             at = @At(
                     value = "INVOKE",
@@ -112,10 +112,10 @@ public abstract class InGameHudMixin {
         }
         return original;
     }
-    *///?}
+    //?}
 
     //? if <=1.20.4 {
-    /*@Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
+    @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
     private void squish$hideHaste(DrawContext context, CallbackInfo ci) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
@@ -132,8 +132,8 @@ public abstract class InGameHudMixin {
             }
         }
     }
-    *///?} else {
-    @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
+    //?} else {
+    /*@Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"))
     private void squish$hideHaste(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
@@ -150,5 +150,5 @@ public abstract class InGameHudMixin {
             }
         }
     }
-    //?}
+    *///?}
 }

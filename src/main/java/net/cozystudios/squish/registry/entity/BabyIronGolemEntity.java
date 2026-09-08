@@ -42,10 +42,10 @@ public class BabyIronGolemEntity extends TameableEntity {
     protected void initGoals() {
         this.goalSelector.add(1, new SitGoal(this));
         //? if <=1.20.4 {
-        /*this.goalSelector.add(2, new FollowOwnerGoal(this, 1.0, 3.0f, 1.0f, false));
-        *///?} else {
-        this.goalSelector.add(2, new FollowOwnerGoal(this, 1.0, 3.0f, 1.0f));
-        //?}
+        this.goalSelector.add(2, new FollowOwnerGoal(this, 1.0, 3.0f, 1.0f, false));
+        //?} else {
+        /*this.goalSelector.add(2, new FollowOwnerGoal(this, 1.0, 3.0f, 1.0f));
+        *///?}
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.9));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(5, new LookAroundGoal(this));
@@ -74,10 +74,10 @@ public class BabyIronGolemEntity extends TameableEntity {
 
             this.setOwner(player);
             //? if <=1.20.4 {
-            /*this.setTamed(true);
-            *///?} else {
-            this.setTamed(true, true);
-            //?}
+            this.setTamed(true);
+            //?} else {
+            /*this.setTamed(true, true);
+            *///?}
             this.setSitting(false);
 
             this.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 0.6f, 1.7f);
@@ -94,11 +94,11 @@ public class BabyIronGolemEntity extends TameableEntity {
     }
 
     //? if <=1.20.4 {
-    /*@Override
+    @Override
     public boolean canBeLeashedBy(PlayerEntity player) {
         return this.isTamed() && this.isOwner(player);
     }
-    *///?}
+    //?}
 
     @Nullable
     @Override
@@ -112,16 +112,16 @@ public class BabyIronGolemEntity extends TameableEntity {
     }
 
     //? if >1.20.4 {
-    @Override
+    /*@Override
     public boolean isBreedingItem(ItemStack stack) {
         return false;
     }
-    //?}
+    *///?}
 
     //? if <=1.20.4 {
-    /*@Override
+    @Override
     public EntityView method_48926() {
         return this.getWorld();
     }
-    *///?}
+    //?}
 }

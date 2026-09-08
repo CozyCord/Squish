@@ -23,18 +23,18 @@ public abstract class SquidEntitySquishMixin extends WaterCreatureEntity impleme
     }
 
     //? if <=1.20.4 {
-    /*@Override
+    @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(SQUISH_PERMA_BABY, false);
     }
-    *///?} else {
-    @Override
+    //?} else {
+    /*@Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(SQUISH_PERMA_BABY, false);
     }
-    //?}
+    *///?}
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {

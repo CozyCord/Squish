@@ -7,11 +7,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 //? if <=1.20.4 {
-/*import net.minecraft.data.server.recipe.RecipeJsonProvider;
-*///?} else {
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
+//?} else {
+/*import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.registry.RegistryWrapper;
-//?}
+*///?}
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -19,27 +19,27 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
 //? if <=1.20.4 {
-/*import java.util.function.Consumer;
-*///?} else {
-import java.util.concurrent.CompletableFuture;
-//?}
+import java.util.function.Consumer;
+//?} else {
+/*import java.util.concurrent.CompletableFuture;
+*///?}
 
 public class SquishRecipeProvider extends FabricRecipeProvider {
     //? if <=1.20.4 {
-    /*public SquishRecipeProvider(FabricDataOutput output) {
+    public SquishRecipeProvider(FabricDataOutput output) {
         super(output);
     }
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
-    *///?} else {
-    public SquishRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    //?} else {
+    /*public SquishRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
     public void generate(RecipeExporter exporter) {
-    //?}
+    *///?}
         CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(Items.SUGAR), RecipeCategory.MISC, RegistryHelper.MELTED_SUGAR_BLOCK, 0.1f, 600)
                 .criterion(hasItem(Items.SUGAR), conditionsFromItem(Items.SUGAR))
                 .offerTo(exporter, SquishId.of("squish", "campfire_melt_sugar"));

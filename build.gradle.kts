@@ -28,18 +28,11 @@ dependencies {
             exclude(group = "net.fabricmc.fabric-api")
         }
         modImplementation("vazkii.patchouli:Patchouli:${mod.prop("patchouli_version")}")
+
+        if (mod.prop("minecraft_version") == "1.20.1") {
+            modCompileOnly("mezz.jei:jei-1.20.1-common-api:${mod.prop("jei_version")}")
+            modCompileOnly("mezz.jei:jei-1.20.1-fabric-api:${mod.prop("jei_version")}")
+        }
     }
 }
 
-// TODO: publishing config
-//publishMods {
-//    modrinth {
-//        if (mod.isFabric) requires("fabric-api")
-//    }
-//
-//    curseforge {
-//        clientRequired = true // Set as needed
-//        serverRequired = false // Set as needed
-//        if (mod.isFabric) requires("fabric-api")
-//    }
-//}

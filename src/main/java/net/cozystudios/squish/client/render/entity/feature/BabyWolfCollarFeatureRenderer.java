@@ -36,7 +36,7 @@ public class BabyWolfCollarFeatureRenderer extends FeatureRenderer<WolfEntity, B
 
         //? if <=1.20.4 {
         //?} else {
-        DyeColor dyeColor = entity.getCollarColor();
+        /*DyeColor dyeColor = entity.getCollarColor();
         int color = dyeColor.getEntityColor() | 0xFF000000;
         this.getContextModel().render(
                 matrices,
@@ -45,6 +45,6 @@ public class BabyWolfCollarFeatureRenderer extends FeatureRenderer<WolfEntity, B
                 LivingEntityRenderer.getOverlay(entity, 0.0F),
                 color
         );
-        //?}
+        *///?}
     }
 }

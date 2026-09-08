@@ -36,16 +36,16 @@ public abstract class DolphinEntitySquishMixin extends WaterCreatureEntity imple
     }
 
     //? if <=1.20.4 {
-    /*@Inject(method = "initDataTracker", at = @At("TAIL"))
+    @Inject(method = "initDataTracker", at = @At("TAIL"))
     private void squish$initDataTracker(CallbackInfo ci) {
         this.dataTracker.startTracking(SQUISH_PERMA_BABY, false);
     }
-    *///?} else {
-    @Inject(method = "initDataTracker", at = @At("TAIL"))
+    //?} else {
+    /*@Inject(method = "initDataTracker", at = @At("TAIL"))
     private void squish$initDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
         builder.add(SQUISH_PERMA_BABY, false);
     }
-    //?}
+    *///?}
 
     @Inject(method = "writeCustomDataToNbt", at = @At("RETURN"))
     private void squish$writeNbt(NbtCompound nbt, CallbackInfo ci) {

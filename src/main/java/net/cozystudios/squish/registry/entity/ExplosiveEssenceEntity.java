@@ -46,11 +46,11 @@ public class ExplosiveEssenceEntity extends ThrownItemEntity {
     }
 
     //? if <=1.20.4 {
-    /*@Override
+    @Override
     protected float getGravity() {
         return 0.05F;
     }
-    *///?}
+    //?}
 
     @Override
     protected void onCollision(HitResult hitResult) {

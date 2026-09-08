@@ -17,9 +17,9 @@ public class MeltedSugarBlockItem extends SquishBaseBlockItem {
         String key = preserved ? "block.squish.waxed_melted_sugar_block" : this.getTranslationKey();
         Text name = Text.translatable(key);
         //? if >1.20.4 {
-        return SquishBaseItem.applySquishStyle(name);
-        //?} else {
-        /*return name;
-        *///?}
+        /*return SquishBaseItem.applySquishStyle(name);
+        *///?} else {
+        return name;
+        //?}
     }
 }

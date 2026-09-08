@@ -12,18 +12,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BrewingRecipeRegistryMixin {
 
     //? if <=1.20.4 {
-    /*@Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
     private static void squish$allowShardAsIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (stack.isOf(RegistryHelper.HARDENED_SUGAR_SHARD)) {
             cir.setReturnValue(true);
         }
     }
-    *///?} else {
-    @Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
+    //?} else {
+    /*@Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
     private void squish$allowShardAsIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (stack.isOf(RegistryHelper.HARDENED_SUGAR_SHARD)) {
             cir.setReturnValue(true);
         }
     }
-    //?}
+    *///?}
 }
