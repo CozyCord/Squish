@@ -4,8 +4,11 @@ package net.cozystudios.squish.compat.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.vanilla.IJeiBrewingRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.cozystudios.squish.Squish;
 import net.cozystudios.squish.loader.fabric.RegistryHelper;
@@ -28,20 +31,56 @@ public class SquishJEIPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {
-        IVanillaRecipeFactory factory = registration.getJeiHelpers().getVanillaRecipeFactory();
+    public void registerCategories(IRecipeCategoryRegistration registration) {
+        registration.addRecipeCategories(
+                new EssenceInfusionCategory(registration.getJeiHelpers().getGuiHelper())
+        );
+    }
 
+    @Override
+    public void registerRecipes(IRecipeRegistration registration) {
+        IJeiHelpers helpers = registration.getJeiHelpers();
+
+        IVanillaRecipeFactory factory = helpers.getVanillaRecipeFactory();
         ItemStack water = PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.WATER);
         ItemStack shard = new ItemStack(RegistryHelper.HARDENED_SUGAR_SHARD);
         ItemStack essence = new ItemStack(RegistryHelper.SQUISH_ESSENCE);
-
-        IJeiBrewingRecipe recipe = factory.createBrewingRecipe(
+        IJeiBrewingRecipe brew = factory.createBrewingRecipe(
                 List.of(shard),
                 List.of(water),
                 essence
         );
+        registration.addRecipes(RecipeTypes.BREWING, List.of(brew));
 
-        registration.addRecipes(RecipeTypes.BREWING, List.of(recipe));
+        ItemStack lollipop = new ItemStack(RegistryHelper.LOLLIPOP);
+        List<EssenceInfusionRecipe> infusions = List.of(
+                new EssenceInfusionRecipe(
+                        new ItemStack(RegistryHelper.SQUISH_ESSENCE),
+                        lollipop,
+                        new ItemStack(RegistryHelper.SQUISH_CANDY)),
+                new EssenceInfusionRecipe(
+                        new ItemStack(RegistryHelper.EXPLOSIVE_ESSENCE),
+                        lollipop,
+                        new ItemStack(RegistryHelper.EXPLOSIVE_CANDY)),
+                new EssenceInfusionRecipe(
+                        new ItemStack(RegistryHelper.POPPY_ESSENCE),
+                        lollipop,
+                        new ItemStack(RegistryHelper.POPPY_CANDY)),
+                new EssenceInfusionRecipe(
+                        new ItemStack(RegistryHelper.ENDER_ESSENCE),
+                        lollipop,
+                        new ItemStack(RegistryHelper.ENDER_CANDY)),
+                new EssenceInfusionRecipe(
+                        new ItemStack(RegistryHelper.SKELLY_ESSENCE),
+                        lollipop,
+                        new ItemStack(RegistryHelper.SKELLY_CANDY))
+        );
+        registration.addRecipes(EssenceInfusionCategory.TYPE, infusions);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(RegistryHelper.LOLLIPOP), EssenceInfusionCategory.TYPE);
     }
 }
 //?} else {

@@ -16,7 +16,7 @@ public final class SquishEntities {
             SquishId.of("baby_creeper"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabyCreeperEntity::new)
                     .dimensions(EntityDimensions.fixed(0.6f, 0.9f))
-                    .trackRangeBlocks(8)
+                    .trackRangeChunks(8)
                     .trackedUpdateRate(3)
                     .build()
     );
@@ -26,7 +26,7 @@ public final class SquishEntities {
             SquishId.of("baby_iron_golem"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabyIronGolemEntity::new)
                     .dimensions(EntityDimensions.fixed(0.7f, 0.95f))
-                    .trackRangeBlocks(8)
+                    .trackRangeChunks(10)
                     .trackedUpdateRate(3)
                     .build()
     );
@@ -36,7 +36,7 @@ public final class SquishEntities {
             SquishId.of("baby_enderman"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabyEndermanEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 1.0f))
-                    .trackRangeBlocks(8)
+                    .trackRangeChunks(8)
                     .trackedUpdateRate(3)
                     .build()
     );
@@ -46,7 +46,7 @@ public final class SquishEntities {
             SquishId.of("baby_skeleton"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BabySkeletonEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.9f))
-                    .trackRangeBlocks(8)
+                    .trackRangeChunks(8)
                     .trackedUpdateRate(3)
                     .build()
     );

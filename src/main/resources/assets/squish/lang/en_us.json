@@ -23,5 +23,8 @@
   "item.squish.ender_candy": "Ender Candy",
   "item.squish.skelly_essence": "Skelly Essence",
   "item.squish.skelly_candy": "Skelly Candy",
-  "entity.squish.baby_skeleton": "Baby Skeleton"
+  "entity.squish.baby_skeleton": "Baby Skeleton",
+  "category.squish.essence_infusion": "Essence Infusion",
+  "category.squish.essence_infusion.hint1": "Drop a lollipop or a stack on the ground.",
+  "category.squish.essence_infusion.hint2": "Throw the essence at em!"
 }
